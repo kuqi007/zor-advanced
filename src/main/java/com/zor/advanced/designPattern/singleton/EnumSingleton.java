@@ -8,9 +8,11 @@ package com.zor.advanced.designPattern.singleton;
  */
 public enum EnumSingleton {
 
+    //一句话代码...
     INSTANCE;
 
-    public EnumSingleton getInstance() {
-        return INSTANCE;
+    public void tellEveryone() {
+        System.out.println("This is an EnumSingleton " + this.hashCode());
     }
+
 }
