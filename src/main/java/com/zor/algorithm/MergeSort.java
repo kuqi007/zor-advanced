@@ -32,5 +32,11 @@ public class MergeSort {
 
         return new int[0];
     }
+
+    private static void sort(int[] array) {
+
+
+
+    }
 }
 
