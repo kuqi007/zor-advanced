@@ -20,8 +20,18 @@ public class CglibProxyFactory implements MethodInterceptor {
         this.target = target;
     }
 
+    public static void main(String[] args) {
+        // 1.创建对象
+        ProxyTest test = new ProxyTest();
+        // 2.创建代理对象
+        CglibProxyFactory proxy = new CglibProxyFactory(test);
+        // 3.调用代理对象的增强方法,得到增强后的对象
+        ProxyTest createProxy = (ProxyTest) proxy.createProxy();
+        createProxy.test();
+    }
+
     //创建代理对象
-    public Object createProxy(){
+    public Object createProxy() {
         //1.创建Enhancer
         Enhancer enhancer = new Enhancer();
         //2.传递目标对象的class
@@ -42,20 +52,10 @@ public class CglibProxyFactory implements MethodInterceptor {
         System.out.println("这是增强方法后......");
         return invoke;
     }
-
-    public static void main(String[] args) {
-        // 1.创建对象
-        ProxyTest test=new ProxyTest();
-        // 2.创建代理对象
-        CglibProxyFactory proxy = new CglibProxyFactory(test);
-        // 3.调用代理对象的增强方法,得到增强后的对象
-        ProxyTest createProxy = (ProxyTest) proxy.createProxy();
-        createProxy.test();
-    }
 }
 
-class ProxyTest{
-    public void test(){
+class ProxyTest {
+    public void test() {
         System.out.println("cglib代理测试");
     }
 }
