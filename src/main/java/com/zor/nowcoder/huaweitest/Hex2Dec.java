@@ -1,5 +1,7 @@
 package com.zor.nowcoder.huaweitest;
 
+import org.junit.Test;
+
 import java.util.Scanner;
 
 /**
@@ -55,6 +57,20 @@ public class Hex2Dec {
                 }
             }
             System.out.println(sum);
+        }
+    }
+
+    @Test
+    public void reverseArray() {
+        char[] ch = {'a', 'b', 'c', 'd', 'e', 'f'};
+        for (int i = 0; i < ch.length / 2; i++) {
+            char temp = ch[i];
+            ch[i] = ch[ch.length - 1 - i];
+            ch[ch.length - 1 - i] = temp;
+        }
+        //遍历数组
+        for (char i : ch) {
+            System.out.print(i + ",");
         }
     }
 }
