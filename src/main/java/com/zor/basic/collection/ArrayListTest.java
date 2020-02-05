@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -60,5 +61,12 @@ public class ArrayListTest {
         System.out.println(list.toString());
         //由于asList产生的集合并没有重写add,remove等方法，所以它会调用父类AbstractList的方法，而父类的方法中抛出的却是异常信息
 
+    }
+
+    @Test
+    public void testSyrList(){
+        List<String> list=new ArrayList<>();
+
+        List<String> synchronizedList = Collections.synchronizedList(list);
     }
 }

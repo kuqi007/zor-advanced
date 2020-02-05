@@ -29,12 +29,14 @@ public class MergeSort {
      * @return a和b合并后的升序排列数组
      */
     public static int[] merge(int[] a, int[] b) {
+        //TODO
+        int[] arrayNew = new int[a.length + b.length];
 
-        return new int[0];
+
+        return arrayNew;
     }
 
     private static void sort(int[] array) {
-
 
 
     }
