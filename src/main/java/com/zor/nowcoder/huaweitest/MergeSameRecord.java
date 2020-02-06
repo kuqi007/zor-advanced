@@ -38,6 +38,7 @@ public class MergeSameRecord {
             int count = scanner.nextInt();
             Map<Integer, Integer> treeMap = new TreeMap<>();
             for (int i = 0; i < count; i++) {
+                // 空格也可作为下一个输入，key value属于同一行
                 int key = scanner.nextInt();
                 int value = scanner.nextInt();
                 if (treeMap.containsKey(key)) {
