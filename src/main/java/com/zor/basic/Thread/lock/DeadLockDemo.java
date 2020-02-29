@@ -1,4 +1,4 @@
-package com.zor.basic.Thread;
+package com.zor.basic.Thread.lock;
 
 /**
  * Created by zqq on 2019/7/29.
@@ -8,8 +8,8 @@ public class DeadLockDemo implements Runnable {
     public static int flag = 1;
 
     //static 变量是 类对象共享的
-    static Object o1 = new Object();
-    static Object o2 = new Object();
+    private static final Object o1 = new Object();
+    private static final Object o2 = new Object();
 
     @Override
     public void run() {
@@ -44,11 +44,11 @@ public class DeadLockDemo implements Runnable {
         }
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
 
         DeadLockDemo t1 = new DeadLockDemo();
         DeadLockDemo t2 = new DeadLockDemo();
-        t1.flag = 1;
+        flag = 1;
         new Thread(t1).start();
 
         //让main线程休眠1秒钟,保证t2开启锁住o2.进入死锁
@@ -58,7 +58,7 @@ public class DeadLockDemo implements Runnable {
             e.printStackTrace();
         }
 
-        t2.flag = 0;
+        flag = 0;
         new Thread(t2).start();
 
     }
