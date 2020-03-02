@@ -1,4 +1,4 @@
-package com.zor.basic.Thread.lock;
+package com.zor.basic.MultiThread.lock;
 
 /**
  * * Java program to create a deadlock by imposing circular wait. * * @author
