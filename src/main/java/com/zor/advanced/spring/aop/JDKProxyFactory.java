@@ -23,9 +23,8 @@ public class JDKProxyFactory implements InvocationHandler {
         // 2.得到目标对象的实现接口
         Class<?>[] interfaces = target.getClass().getInterfaces();
         // 3.第三个参数需要一个实现invocationHandler接口的对象
-        Object newProxyInstance = Proxy.newProxyInstance(classLoader, interfaces, this);
 
-        return newProxyInstance;
+        return Proxy.newProxyInstance(classLoader, interfaces, this);
     }
 
     @Override
@@ -40,20 +39,28 @@ public class JDKProxyFactory implements InvocationHandler {
     }
 
     public static void main(String[] args) {
-        Exception exception = new Exception("ss");
-        JDKProxyFactory jdkProxyFactory = new JDKProxyFactory(exception);
+        Subject subject = (Subject) new JDKProxyFactory(new RealSubject()).createProxy();
 
-        Exception proxy1 = (Exception) jdkProxyFactory.createProxy();
+        subject.doSomething();
 
-        proxy1.printStackTrace();
+    }
+}
 
+interface Subject {
 
-        //// 1.创建对象
-        //UserServiceImpl userService = new UserServiceImpl();
-        //// 2.创建代理对象
-        //JDKProxyFactory proxy = new JDKProxyFactory(userService);
-        //// 3.调用代理对象的增强方法,得到增强后的对象
-        //IUserService createProxy = (IUserService) proxy.createProxy();
-        //createProxy.regist();
+    void doSomething();
+}
+
+/**
+ * RealSubject
+ * 真实主题类
+ *
+ * @author
+ * @create 2018-03-29 14:21
+ **/
+class RealSubject implements Subject {
+    @Override
+    public void doSomething() {
+        System.out.println("RealSubject do something");
     }
 }
