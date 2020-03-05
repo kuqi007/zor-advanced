@@ -1,4 +1,4 @@
-package com.zor.basic.MultiThread.ThreadPool;
+package com.zor.basic.MultiThread;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
