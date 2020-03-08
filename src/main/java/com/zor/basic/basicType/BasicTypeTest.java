@@ -36,4 +36,16 @@ public class BasicTypeTest {
         byte test = (byte) b;
         System.out.println(test);
     }
+
+    @Test
+    public void floatTest() {
+        float a = 0.1111111111111f;
+        //a = a / 3;
+        //最多小数点后8位
+        System.out.println(a);
+
+        double b = 1f / 3;
+        // double最多小数点后16位
+        System.out.println(b+1f);
+    }
 }
