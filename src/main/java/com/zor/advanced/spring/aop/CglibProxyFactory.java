@@ -55,7 +55,7 @@ public class CglibProxyFactory implements MethodInterceptor {
 }
 
 class ProxyTest {
-    public void test() {
+     void test() {
         System.out.println("cglib代理测试");
     }
 }
