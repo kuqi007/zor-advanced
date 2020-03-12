@@ -1,4 +1,4 @@
-package com.zor.basic.collection;
+package com.zor.basic.collection.map;
 
 import org.junit.Test;
 

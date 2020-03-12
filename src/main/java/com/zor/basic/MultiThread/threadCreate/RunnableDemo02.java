@@ -1,4 +1,4 @@
-package com.zor.basic.MultiThread;
+package com.zor.basic.MultiThread.threadCreate;
 
 /**
  * Created by zqq on 2019/5/22.

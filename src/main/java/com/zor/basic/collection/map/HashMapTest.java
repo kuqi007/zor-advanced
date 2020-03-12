@@ -1,7 +1,6 @@
-package com.zor.basic.collection;
+package com.zor.basic.collection.map;
 
 import java.util.HashMap;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
