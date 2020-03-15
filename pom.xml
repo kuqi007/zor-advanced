@@ -33,6 +33,11 @@
             <artifactId>redisson</artifactId>
             <version>3.3.2</version>
         </dependency>
+        <!--lombok插件-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
