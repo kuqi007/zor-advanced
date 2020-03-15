@@ -5,9 +5,10 @@ import lombok.Data;
 import lombok.ToString;
 
 /**
- * 静态内部类的对象复制？？？？？？？？
+ * 对象复制问题
  */
-public class DeepCopyDemo {
+public class ObjectCopyDemo {
+
     public static void main(String[] args) {
         Subject subject = new Subject("aaa");
 
@@ -15,9 +16,15 @@ public class DeepCopyDemo {
         studentA.subject = subject;
 
         Subject subject1 = studentA.subject;
+        // 此时subject1是aaa
         System.out.println(subject1);
 
-        studentA.subject = new Subject("bbb");
+        studentA.subject.name = "bbb";
+        //  此时studentA的subject引用不变，里面值发生了改变，所以subject1变成了bbb
+        System.out.println(subject1);
+
+        // 此时studentA的subject指向了另一个新的引用，所以subject1不会发生改变，仍然是bbb，不会变成ccc
+        studentA.subject = new Subject("ccc");
 
         System.out.println(subject1);
 
