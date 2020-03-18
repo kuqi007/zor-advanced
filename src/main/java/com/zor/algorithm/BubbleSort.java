@@ -6,6 +6,10 @@ public class BubbleSort {
 
     public static void main(String[] args) {
         int[] arrays = new int[]{9, 3, 10, 1, 8};
+        sort(arrays);
+    }
+
+    private static void sort(int[] arrays) {
         int temp;
         boolean isChange = true;
         for (int i = 0; i < arrays.length - 1 && isChange; i++) {
