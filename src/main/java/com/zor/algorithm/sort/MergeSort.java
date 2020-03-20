@@ -1,4 +1,4 @@
-package com.zor.algorithm;
+package com.zor.algorithm.sort;
 
 import java.io.IOException;
 import java.util.Arrays;

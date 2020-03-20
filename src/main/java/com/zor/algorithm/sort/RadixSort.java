@@ -1,9 +1,9 @@
-package com.zor.algorithm;
+package com.zor.algorithm.sort;
 
 /**
  * Created by zqq on 2020/3/18.
  */
-public class HeapSort {
+public class RadixSort {
     public static void main(String[] args) {
         int[] arrays = new int[]{9, 3, 10, 1, 8};
         sort(arrays);

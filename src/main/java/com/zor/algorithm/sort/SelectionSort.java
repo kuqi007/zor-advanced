@@ -1,4 +1,4 @@
-package com.zor.algorithm;
+package com.zor.algorithm.sort;
 
 import java.util.Arrays;
 
