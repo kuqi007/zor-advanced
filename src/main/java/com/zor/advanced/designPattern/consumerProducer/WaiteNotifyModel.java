@@ -4,9 +4,9 @@ package com.zor.advanced.designPattern.consumerProducer;
  * https://my.oschina.net/hosee/blog/485121
  */
 public class WaiteNotifyModel {
-    private static Integer count = 0;
-    private final Integer FULL = 10;
-    private static String LOCK = "LOCK";
+    private static int count = 0;
+    private final int FULL = 10;
+    private static final String LOCK = "LOCK";
 
     class Producer implements Runnable {
         @Override
