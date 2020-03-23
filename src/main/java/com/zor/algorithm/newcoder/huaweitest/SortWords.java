@@ -1,4 +1,4 @@
-package com.zor.nowcoder.huaweitest;
+package com.zor.algorithm.newcoder.huaweitest;
 
 import java.util.Arrays;
 import java.util.Scanner;

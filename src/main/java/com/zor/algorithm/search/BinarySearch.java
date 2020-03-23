@@ -1,4 +1,4 @@
-package com.zor.algorithm;
+package com.zor.algorithm.search;
 
 /**
  * Created by zqq on 2019/12/19.
