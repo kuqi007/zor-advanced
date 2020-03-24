@@ -1,4 +1,4 @@
-package com.zor.basic.MultiThread.lock;
+package com.zor.basic.MultiThread;
 
 /**
  * Created by zqq on 2019/7/29.
