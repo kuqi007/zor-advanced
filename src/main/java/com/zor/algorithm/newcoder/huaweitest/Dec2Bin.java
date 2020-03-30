@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 /**
  * Created by zqq on 2020/2/6.
+ * 十进制转换为二进制
+ *
  */
 public class Dec2Bin {
     public static void main(String[] args) {
