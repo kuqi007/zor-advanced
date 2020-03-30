@@ -1,4 +1,4 @@
-package com.zor.basic.MultiThread;
+package com.zor.basic.MultiThread.deadlock;
 
 /**
  * Created by zqq on 2019/7/29.
