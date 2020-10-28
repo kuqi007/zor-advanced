@@ -1,4 +1,4 @@
-package com.zor.algorithm.newcoder.huaweitest;
+package com.zor.algorithm.interview.online;
 
 import java.util.HashMap;
 import java.util.Map;
