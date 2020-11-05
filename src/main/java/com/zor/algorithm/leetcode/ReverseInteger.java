@@ -63,8 +63,9 @@ public class ReverseInteger {
              * 当出现 ans > MAX_VALUE / 10 且 还有pop需要添加 时，则一定溢出
              * 当出现 ans == MAX_VALUE / 10 且 pop > 7 时，则一定溢出，7是2^31 - 1的个位数
              *
+             *   首先确定rev是int类型
              *   rev*10，最后一位肯定是0
-             *   ans > MAX_VALUE/10 则乘以10之后肯定比max大 加入最大值511，大于511/10=51，比如52*10=520>511
+             *   ans > MAX_VALUE/10 则乘以10之后肯定比max大 假如最大值511，大于511/10=51，比如52*10=520>511
              */
             if (rev > Integer.MAX_VALUE / 10 || (rev == Integer.MAX_VALUE / 10 && pop > Integer.MAX_VALUE % 10))
                 return 0;
