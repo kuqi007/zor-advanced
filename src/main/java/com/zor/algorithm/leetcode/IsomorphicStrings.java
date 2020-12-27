@@ -2,6 +2,7 @@ package com.zor.algorithm.leetcode;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by kuqi0 on 2020/12/27
@@ -77,6 +78,20 @@ public class IsomorphicStrings {
                 if (map.get(s.charAt(i)) != t.charAt(i)) {
                     return false;
                 }
+            }
+        }
+        return true;
+    }
+
+    public static boolean solution3(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        Map<Object, Object> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            if (!Objects.equals(map.put(String.valueOf(s.charAt(i)), i), map.put(t.charAt(i), i))) {
+                return false;
             }
         }
         return true;
