@@ -75,7 +75,7 @@ public class LinkedListCycleII {
     }
 
     public static ListNode solution2(ListNode head) {
-        // 双指针必须得从head开始？？？如果fast从head next开始会怎么样
+        // TODO 双指针必须得从head开始？？？如果fast从head next开始会怎么样
         ListNode slow = head;
         ListNode fast = head;
 
