@@ -1,7 +1,7 @@
-package com.zor.algorithm.leetcode;
+package com.zor.algorithm.leetcode.linkedlist;
 
-import com.zor.algorithm.leetcode.base.ListNode;
-import com.zor.algorithm.leetcode.base.ListNodeUtil;
+import com.zor.algorithm.leetcode.linkedlist.base.ListNode;
+import com.zor.algorithm.leetcode.linkedlist.base.ListNodeUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -56,10 +56,10 @@ import java.util.Set;
  * 链接：https://leetcode-cn.com/problems/linked-list-cycle
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class LinedListCycle {
+public class LinkedListCycle {
 
     public static void main(String[] args) {
-        ListNode head = ListNodeUtil.getCycledLinkedList(new int[]{1, 2}, -1);
+        ListNode head = ListNodeUtil.getCycledLinkedList(new int[]{1, 2, 4, 3, 5}, -1);
         System.out.println(solution11(head));
     }
 

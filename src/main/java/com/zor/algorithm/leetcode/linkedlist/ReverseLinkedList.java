@@ -1,6 +1,6 @@
-package com.zor.algorithm.leetcode;
+package com.zor.algorithm.leetcode.linkedlist;
 
-import com.zor.algorithm.leetcode.base.ListNode;
+import com.zor.algorithm.leetcode.linkedlist.base.ListNode;
 
 /**
  * No.206
