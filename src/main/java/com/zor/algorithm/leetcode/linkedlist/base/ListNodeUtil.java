@@ -37,4 +37,39 @@ public class ListNodeUtil {
         return dummyNode.next;
     }
 
+    /**
+     * 获得一个链表
+     */
+    public static ListNode getListNode(int[] nodeArr) {
+        if (nodeArr == null || nodeArr.length == 0) {
+            return null;
+        }
+        ListNode dummyNode = new ListNode(0);
+        ListNode p = dummyNode;
+        for (int value : nodeArr) {
+            p.next = new ListNode(value);
+            p = p.next;
+        }
+
+        return dummyNode.next;
+    }
+
+    public static void printList(ListNode head) {
+        StringBuilder result = new StringBuilder();
+        while (head != null) {
+            result.append(head.val);
+            result.append("->");
+            head = head.next;
+        }
+        if (result.lastIndexOf("->") == result.length() - 2) {
+            result.delete(result.length() - 2, result.length());
+        }
+        System.out.println(result);
+    }
+
+    public static void main(String[] args) {
+        ListNode listNode = getListNode(new int[]{1, 1, 2, 3, 4, 4});
+        printList(listNode);
+    }
+
 }

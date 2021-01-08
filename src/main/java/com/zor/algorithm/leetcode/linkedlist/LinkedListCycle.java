@@ -63,6 +63,9 @@ public class LinkedListCycle {
         System.out.println(solution11(head));
     }
 
+    /**
+     * hashSet直接遍历
+     */
     public static boolean hasCycle(ListNode head) {
         Set<ListNode> set = new HashSet<>();
         while (head != null) {
@@ -75,7 +78,7 @@ public class LinkedListCycle {
     }
 
     /**
-     * TODO
+     * 快慢指针法
      */
     public static boolean solution11(ListNode head) {
         if (head == null || head.next == null) {
