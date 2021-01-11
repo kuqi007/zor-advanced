@@ -1,4 +1,4 @@
-package com.zor.algorithm.leetcode;
+package com.zor.algorithm.leetcode.linkedlist;
 
 import com.zor.algorithm.leetcode.linkedlist.base.ListNode;
 import com.zor.algorithm.leetcode.linkedlist.base.ListNodeUtil;
@@ -20,13 +20,13 @@ public class MergeTwoSortedLists {
     public static void main(String[] args) {
         ListNode listNode1 = ListNodeUtil.getListNode(new int[]{1, 2, 4});
         ListNode listNode2 = ListNodeUtil.getListNode(new int[]{1, 3, 4});
-        ListNode listNode = mergeTwoLists(listNode1, listNode2);
+        ListNode listNode = solution2(listNode1, listNode2);
         ListNodeUtil.printList(listNode);
 
     }
 
     /**
-     * TODO 递归。。一看一会，一写就废
+     * TODO 递归。。一看就会，一写就废
      */
     public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         if (l1 == null) {
@@ -40,5 +40,29 @@ public class MergeTwoSortedLists {
             l2.next = mergeTwoLists(l1, l2.next);
             return l2;
         }
+    }
+
+    /**
+     * 迭代做法
+     */
+    public static ListNode solution2(ListNode l1, ListNode l2) {
+
+        ListNode dummyNode = new ListNode(-1);
+
+        ListNode prev = dummyNode;
+        while (l1 != null && l2 != null) {
+            if (l1.val <= l2.val) {
+                prev.next = l1;
+                l1 = l1.next;
+            } else {
+                prev.next = l2;
+                l2 = l2.next;
+            }
+            prev = prev.next;
+        }
+        // 合并后 l1 和 l2 最多只有一个还未被合并完，我们直接将链表末尾指向未合并完的链表即可
+        prev.next = l1 != null ? l1 : l2;
+
+        return dummyNode.next;
     }
 }
