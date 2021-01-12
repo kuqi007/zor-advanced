@@ -4,6 +4,7 @@ import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Stack;
 
 /**
  * No.20 有效的括号
@@ -44,7 +45,7 @@ import java.util.Map;
 public class ValidParentheses {
     public static void main(String[] args) {
 
-        System.out.println(isValid("()]{}"));
+        System.out.println(solution2("()[]{}"));
 
     }
 
@@ -65,7 +66,7 @@ public class ValidParentheses {
             char c = s.charAt(i);
             // 存在表示是右括号
             if (pairs.containsKey(c)) {
-                // 如果字符串以右括号开头，那么直接返回false，或者栈头不是匹配的括号，也返回false
+                // 如果栈为空表示先出现了右括号，那么直接返回false，或者栈头不是匹配对应括号，也返回false
                 if (stack.isEmpty() || stack.peek() != pairs.get(c)) {
                     return false;
                 }
@@ -74,6 +75,35 @@ public class ValidParentheses {
                 stack.push(c);
             }
         }
+        return stack.isEmpty();
+    }
+
+    public static boolean solution2(String s) {
+
+        if (s.length() % 2 == 1) return false;
+
+        Map<Character, Character> pairs = new HashMap<>();
+        pairs.put(']', '[');
+        pairs.put(')', '(');
+        pairs.put('}', '{');
+
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            // 出现右括号
+            if (pairs.containsKey(c)) {
+                // 栈为空，未发现左括号，或者栈顶与该括号不匹配
+                if (stack.isEmpty() || pairs.get(c) != stack.peek()) {
+                    return false;
+                }
+                stack.pop();
+            } else {
+                // 非右括号
+                stack.push(c);
+            }
+        }
+
         return stack.isEmpty();
     }
 
