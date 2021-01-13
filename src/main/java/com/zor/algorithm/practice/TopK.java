@@ -18,7 +18,7 @@ public class TopK {
     }
 
     /**
-     * 利用堆排序 取最大的TopK
+     * 利用堆排序 取最小的TopK
      *
      * @param input 数组
      * @param k     前K
@@ -29,12 +29,15 @@ public class TopK {
             System.out.println("K值不合法");
             return;
         }
-        Queue<Integer> queue = new PriorityQueue<>();
+        // 去最大TopK一般构建最小堆，反之构建最大堆
+        // PriorityQueue无参默认构建最小堆
+        // new PriorityQueue<>((o1, o2) -> o2-o1) 构建最大堆
+        Queue<Integer> queue = new PriorityQueue<>((o1, o2) -> o2 - o1);
         for (int num : input) {
             // 先把数压入队列
             if (queue.size() < k) {
                 queue.add(num);
-            } else if (queue.peek() < num) {
+            } else if (queue.peek() > num) {
                 // 当队列的数量超过K的时候，如果进来的数大于队列头部的数，则剔除掉头部的数，将进来的数继续压入队列
                 queue.poll();
                 queue.add(num);
