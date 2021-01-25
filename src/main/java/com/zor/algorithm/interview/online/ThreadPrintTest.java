@@ -13,7 +13,7 @@ public class ThreadPrintTest {
     // 从0递增的整数用来判断打印A还是B
     private static int index = 0;
     // 设置一个打印上限，最多打印200个字符，防止打印过多CPU扛不住
-    private static int max = 200;
+    private static final int max = 200;
     // 对象锁（工具人）
     private static final Object lock = new Object();
     // 负载标志位，0的时候B线程执行，1的时候B1执行
