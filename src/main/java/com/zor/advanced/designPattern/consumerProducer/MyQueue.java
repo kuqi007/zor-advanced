@@ -1,38 +1,37 @@
 package com.zor.advanced.designPattern.consumerProducer;
 
 import java.util.LinkedList;
-import java.util.Queue;
 
 public class MyQueue {
 
     private final LinkedList<Object> list = new LinkedList<>();
-    
-    private final Integer MAX = 5;
-    
-    private final Integer MIN = 0;
-    
+
+    private static final Integer MAX = 5;
+
+    private static final Integer MIN = 0;
+
     private final Object obj = new Object();
-    
-    
+
     public void put(Object object) {
         synchronized (obj) {            //判断list里面是否超过最大元素个数限制
-            while(list.size() == MAX) {
+            while (list.size() == MAX) {
                 try {
                     obj.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }            //往LinkedList添加元素
+            }
+            //往LinkedList添加元素
             list.add(object);
-            System.out.println("element " + object + " added" );            //唤醒消费者消费
+            System.out.println("element " + object + " added");            //唤醒消费者消费
             obj.notify(); //notify需在synchronize方法块内才可使用
         }
     }
-    
+
     public Object get() {
         Object temp = null;
         synchronized (obj) {            //判断list是否有元素
-            while(list.size() == MIN) {
+            while (list.size() == MIN) {
                 try {
                     obj.wait();
                 } catch (InterruptedException e) {
@@ -46,35 +45,27 @@ public class MyQueue {
         }
         return temp;
     }
-    
-    
+
+
     public static void main(String[] args) {
         final MyQueue t = new MyQueue();
-        
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                t.put("a");
-                t.put("b");
-                t.put("c");
-                t.put("d");
+
+        new Thread(() -> {
+            t.put("a");
+            t.put("b");
+            t.put("c");
+            t.put("d");
+        }, "t1").start();
+
+
+        new Thread(() -> {
+            try {
+                t.get();
+                Thread.sleep(1000);
+                t.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        },"t1").start();
-        
-        
-        
-        new Thread(new Runnable() {
-            
-            @Override
-            public void run() {
-                try {
-                    t.get();
-                    Thread.sleep(1000);
-                    t.get();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        },"t2").start();
+        }, "t2").start();
     }
 }
