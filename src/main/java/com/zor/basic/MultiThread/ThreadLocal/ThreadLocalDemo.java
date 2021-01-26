@@ -5,6 +5,11 @@ package com.zor.basic.MultiThread.ThreadLocal;
  */
 public class ThreadLocalDemo {
     public static void main(String[] args) {
-        ThreadLocal<String> localVar=new InheritableThreadLocal<>();
+        ThreadLocal<String> localVar = new InheritableThreadLocal<>();
+        localVar.set("aaa");
+        new Thread(() -> {
+            String s = localVar.get();
+            System.out.println("子线程InheritableThreadLocal " + s);
+        }).start();
     }
 }
