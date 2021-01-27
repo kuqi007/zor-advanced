@@ -13,4 +13,18 @@ public class QuickSort {
 
 
     }
+
+
+    private int partition(int[] arr, int left, int right) {
+
+
+        return 0;
+    }
+
+    private void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
 }
