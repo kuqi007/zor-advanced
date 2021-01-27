@@ -36,6 +36,7 @@ public class GetOddNumbersTest {
             return result;
         }
 
+        // 快排
         Arrays.sort(a);
 
         int last = a[0];
