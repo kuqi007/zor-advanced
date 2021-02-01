@@ -15,9 +15,6 @@ public class QuickSort {
     }
 
 
-    /**
-     * 分区
-     */
     private int partition(int[] arr, int left, int right) {
 
 
