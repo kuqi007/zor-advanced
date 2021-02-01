@@ -23,13 +23,26 @@ public class MaxSubarray {
 
     }
 
+    /**
+     * TODO 有点懵
+     *
+     * @param nums
+     * @return
+     */
     public static int maxSubArray(int[] nums) {
-
-        for (int i = 0; i < nums.length; i++) {
-
+        // ans是结果
+        int ans = nums[0];
+        // sum是最大序列之和
+        int sum = 0;
+        for (int num : nums) {
+            if (sum > 0) {
+                sum = +num;
+            } else {
+                sum = num;
+            }
+            ans = Math.max(ans, sum);
         }
 
-
-        return 0;
+        return ans;
     }
 }
