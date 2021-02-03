@@ -32,10 +32,6 @@ import java.util.Queue;
  */
 public class BinaryTreeLevelOrderTraversalII {
 
-    public static void main(String[] args) {
-
-    }
-
     public static List<List<Integer>> levelOrderBottom(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
 
