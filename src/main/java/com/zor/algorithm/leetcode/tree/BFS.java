@@ -1,6 +1,5 @@
 package com.zor.algorithm.leetcode.tree;
 
-import java.util.ArrayDeque;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -15,6 +14,7 @@ public class BFS {
         queue.add(root);
         while (!queue.isEmpty()) {
             TreeNode node = queue.poll();
+            visit(node);
             if (node.left != null) {
                 queue.add(node.left);
             }
@@ -23,5 +23,9 @@ public class BFS {
             }
         }
 
+    }
+
+    private void visit(TreeNode tn) {
+        System.out.println(tn.val);
     }
 }
