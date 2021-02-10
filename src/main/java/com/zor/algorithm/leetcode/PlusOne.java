@@ -40,16 +40,46 @@ public class PlusOne {
     public static int[] plusOne(int[] digits) {
 
         for (int i = digits.length - 1; i >= 0; i--) {
-            digits[i] = ++digits[i] % 10;
-            if (digits[i] != 0) {
+            digits[i]++;
+            digits[i] %= 10;
+            // 关键条件，如果不为0，则表示没有进位，直接return；反之表示进位，继续遍历，进位之后下一位要+1
+            if (digits[i] != 0)
                 return digits;
-            }
         }
 
+        // 首位是1，其余位默认为0
         digits = new int[digits.length + 1];
         digits[0] = 1;
 
         return digits;
+    }
+
+    /**
+     * 笨写法
+     *
+     * @param digits
+     * @return
+     */
+    public static int[] solution2(int[] digits) {
+
+        // 进一位
+        int upper = 1;
+        for (int i = digits.length - 1; i >= 0; i--) {
+            int digit = digits[i];
+
+            digit = digit + upper;
+
+            digits[i] = digit % 10;
+            upper = digit / 10;
+        }
+
+        if (upper != 0) {
+            digits = new int[digits.length + 1];
+            digits[0] = 1;
+        }
+
+        return digits;
+
     }
 
 
