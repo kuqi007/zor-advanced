@@ -24,7 +24,7 @@ import java.util.List;
  * @author zqq
  * @date 2021/2/12
  */
-public class PascalsTriangleII {
+public class Leetcode119 {
     public static void main(String[] args) {
 
         List<Integer> row = solution3(3);
