@@ -1,4 +1,4 @@
-package com.zor.advanced.middleWare.cache;
+package com.zor.advanced.cache.redis;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

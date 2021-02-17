@@ -1,4 +1,4 @@
-package com.zor.advanced.middleWare.cache.bloomfilter;
+package com.zor.advanced.cache.redis.bloomfilter;
 
 import java.util.BitSet;
 

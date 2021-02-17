@@ -1,4 +1,4 @@
-package com.zor.advanced.middleWare.cache;
+package com.zor.advanced.cache;
 
 import org.springframework.cglib.core.internal.LoadingCache;
 

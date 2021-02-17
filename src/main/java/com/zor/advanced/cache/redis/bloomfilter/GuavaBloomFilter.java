@@ -1,4 +1,4 @@
-package com.zor.advanced.middleWare.cache.bloomfilter;
+package com.zor.advanced.cache.redis.bloomfilter;
 
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;

@@ -1,4 +1,4 @@
-package com.zor.advanced.middleWare.cache;
+package com.zor.advanced.cache.redis;
 
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
