@@ -47,6 +47,9 @@ public class Leetcode566 {
 
     }
 
+    /**
+     * 本质上是把二位数组变成一位数组再变成二维数组
+     */
     public int[][] matrixReshape(int[][] nums, int r, int c) {
         int m = nums.length;
         int n = nums[0].length;
