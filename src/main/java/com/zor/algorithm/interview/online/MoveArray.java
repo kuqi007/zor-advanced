@@ -1,8 +1,10 @@
 package com.zor.algorithm.interview.online;
 
-import java.util.Scanner;
-import java.util.*;
+import java.util.Arrays;
 
+/**
+ * 2021/2/19日 百度面试
+ */
 public class MoveArray {
     public static void main(String[] args) {
         // 1. 给定数组，返回长度相同的数组。在返回的数组中，第i个位置的值生成规则为：
@@ -10,47 +12,92 @@ public class MoveArray {
         // b、若没有比自己大的元素，或者为最后一个元素，则置为-1
         // case:     input:  [ 6 , 2 , 7 , 3 , 2 ]
         // return: [ 2 , 1 ,-1 ,-1 , -1]
-        //Scanner in = new Scanner(System.in);
-        //int a = in.nextInt();
-        //System.out.println(a);
-        System.out.println("test");
-        int[] nums = {6, 2, 7, 3, 2};
-        int[] res = test(nums);
+        int[] nums = {6, 2, 7, 3, 3, 1, 3, 99};
+        int[] res = solution4(nums);
         System.out.println(Arrays.toString(res));
     }
 
-    public static int[] move(int[] nums) {
+    /**
+     * 暴力解法，时间复杂度约n^2
+     */
+    public static int[] violent(int[] nums) {
         int[] res = new int[nums.length];
-        for (int i = 0; i < res.length; i++) {
-            res[i] = -1;
-        }
-        int index = 0;
-        for (int i = 1; i < nums.length; i++) {
-            if (nums[i] > nums[index]) {
-                res[index] = i - index;
-                index++;
-                i = index;
+        Arrays.fill(res, -1);
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] < nums[j]) {
+                    res[i] = j - i;
+                    break;
+                }
             }
         }
         return res;
     }
 
 
-    public static int[] test(int[] nums) {
-        int i = 0, j = 1;
-        while (j <= nums.length - 1) {
-            if (nums[j] > nums[i]) {
-                nums[i] = j - i;
-                i++;
-                j = i;
-            } else if (j == nums.length - 1) {
-                nums[i] = -1;
-                j = i;
+    public static int[] solution2(int[] nums) {
+        int left = 0, right = 1;
+        while (right < nums.length) {
+            if (nums[left] < nums[right]) {
+                nums[left] = right - left;
+                left++;
+                right = left;
+            } else if (right == nums.length - 1) {
+                nums[left] = -1;
+                left++;
+                right = left;
+            } else {
+                right++;
             }
-            j++;
         }
         return nums;
     }
+
+    public static int[] solution3(int[] nums) {
+        int index = 0;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[index] < nums[i]) {
+                nums[index] = i - index;
+                i = index;
+                index++;
+            } else if (i == nums.length - 1) {
+                nums[index] = -1;
+                i = index;
+                index++;
+            }
+        }
+        return nums;
+    }
+
+    /**
+     * 优化解法，倒过来遍历
+     */
+    public static int[] solution4(int[] nums) {
+        int[] res = new int[nums.length];
+        Arrays.fill(res, -1);
+        int n = nums.length;
+        int preOffset = 0;
+        for (int i = n - 2; i >= 0; i--) {
+            if (nums[i] < nums[i + 1]) {
+                res[i] = 1;
+                preOffset = 1;
+            } else {
+                int j = 1;
+                while (i + preOffset + j < n) {
+                    if (nums[i] < nums[i + preOffset + j]) {
+                        preOffset = preOffset + j;
+                        res[i] = preOffset;
+                        break;
+                    } else if (i + preOffset + j == n - 1) {
+                        res[i] = -1;
+                    }
+                    j++;
+                }
+            }
+        }
+        return res;
+    }
+
 }
 
 
