@@ -1,6 +1,6 @@
 package com.zor.algorithm.interview.online;
 
-public class Test {
+public class StrategyPatternTest {
 
     public void test(String casees) {
         Father father = null;
