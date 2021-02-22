@@ -53,6 +53,9 @@ public class MoveArray {
         return nums;
     }
 
+    /**
+     * for循环遍历写法，不是很推荐
+     */
     public static int[] solution3(int[] nums) {
         int index = 0;
         for (int i = 1; i < nums.length; i++) {
@@ -76,19 +79,19 @@ public class MoveArray {
         int[] res = new int[nums.length];
         Arrays.fill(res, -1);
         int n = nums.length;
-        int preOffset = 0;
+        int pre = 0;
         for (int i = n - 2; i >= 0; i--) {
             if (nums[i] < nums[i + 1]) {
                 res[i] = 1;
-                preOffset = 1;
+                pre = 1;
             } else {
                 int j = 1;
-                while (i + preOffset + j < n) {
-                    if (nums[i] < nums[i + preOffset + j]) {
-                        preOffset = preOffset + j;
-                        res[i] = preOffset;
+                while (i + pre + j < n) {
+                    if (nums[i] < nums[i + pre + j]) {
+                        pre = pre + j;
+                        res[i] = pre;
                         break;
-                    } else if (i + preOffset + j == n - 1) {
+                    } else if (i + pre + j == n - 1) {
                         res[i] = -1;
                     }
                     j++;
