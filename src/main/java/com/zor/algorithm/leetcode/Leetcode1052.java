@@ -31,7 +31,7 @@ package com.zor.algorithm.leetcode;
  */
 public class Leetcode1052 {
     public static void main(String[] args) {
-        int i = maxSatisfied(new int[]{1, 0, 1, 2, 1, 1, 7, 5}, new int[]{0, 1, 0, 1, 0, 1, 0, 1}, 3);
+        int i = solution1(new int[]{3}, new int[]{1}, 1);
         System.out.println(i);
     }
 
@@ -66,9 +66,7 @@ public class Leetcode1052 {
         int n = customers.length;
         int total = 0;
         for (int i = 0; i < n; i++) {
-            if (grumpy[i] == 0) {
-                total += customers[i];
-            }
+            total += customers[i] * (1 - grumpy[i]);
         }
 
         int increase = 0;
@@ -77,6 +75,7 @@ public class Leetcode1052 {
         }
         int maxIncrease = increase;
         for (int i = X; i < n; i++) {
+            // 如果是1的代表生气，0的代表不生气直接乘就可以（仍为0），因为之前已经算出来了
             increase = increase - customers[i - X] * grumpy[i - X] + customers[i] * grumpy[i];
             maxIncrease = Math.max(maxIncrease, increase);
         }
