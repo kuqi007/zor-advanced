@@ -35,7 +35,7 @@ public class Leetcode832 {
 
     public static void main(String[] args) {
         int[][] A = {{1, 1, 0}, {1, 0, 1}, {0, 0, 0}};
-        int[][] ints = flipAndInvertImage(A);
+        int[][] ints = solution2(A);
         System.out.println(Arrays.deepToString(ints));
 
 
