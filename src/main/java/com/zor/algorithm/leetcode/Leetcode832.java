@@ -66,6 +66,7 @@ public class Leetcode832 {
     public static int[][] solution0(int[][] A) {
         int n = A[0].length;
         for (int[] a : A) {
+            // 取n+1是因为中间数也需要翻转
             for (int i = 0; i < (n + 1) / 2; i++) {
                 int t = a[i];
                 // 翻转取1
