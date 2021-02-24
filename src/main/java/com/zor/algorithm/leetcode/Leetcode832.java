@@ -3,7 +3,6 @@ package com.zor.algorithm.leetcode;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * 832. 翻转图像
@@ -35,12 +34,15 @@ public class Leetcode832 {
 
     public static void main(String[] args) {
         int[][] A = {{1, 1, 0}, {1, 0, 1}, {0, 0, 0}};
-        int[][] ints = solution2(A);
+        int[][] ints = solution0(A);
         System.out.println(Arrays.deepToString(ints));
 
 
     }
 
+    /**
+     * 暴力
+     */
     public static int[][] flipAndInvertImage(int[][] A) {
         for (int i = 0; i < A.length; i++) {
             //水平翻转图片
@@ -61,21 +63,55 @@ public class Leetcode832 {
         return A;
     }
 
-    public static int[][] solution2(int[][] A){
-
-        for (int[] nums : A) {
-            int n=nums.length;
-            int low=0;
-            int high=n-1;
-            while (low<=high){
-                int temp=nums[low];
-                nums[low++]=nums[high]^1;
-                nums[high--]=temp^1;
+    public static int[][] solution0(int[][] A) {
+        int n = A[0].length;
+        for (int[] a : A) {
+            for (int i = 0; i < (n + 1) / 2; i++) {
+                int t = a[i];
+                // 翻转取1
+                a[i] = a[n - 1 - i] ^ 1;
+                // 翻转取1
+                a[n - 1 - i] = t ^ 1;
             }
-
         }
         return A;
     }
 
+    public static int[][] solution1(int[][] A) {
+        int n = A[0].length;
+        for (int[] arr : A) {
+            int left = 0;
+            int right = n - 1;
+            while (left < right) {
+                if (arr[left] == arr[right]) {
+                    arr[left] ^= 1;
+                    arr[right] ^= 1;
+                }
+                left++;
+                right--;
+            }
+            // 奇数数组，中间位置直接取反
+            if (left == right) {
+                arr[left] ^= 1;
+            }
+        }
+        return A;
+    }
 
+    /**
+     * 双指针
+     */
+    public static int[][] solution2(int[][] A) {
+        for (int[] nums : A) {
+            int n = nums.length;
+            int low = 0;
+            int high = n - 1;
+            while (low <= high) {
+                int temp = nums[low];
+                nums[low++] = nums[high] ^ 1;
+                nums[high--] = temp ^ 1;
+            }
+        }
+        return A;
+    }
 }
