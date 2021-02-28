@@ -28,12 +28,11 @@ public class Leetcode485 {
 
     public static int findMaxConsecutiveOnes(int[] nums) {
         int count = 0, left = 0, right = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == 0) {
+        for (; right < nums.length; right++) {
+            if (nums[right] == 0) {
                 count = Math.max(count, right - left);
-                left = i + 1;
+                left = right + 1;
             }
-            right++;
         }
         return Math.max(count, right - left);
     }
@@ -63,5 +62,20 @@ public class Leetcode485 {
             ++right;
         }
         return Math.max(res, right - left);
+    }
+
+    public static int solution4(int[] nums) {
+        int n = nums.length;
+        int res = 0, max = 0, left = 0, right = 0;
+        while (right < n) {
+            if (nums[right] == 0) {
+                res = Math.max(res, right - left);
+                left = right + 1;
+            }
+            right++;
+        }
+
+        return Math.max(res, right - left);
+
     }
 }
