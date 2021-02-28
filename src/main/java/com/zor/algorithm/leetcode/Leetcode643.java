@@ -67,10 +67,11 @@ public class Leetcode643 {
         int n = nums.length;
         int left = 0, right = 0;
         int sum = 0;
-        int ans = 0;
+        int ans = Integer.MIN_VALUE;
         while (right < n) {
             sum += nums[right++];
             if (right - left == k) {
+                // max写在内部，因为必须要加三个数的和，比如10，-1，-2，如果卸载if外面，那么最后的结果为10，就不对了
                 ans = Math.max(ans, sum);
                 sum -= nums[left++];
             }
