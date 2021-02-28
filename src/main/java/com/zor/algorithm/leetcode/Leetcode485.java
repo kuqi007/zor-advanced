@@ -66,7 +66,7 @@ public class Leetcode485 {
 
     public static int solution4(int[] nums) {
         int n = nums.length;
-        int res = 0, max = 0, left = 0, right = 0;
+        int res = 0, left = 0, right = 0;
         while (right < n) {
             if (nums[right] == 0) {
                 res = Math.max(res, right - left);
