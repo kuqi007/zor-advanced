@@ -1,5 +1,8 @@
 package com.zor.advanced.designPattern.strategy;
 
+import com.zor.advanced.designPattern.factory.Factory;
+import com.zor.advanced.designPattern.factory.FactoryA;
+
 /**
  * @author zqq
  * @date 2021/3/1
@@ -30,9 +33,14 @@ class Context {
     }
 }
 
+
 class StrategyTest {
     public static void main(String[] args) {
-        Context context = new Context(new StrategyA());
+        // 工厂方法模式帮助我们直接产生一个具体的策略对象，策略模式帮助我们保证这些策略对象可以自由地切换而不需要改动其他逻辑，从而达到解耦的目的。
+        Factory factory = new FactoryA();
+        Strategy strategy = factory.createStrategy(StrategyA.class);
+        //
+        Context context = new Context(strategy);
         context.doStrategy();
     }
 }

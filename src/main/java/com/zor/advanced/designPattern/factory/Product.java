@@ -18,28 +18,10 @@ class ProductA extends Product {
     }
 }
 
-// 抽象的工厂
-abstract class Factory<T> {
-    abstract Product createProduct(Class<T> c);
-}
-
-// 具体的工厂可以生产出相应的产品
-class FactoryA<T> extends Factory<T> {
-    @Override
-    Product createProduct(Class<T> c) {
-        Product product = null;
-        try {
-            product = (Product) Class.forName(c.getName()).newInstance();
-        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return product;
-    }
-}
 
 class Test {
     public static void main(String[] args) {
-        Factory<ProductA> factory = new FactoryA<>();
+        Factory factory = new FactoryA();
         Product product = factory.createProduct(ProductA.class);
         product.method();
     }
