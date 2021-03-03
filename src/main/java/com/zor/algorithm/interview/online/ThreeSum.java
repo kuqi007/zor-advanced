@@ -14,7 +14,8 @@ import java.util.List;
  */
 public class ThreeSum {
     public static void main(String[] args) {
-        int[] arr = new int[]{1, 1, 3, 3, 5, 7, 7, 9, 9, 0};
+        int[] arr = new int[]{0, 1, 1, 3, 3, 5, 7, 7, 8, 9};
+        //int[] arr = new int[]{0, 0, 0};
         List<List<Integer>> sum = getSum(arr, 10);
         System.out.println(sum);
     }
@@ -27,12 +28,18 @@ public class ThreeSum {
             int num1 = nums[i];
             int left = i + 1, right = n - 1;
             while (left < right) {
-                if (nums[left] + nums[right] + num1 == target) {
-                    List<Integer> temp = Lists.newArrayList(num1, nums[left], nums[right]);
-                    ans.add(temp);
+                int temp = num1 + nums[left] + nums[right];
+                if (temp == target) {
+                    ans.add(Arrays.asList(num1, nums[left], nums[right]));
+                    while (left < right && nums[left] == nums[left + 1]) left++;
+                    while (left < right && nums[right] == nums[right - 1]) right--;
+                    left++;
+                    right--;
+                } else if (temp < target) {
+                    left++;
+                } else {
+                    right--;
                 }
-                left++;
-                right--;
             }
         }
         return ans;

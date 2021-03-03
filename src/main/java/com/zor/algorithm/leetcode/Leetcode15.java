@@ -49,8 +49,9 @@ public class Leetcode15 {
         List<List<Integer>> ans = new ArrayList<>();
         Arrays.sort(nums);
         int n = nums.length;
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n - 2; i++) {
             int cur = nums[i];
+            // 如果当前值已经是正数则无需遍历，因为后面的数肯定比当前大
             if (cur > 0) return ans;
             if (i > 0 && cur == nums[i - 1]) {
                 continue;
@@ -59,18 +60,10 @@ public class Leetcode15 {
             while (l < r) {
                 int temp = cur + nums[l] + nums[r];
                 if (temp == 0) {
-                    List<Integer> list = new ArrayList<>();
-                    list.add(cur);
-                    list.add(nums[l]);
-                    list.add(nums[r]);
-                    ans.add(list);
-                    // 如果有重复的跳过
-                    while (l < r && nums[l + 1] == nums[l]) {
-                        l++;
-                    }
-                    while (l < r && nums[r - 1] == nums[r]) {
-                        r--;
-                    }
+                    ans.add(Arrays.asList(cur, nums[l], nums[r]));
+                    // 过滤掉重复的
+                    while (l < r && nums[l + 1] == nums[l]) l++;
+                    while (l < r && nums[r - 1] == nums[r]) r--;
                     l++;
                     r--;
                 } else if (temp < 0) {
