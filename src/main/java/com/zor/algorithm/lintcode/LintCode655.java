@@ -8,12 +8,11 @@ package com.zor.algorithm.lintcode;
  * num1 和 num2 都只包含数字 0-9。
  * num1 和 num2 都不包含任何前导零。
  * 您不能使用任何内置的BigInteger库内的方法或直接将输入转换为整数。
- * 您在真实的面试中是否遇到过这个题？
- * 样例
  * 样例 1:
  * <p>
  * 输入 : num1 = "123", num2 = "45"
  * 输出 : "168"
+ * <p>
  * Created by kuqi0 on 2021/3/6
  */
 public class LintCode655 {
