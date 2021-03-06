@@ -1,6 +1,7 @@
 package com.zor.algorithm.interview.online;
 
 /**
+ * 大整数加法
  * 将两个字符串类型的数字相加
  * 例如"123456789" + "122986598416"
  * 可以按位parseInt
@@ -8,7 +9,7 @@ package com.zor.algorithm.interview.online;
  * @author zqq
  * @date 2021/2/28
  */
-public class AddStringNum {
+public class AddBigStringNum {
 
     public static void main(String[] args) {
 
@@ -21,6 +22,29 @@ public class AddStringNum {
 
 
     }
+
+    public static String addBigStringNum(String num1, String num2) {
+        int i = num1.length() - 1, j = num2.length() - 1;
+        String res = "";
+        // 进位
+        int carry = 0;
+        while (i >= 0 || j >= 0) {
+            int a = 0, b = 0;
+            if (i >= 0) {
+                a = num1.charAt(i) - '0';
+                i--;
+            }
+            if (j >= 0) {
+                b = num2.charAt(j) - '0';
+                j--;
+            }
+            int sum = a + b + carry;
+            res = sum % 10 + res;
+            carry = sum / 10;
+        }
+        return carry == 1 ? "1" + res : res;
+    }
+
 
     public static long addStringNum(String s1, String s2) {
         int n;
@@ -54,11 +78,6 @@ public class AddStringNum {
     }
 
     public static long solution1(String s1, String s2) {
-        if (s1.length() - s2.length() < 0) {
-            String temp = s1;
-            s1 = s2;
-            s2 = temp;
-        }
         int i = s1.length() - 1;
         int j = s2.length() - 1;
         int mod = 0;
