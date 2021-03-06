@@ -12,8 +12,8 @@ public class AddStringNum {
 
     public static void main(String[] args) {
 
-        String num1 = "89465812";
-        String num2 = "46567853464646";
+        String num1 = "956";
+        String num2 = "57";
         long l = solution1(num1, num2);
         System.out.println(l);
 
@@ -63,20 +63,20 @@ public class AddStringNum {
         int j = s2.length() - 1;
         int mod = 0;
         long res = 0, radix = 1;
-        while (i >= 0) {
-            int a, b = 0;
-            a = s1.charAt(i) - '0';
+        while (i >= 0 || j >= 0) {
+            int a = 0, b = 0;
+            if (i >= 0) {
+                a = s1.charAt(i--) - '0';
+            }
             if (j >= 0) {
-                b = s2.charAt(j) - '0';
-                j--;
+                b = s2.charAt(j--) - '0';
             }
             int sum = a + b + mod;
             res = res + (long) (sum % 10) * radix;
             radix *= 10;
             mod = sum / 10;
-            i--;
         }
-        return res;
+        return mod == 1 ? radix * mod + res : res;
     }
 
 
