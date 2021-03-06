@@ -1,5 +1,6 @@
 package com.zor.algorithm.leetcode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
@@ -26,14 +27,54 @@ public class Leetcode503 {
 
         int[] nums = {5, 4, 3, 2, 1};
         int[] ints = nextGreaterElements(nums);
-        System.out.println(Arrays.toString(ints));
+        System.out.println("单调栈解法答案：" + Arrays.toString(ints));
+        int[] ints1 = solution1(nums);
+        System.out.println("暴力解法答案：" + Arrays.toString(ints1));
 
     }
 
     /**
-     * 暴力解法
+     * 单调栈
      */
     public static int[] nextGreaterElements(int[] nums) {
+        int n = nums.length;
+        int[] res = new int[n];
+        Arrays.fill(res, -1);
+        Deque<Integer> stack = new LinkedList<>();
+        // 遍历两遍数组
+        for (int i = 0; i < 2 * n - 1; i++) {
+            // nums[i%n]模拟循环数组
+            while (!stack.isEmpty() && nums[i % n] > nums[stack.peek()]) {
+                res[stack.pop()] = nums[i % n];
+            }
+            stack.push(i % n);
+        }
+        return res;
+    }
+
+    /**
+     * 看起来简洁的暴力解法
+     */
+    public static int[] solution1(int[] nums) {
+        int n = nums.length;
+        int[] res = new int[n];
+        for (int i = 0; i < nums.length; i++) {
+            res[i] = -1;
+            for (int j = i + 1; j < n + i; j++) {
+                // 模拟循环数组
+                if (nums[i] < nums[j % n]) {
+                    res[i] = nums[j % n];
+                    break;
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
+     * 愚蠢的暴力解法
+     */
+    public static int[] solution2(int[] nums) {
         int[] res = new int[nums.length];
         int n = nums.length;
         int i = 0;
@@ -63,20 +104,6 @@ public class Leetcode503 {
                 res[i] = -1;
             }
             i++;
-        }
-        return res;
-    }
-
-    public static int[] solution2(int[] nums) {
-        int n = nums.length;
-        int[] res = new int[n];
-        Arrays.fill(res, -1);
-        Deque<Integer> stack = new LinkedList<>();
-        for (int i = 0; i < 2 * n; i++) {
-            while (!stack.isEmpty() && nums[i % n] > nums[stack.peek()]) {
-                res[stack.pop()] = nums[i % n];
-            }
-            stack.push(i % n);
         }
         return res;
     }
