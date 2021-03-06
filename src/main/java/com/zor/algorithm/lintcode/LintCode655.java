@@ -46,6 +46,7 @@ public class LintCode655 {
                 j--;
             }
             int sum = a + b + carry;
+            // sum插入到res的前面
             res.insert(0, sum % 10);
             // sum%10+'0' 是把数字转换为字符串
             //res = (char) (sum % 10 + '0') + res;
