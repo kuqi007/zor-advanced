@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ * https://tech.meituan.com/2017/12/22/ddd-in-practice.html
  * Created by kuqi0 on 2021/3/7
  */
 @Service
