@@ -4,13 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ *
  * 百度面试题
  * Created by kuqi0 on 2021/3/8
  * 使用双向链表实现一个LRU的cache
  * <p>
  * 首先要接收⼀个capacity参数作为缓存的最⼤容量，然后实现两个API，⼀个是 put(key, val) 方法存入键值对，
  * 另一个是 get(key) 方法获取 key 对应的 val，如果 key 不存在则返回空。
- * 注意哦，get 和 put ⽅法必须都是  O(1)  的时间复杂度，
+ * 注意哦，get 和 put ⽅法必须都是  O(1)  的时间复杂度
+ * 参考 https://www.cnblogs.com/-beyond/p/13026406.html
  */
 public class MyLRUCache {
 

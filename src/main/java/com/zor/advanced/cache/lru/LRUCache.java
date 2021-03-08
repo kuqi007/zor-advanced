@@ -35,6 +35,7 @@ public class LRUCache {
         }
         int val = map.get(key).val;
         // 利用put方法把数据提前
+        // 其实就是两步：将该节点删除，再将该节点放到头部
         put(key, val);
         return val;
     }
