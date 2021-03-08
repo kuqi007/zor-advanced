@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 百度面试题
  * Created by kuqi0 on 2021/3/8
  * 使用双向链表实现一个LRU的cache
  * <p>
@@ -11,7 +12,7 @@ import java.util.Map;
  * 另一个是 get(key) 方法获取 key 对应的 val，如果 key 不存在则返回空。
  * 注意哦，get 和 put ⽅法必须都是  O(1)  的时间复杂度，
  */
-public class LRUCache {
+public class MyLRUCache {
 
     /**
      * 缓存数据的容器
@@ -36,7 +37,7 @@ public class LRUCache {
      *
      * @param capacity 最多能保存的缓存项数量
      */
-    public LRUCache(int capacity) {
+    public MyLRUCache(int capacity) {
         this.capacity = capacity;
         cache = new HashMap<>();
         head = new DLinkedNode();
@@ -152,7 +153,7 @@ public class LRUCache {
 
 
     public static void main(String[] args) {
-        LRUCache cache = new LRUCache(3);
+        MyLRUCache cache = new MyLRUCache(3);
         cache.set("one", 111);
         System.out.println(cache.get("one"));   // 111
 
