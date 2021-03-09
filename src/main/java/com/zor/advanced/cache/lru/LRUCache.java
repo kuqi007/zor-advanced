@@ -1,6 +1,8 @@
 package com.zor.advanced.cache.lru;
 
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -14,7 +16,7 @@ public class LRUCache {
     private final Map<Integer, Node> map;
 
     /**
-     * 可以直接换成LinkedList
+     * 可以直接换成Deque或者LinkedList
      */
     private final DoubleList cache;
 
