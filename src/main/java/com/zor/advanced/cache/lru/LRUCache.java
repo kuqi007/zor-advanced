@@ -27,6 +27,7 @@ public class LRUCache {
         this.cap = capacity;
         map = new HashMap<>();
         cache = new DoubleLinkedList();
+        //cache = new DoubleLinkedListII();
     }
 
     public int get(int key) {
