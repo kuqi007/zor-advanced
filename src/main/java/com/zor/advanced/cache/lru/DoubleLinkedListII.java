@@ -1,7 +1,7 @@
 package com.zor.advanced.cache.lru;
 
 /**
- * 使用一个傀儡头和傀儡尾节点，更方便操作
+ * 使用一个傀儡头和傀儡尾节点，更方便操作，不需要去判断各种边界条件
  *
  * @author zqq
  * @date 2021/3/10
