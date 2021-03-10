@@ -47,6 +47,7 @@ public class Leetcode125 {
             }
             char lc = chars[l];
             char rc = chars[r];
+            // 0P太恶心了。。。直接用ascii码计算会有问题
             if (Character.toLowerCase(lc) != Character.toLowerCase(rc)) {
                 return false;
             }
