@@ -28,11 +28,12 @@ public class DoubleLinkedListII implements DoubleList {
      * 在链表头部添加节点x，时间O(1)
      */
     public void addFirst(Node x) {
+        final Node next = head.next;
         // 先将新节点的左右两边置为头结点和原来的第一个节点
         x.prev = head;
-        x.next = head.next;
+        x.next = next;
         // 再将头节点和原来的第一个节点与新节点连上，顺序不能乱，否则会导致环形链表
-        head.next.prev = x;
+        next.prev = x;
         head.next = x;
         // size++
         size++;
@@ -43,10 +44,12 @@ public class DoubleLinkedListII implements DoubleList {
      * 由于是双链表且给的是⽬标 Node 节点，时间 O(1)
      */
     public void remove(Node x) {
-        Node pre = x.prev;
-        Node next = x.next;
+        final Node pre = x.prev;
+        final Node next = x.next;
         pre.next = next;
         next.prev = pre;
+        x.prev = null;
+        x.next = null;
         // size--
         size--;
     }
@@ -55,7 +58,7 @@ public class DoubleLinkedListII implements DoubleList {
      * 删除链表中最后⼀个节点，并返回该节点，时间 O(1)
      */
     public Node removeLast() {
-        Node last = tail.prev;
+        final Node last = tail.prev;
         remove(last);
         // size--
         size--;
