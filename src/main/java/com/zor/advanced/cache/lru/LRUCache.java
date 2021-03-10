@@ -1,8 +1,6 @@
 package com.zor.advanced.cache.lru;
 
-import java.util.Deque;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 /**
@@ -28,7 +26,7 @@ public class LRUCache {
     public LRUCache(int capacity) {
         this.cap = capacity;
         map = new HashMap<>();
-        cache = new DoubleLinedList();
+        cache = new DoubleLinkedList();
     }
 
     public int get(int key) {
