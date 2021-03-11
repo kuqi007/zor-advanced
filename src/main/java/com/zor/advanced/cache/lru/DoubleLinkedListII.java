@@ -60,8 +60,6 @@ public class DoubleLinkedListII implements DoubleList {
     public Node removeLast() {
         final Node last = tail.prev;
         remove(last);
-        // size--
-        size--;
         return last;
     }
 
