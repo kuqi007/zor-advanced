@@ -58,6 +58,8 @@ public class DoubleLinkedListII implements DoubleList {
      * 删除链表中最后⼀个节点，并返回该节点，时间 O(1)
      */
     public Node removeLast() {
+        // 如果head的下一个是tail，那么无需删除
+        if (head.next == tail) return null;
         final Node last = tail.prev;
         remove(last);
         return last;
