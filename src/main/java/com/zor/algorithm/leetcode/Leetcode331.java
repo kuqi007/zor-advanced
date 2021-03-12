@@ -49,5 +49,6 @@ public class Leetcode331 {
     public boolean isValidSerialization(String preorder) {
         //
 
+        return false;
     }
 }
