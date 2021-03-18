@@ -1,4 +1,4 @@
-package com.zor.algorithm.leetcode;
+package com.zor.algorithm.leetcode.slidingwindow;
 
 /**
  * 1052. 爱生气的书店老板

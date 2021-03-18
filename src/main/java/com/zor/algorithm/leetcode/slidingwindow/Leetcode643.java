@@ -1,4 +1,4 @@
-package com.zor.algorithm.leetcode;
+package com.zor.algorithm.leetcode.slidingwindow;
 
 /**
  * 643. 子数组最大平均数 I

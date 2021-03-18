@@ -1,4 +1,4 @@
-package com.zor.algorithm.leetcode;
+package com.zor.algorithm.leetcode.slidingwindow;
 
 import java.util.HashSet;
 import java.util.Set;
