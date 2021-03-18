@@ -19,7 +19,7 @@ import com.zor.algorithm.leetcode.linkedlist.base.ListNodeUtil;
 public class Leetcode206 {
 
     public static void main(String[] args) {
-        ListNode listNode = ListNodeUtil.getListNode(new int[]{1, 2, 3, 4, 5});
+        ListNode listNode = ListNodeUtil.getListNode(1, 2, 3, 4, 5);
         ListNodeUtil.printList(solution2(listNode));
     }
 

@@ -38,13 +38,13 @@ public class ListNodeUtil {
     }
 
     /**
-     * 获得一个链表
+     * 输入一个数组，获得一个链表
      */
-    public static ListNode getListNode(int[] nodeArr) {
+    public static ListNode getListNode(Integer... nodeArr) {
         if (nodeArr == null || nodeArr.length == 0) {
             return null;
         }
-        ListNode dummyNode = new ListNode(0);
+        ListNode dummyNode = new ListNode(-1);
         ListNode p = dummyNode;
         for (int value : nodeArr) {
             p.next = new ListNode(value);
@@ -58,17 +58,16 @@ public class ListNodeUtil {
         StringBuilder result = new StringBuilder();
         while (head != null) {
             result.append(head.val);
-            result.append("->");
+            if (head.next != null) {
+                result.append(" -> ");
+            }
             head = head.next;
-        }
-        if (result.lastIndexOf("->") == result.length() - 2) {
-            result.delete(result.length() - 2, result.length());
         }
         System.out.println(result);
     }
 
     public static void main(String[] args) {
-        ListNode listNode = getListNode(new int[]{1, 1, 2, 3, 4, 4});
+        ListNode listNode = getListNode(1, 1, 2, 3, 4, 4);
         printList(listNode);
     }
 

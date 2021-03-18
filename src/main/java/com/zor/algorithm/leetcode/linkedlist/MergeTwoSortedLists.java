@@ -18,8 +18,8 @@ import com.zor.algorithm.leetcode.linkedlist.base.ListNodeUtil;
  */
 public class MergeTwoSortedLists {
     public static void main(String[] args) {
-        ListNode listNode1 = ListNodeUtil.getListNode(new int[]{1, 2, 4});
-        ListNode listNode2 = ListNodeUtil.getListNode(new int[]{1, 3, 4});
+        ListNode listNode1 = ListNodeUtil.getListNode(1, 2, 4);
+        ListNode listNode2 = ListNodeUtil.getListNode(1, 3, 4);
         ListNode listNode = solution2(listNode1, listNode2);
         ListNodeUtil.printList(listNode);
 
