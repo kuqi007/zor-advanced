@@ -1,6 +1,7 @@
-package com.zor.algorithm.leetcode;
+package com.zor.algorithm.leetcode.linkedlist;
 
 import com.zor.algorithm.leetcode.linkedlist.base.ListNode;
+import com.zor.algorithm.leetcode.linkedlist.base.ListNodeUtil;
 
 /**
  * 2. 两数相加
@@ -28,8 +29,40 @@ import com.zor.algorithm.leetcode.linkedlist.base.ListNode;
  * 输出：[8,9,9,9,0,0,0,1]
  * 链接：https://leetcode-cn.com/problems/add-two-numbers
  */
-public class AddTwoNumbers {
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+public class Leetcode02 {
+
+    public static void main(String[] args) {
+        ListNode l1 = ListNodeUtil.getListNode(2, 4, 3);
+        ListNode l2 = ListNodeUtil.getListNode(5, 6, 4);
+        ListNode listNode = addTwoNumbers(l1, l2);
+        ListNodeUtil.printList(listNode);
+    }
+
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummyNode = new ListNode(-1);
+        ListNode head = dummyNode;
+        int carry = 0;
+        // 如果l1或l2不为空或者进位为1，则继续循环
+        while (l1 != null || l2 != null || carry != 0) {
+            int sum = carry;
+            // 不为空则sum加上这个值，同时指针往下走
+            if (l1 != null) {
+                sum += l1.val;
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                sum += l2.val;
+                l2 = l2.next;
+            }
+            head.next = new ListNode(sum % 10);
+            head = head.next;
+            carry = sum / 10;
+        }
+        return dummyNode.next;
+    }
+
+
+    public ListNode solution1(ListNode l1, ListNode l2) {
         ListNode dummyNode = new ListNode(0);
         ListNode head = dummyNode;
         int carry = 0;
