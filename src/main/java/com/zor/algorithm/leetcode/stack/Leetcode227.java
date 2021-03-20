@@ -1,4 +1,4 @@
-package com.zor.algorithm.leetcode;
+package com.zor.algorithm.leetcode.stack;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -46,7 +46,7 @@ public class Leetcode227 {
     }
 
     /**
-     * TODO没太理解
+     * TODO 没太理解
      * @param s
      * @return
      */
