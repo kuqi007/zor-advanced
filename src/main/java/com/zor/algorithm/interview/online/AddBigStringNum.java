@@ -28,7 +28,7 @@ public class AddBigStringNum {
         String res = "";
         // 进位
         int carry = 0;
-        while (i >= 0 || j >= 0) {
+        while (i >= 0 || j >= 0 || carry != 0) {
             int a = 0, b = 0;
             if (i >= 0) {
                 a = num1.charAt(i) - '0';
@@ -42,7 +42,7 @@ public class AddBigStringNum {
             res = sum % 10 + res;
             carry = sum / 10;
         }
-        return carry == 1 ? "1" + res : res;
+        return res;
     }
 
 
