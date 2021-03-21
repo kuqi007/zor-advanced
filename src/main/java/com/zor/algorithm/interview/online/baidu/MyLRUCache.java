@@ -1,4 +1,4 @@
-package com.zor.algorithm.interview.online;
+package com.zor.algorithm.interview.online.baidu;
 
 import java.util.HashMap;
 import java.util.Map;

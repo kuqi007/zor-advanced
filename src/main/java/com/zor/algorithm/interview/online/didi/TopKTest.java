@@ -1,4 +1,4 @@
-package com.zor.algorithm.interview.online;
+package com.zor.algorithm.interview.online.didi;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -86,6 +86,9 @@ public class TopKTest {
 
     }
 
+    /**
+     * 直接排序
+     */
     public static List<String> solution3(String[] arr, int k) {
         Map<String, Long> map = getCountMap(arr);
         return map.entrySet().stream()

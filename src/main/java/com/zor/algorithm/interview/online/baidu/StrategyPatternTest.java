@@ -1,5 +1,8 @@
-package com.zor.algorithm.interview.online;
+package com.zor.algorithm.interview.online.baidu;
 
+/**
+ * 2020/2/19 百度面试 策略模式
+ */
 public class StrategyPatternTest {
 
     public void test(String casees) {

@@ -1,4 +1,4 @@
-package com.zor.algorithm.interview.online;
+package com.zor.algorithm.interview.online.baidu;
 
 import org.assertj.core.util.Lists;
 
