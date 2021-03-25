@@ -42,6 +42,20 @@ public class Leetcode83 {
     }
 
     /**
+     * TODO 递归写法 回头再看
+     */
+    public static ListNode solution0(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        head.next = solution0(head.next);
+        if (head.val == head.next.val) {
+            head = head.next;
+        }
+        return head;
+    }
+
+    /**
      * 想复杂了
      */
     public static ListNode solution1(ListNode head) {
