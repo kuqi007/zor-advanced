@@ -2,9 +2,7 @@ package com.zor.algorithm.leetcode.linkedlist;
 
 import com.zor.algorithm.leetcode.linkedlist.base.ListNode;
 import com.zor.algorithm.leetcode.linkedlist.base.ListNodeUtil;
-import org.checkerframework.checker.units.qual.C;
 
-import java.sql.PreparedStatement;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,10 +39,13 @@ public class Leetcode82 {
 
     public static void main(String[] args) {
         ListNode listNode = ListNodeUtil.getListNode(1, 2, 3, 3, 4, 4, 5);
-        ListNodeUtil.printList(solution1(listNode));
+        ListNodeUtil.printList(deleteDuplicates(listNode));
     }
 
-    public static ListNode deleteDuplicates(ListNode head) {
+    /**
+     * 一次遍历
+     */
+    public static ListNode solution0(ListNode head) {
         ListNode dummyNode = new ListNode(0, head);
         ListNode cur = dummyNode;
         while (cur.next != null && cur.next.next != null) {
@@ -61,25 +62,61 @@ public class Leetcode82 {
         return dummyNode.next;
     }
 
-    public static ListNode solution1(ListNode head) {
+    /**
+     * 递归
+     */
+    public static ListNode deleteDuplicates(ListNode head) {
+        // 没有节点或者只有一个节点，必然没有重复元素
+        if (head == null || head.next == null) {
+            return head;
+        }
+        // 当前节点和下一个节点，值不同，则head的值是需要保留的，对head.next继续递归
+        if (head.val != head.next.val) {
+            head.next = deleteDuplicates(head.next);
+        } else {
+            // 当前节点与下一个节点的值重复了，重复的值都不能要。
+            // 一直往下找，找到不重复的节点。返回对不重复节点的递归结果
+            ListNode move = head.next;
+            while (move != null && head.val == move.val) {
+                move = move.next;
+            }
+            return deleteDuplicates(move);
+        }
+        return head;
+    }
+
+    /**
+     * 利用计数，两次遍历
+     */
+    public static ListNode solution2(ListNode head) {
         Map<Integer, Integer> counter = new HashMap<>();
         ListNode temp = head;
         while (temp != null) {
             counter.merge(temp.val, 1, Integer::sum);
             temp = temp.next;
         }
-
-        ListNode dummyNode = new ListNode(0, head);
-
-        ListNode cur = dummyNode;
-        while (cur.next != null) {
-            if (counter.get(cur.next.val) > 1) {
-                cur.next = cur.next.next;
-            } else {
-                cur = cur.next;
+        // 第一种做法
+        //ListNode dummyNode = new ListNode(0, head);
+        //
+        //ListNode cur = dummyNode;
+        //while (cur.next != null) {
+        //    if (counter.get(cur.next.val) > 1) {
+        //        cur.next = cur.next.next;
+        //    } else {
+        //        cur = cur.next;
+        //    }
+        //}
+        // 第二种做法
+        ListNode dummyNode = new ListNode(0);
+        ListNode res = dummyNode;
+        while (head != null) {
+            if (counter.get(head.val) == 1) {
+                dummyNode.next = new ListNode(head.val);
+                dummyNode = dummyNode.next;
             }
+            head = head.next;
         }
-        return dummyNode.next;
+        return res.next;
     }
 
 
