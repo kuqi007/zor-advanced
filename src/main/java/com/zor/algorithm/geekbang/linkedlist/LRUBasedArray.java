@@ -3,6 +3,14 @@ package com.zor.algorithm.geekbang.linkedlist;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Created by SpecialYang in 2018/12/7 2:00 PM.
+ * <p>
+ * 基于数组实现的LRU缓存
+ * 1. 空间复杂度为O(n)
+ * 2. 时间复杂度为O(n)
+ * 3. 不支持null的缓存
+ */
 public class LRUBasedArray<T> {
 
     private static final int DEFAULT_CAPACITY = (1 << 3);

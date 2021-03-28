@@ -8,7 +8,7 @@ import java.util.Map;
  * 基于数组实现的LRU缓存
  * 1. 空间复杂度为O(n)
  * 2. 时间复杂度为O(n)
- * 3. 不支持null的缓存
+ * TODO 是否还有优化的空间？
  */
 public class ArrayLRU {
 
