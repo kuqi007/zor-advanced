@@ -34,23 +34,59 @@ import java.util.Stack;
 public class Interview16_26 {
     public static void main(String[] args) {
 
+        String s = "3*2+2";
+        System.out.println("calculate(s) = " + calculate(s));
+
     }
 
-    public int calculate(String s) {
-        Deque<Character> operator = new LinkedList<>();
-        Deque<Character> nums = new LinkedList<>();
-        for (int i = 0; i < s.length(); i++) {
+    /**
+     * 主要思想如下：
+     * <p>
+     * 1. 将减法转化为加法（取相反数）
+     * <p>
+     * 2. 由于乘除法优先级高，直接计算
+     * <p>
+     * 3. 整数不仅一位，会>10
+     * <p>
+     * 4. 表达式中没有括号
+     */
+    public static int calculate(String s) {
+        int n = s.length();
+        Deque<Integer> stack = new LinkedList<>();
+        int num = 0;
+        char preSign = '+';
+        for (int i = 0; i < n; i++) {
             char c = s.charAt(i);
             if (Character.isDigit(c)) {
-                // 纯数字
-                nums.push(c);
-            } else if (c == '+' || c == '-' || c == '*' || c == '/') {
-                // 运算符
-
-
+                // 连续数字字符串转为数字，比如字符串 “23”，num 第一次保存为2，num第二次保存 2*10 + 3 = 23。
+                num = num * 10 + c - '0';
+            }
+            // 如果是运算符或者是最后一个字符
+            if ((!Character.isDigit(c) && c != ' ') || i == n - 1) {
+                switch (preSign) {
+                    case '+':
+                        stack.push(num);
+                        break;
+                    case '-':
+                        stack.push(-num);
+                        break;
+                    case '*':
+                        stack.push(stack.pop() * num);
+                        break;
+                    case '/':
+                        stack.push(stack.pop() / num);
+                        break;
+                }
+                preSign = c;
+                // num用完归零
+                num = 0;
             }
         }
-
-        return 0;
+        // 将栈中元素求和
+        int res = 0;
+        while (!stack.isEmpty()) {
+            res += stack.pop();
+        }
+        return res;
     }
 }
