@@ -16,7 +16,7 @@ import com.zor.algorithm.leetcode.linkedlist.base.ListNodeUtil;
  * 链接：https://leetcode-cn.com/problems/merge-two-sorted-lists
  * Created by kuqi0 on 2021/1/3
  */
-public class MergeTwoSortedLists {
+public class Leetcode21 {
     public static void main(String[] args) {
         ListNode listNode1 = ListNodeUtil.getListNode(1, 2, 4);
         ListNode listNode2 = ListNodeUtil.getListNode(1, 3, 4);
