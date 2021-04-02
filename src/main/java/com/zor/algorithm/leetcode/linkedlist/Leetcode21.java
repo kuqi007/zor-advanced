@@ -20,9 +20,26 @@ public class Leetcode21 {
     public static void main(String[] args) {
         ListNode listNode1 = ListNodeUtil.getListNode(1, 2, 4);
         ListNode listNode2 = ListNodeUtil.getListNode(1, 3, 4);
-        ListNode listNode = solution2(listNode1, listNode2);
+        ListNode listNode = solution1(listNode1, listNode2);
         ListNodeUtil.printList(listNode);
 
+    }
+
+    public static ListNode solution1(ListNode l1, ListNode l2) {
+        ListNode dummyNode = new ListNode(-1);
+        ListNode head = dummyNode;
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                head.next = l1;
+                l1 = l1.next;
+            } else {
+                head.next = l2;
+                l2 = l2.next;
+            }
+            head = head.next;
+        }
+        head.next = l1 != null ? l1 : l2;
+        return dummyNode.next;
     }
 
     /**
