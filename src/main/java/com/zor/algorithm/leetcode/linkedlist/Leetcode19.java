@@ -1,6 +1,10 @@
 package com.zor.algorithm.leetcode.linkedlist;
 
 import com.zor.algorithm.leetcode.linkedlist.base.ListNode;
+import com.zor.algorithm.leetcode.linkedlist.base.ListNodeUtil;
+
+import java.util.Deque;
+import java.util.LinkedList;
 
 /**
  * 19. 删除链表的倒数第 N 个结点
@@ -36,17 +40,72 @@ import com.zor.algorithm.leetcode.linkedlist.base.ListNode;
 public class Leetcode19 {
     public static void main(String[] args) {
 
+        ListNode listNode = ListNodeUtil.getListNode(1);
+        ListNode listNode1 = solution1(listNode, 1);
+        ListNodeUtil.printList(listNode1);
+
     }
 
     public static ListNode removeNthFromEnd(ListNode head, int n) {
 
+        ListNode dummyNode = new ListNode(0, head);
 
-        return head;
+        int length = getLength(head);
+
+        if (length < n) return head;
+
+        ListNode cur = dummyNode;
+        // 下标从1开始，到size-n
+        for (int i = 1; i <= length - n; i++) {
+            cur = cur.next;
+        }
+        cur.next = cur.next.next;
+        return dummyNode.next;
     }
 
-    private static ListNode reverse(ListNode head) {
+    private static int getLength(ListNode head) {
+        int length = 0;
+        while (head != null) {
+            head = head.next;
+            length++;
+        }
+        return length;
+    }
 
+    /**
+     * 使用栈
+     */
+    public static ListNode solution1(ListNode head, int n) {
+        ListNode dummyNode = new ListNode(0, head);
+        Deque<ListNode> stack = new LinkedList<>();
+        ListNode cur = dummyNode;
+        while (cur != null) {
+            stack.push(cur);
+            cur = cur.next;
+        }
+        for (int i = 0; i < n; i++) {
+            stack.pop();
+        }
+        ListNode prev = stack.peek();
+        prev.next = prev.next.next;
+        return dummyNode.next;
+    }
 
-        return head;
+    /**
+     * 双指针做法
+     */
+    public static ListNode solution2(ListNode head, int n) {
+        ListNode dummyNode = new ListNode(0, head);
+        ListNode first = head;
+        ListNode second = dummyNode;
+        for (int i = 0; i < n; i++) {
+            first = first.next;
+        }
+        while (first != null) {
+            first = first.next;
+            second = second.next;
+        }
+        second.next = second.next.next;
+        return dummyNode.next;
     }
 }
