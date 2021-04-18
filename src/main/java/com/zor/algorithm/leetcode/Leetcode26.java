@@ -46,10 +46,30 @@ import java.util.Arrays;
  * @author zqq
  * @date 2021/1/13
  */
-public class RemoveDuplicatesFromSortedArray {
+public class Leetcode26 {
 
     public static void main(String[] args) {
-        System.out.println(removeDuplicates(new int[]{0, 0, 0, 1, 1, 2, 2, 3, 3}));
+        System.out.println(removeDuplicates(new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}));
+    }
+
+    public static int removeDuplicates(int[] nums) {
+        int n = nums.length;
+        int slow = 0, fast = 1;
+        while (fast < n) {
+            if (nums[fast] != nums[slow]) {
+                if (fast - slow > 1) {
+                    nums[slow + 1] = nums[fast];
+                }
+                slow++;
+            }
+            fast++;
+        }
+
+        //System.out.println(slow);
+
+        //System.out.println(Arrays.toString(nums));
+        return slow + 1;
+
     }
 
     /**
@@ -60,7 +80,7 @@ public class RemoveDuplicatesFromSortedArray {
      * 当我们遇到 nums[j] != nums[i] 时，跳过重复项的运行已经结束，
      * 因此我们必须把它（nums[j]）的值复制到 nums[i + 1]。然后递增 i，接着我们将再次重复相同的过程，直到 j 到达数组的末尾为止。
      */
-    public static int removeDuplicates(int[] nums) {
+    public static int solution1(int[] nums) {
 
         int i = 0;
 
