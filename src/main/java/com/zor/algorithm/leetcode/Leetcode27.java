@@ -52,13 +52,25 @@ import java.util.Arrays;
  * @author zqq
  * @date 2021/1/13
  */
-public class RemoveElement {
+public class Leetcode27 {
     public static void main(String[] args) {
-        System.out.println(solution3(new int[]{2, 3, 2, 1, 1, 3}, 3));
+        System.out.println(solution0(new int[]{2, 3, 2, 1, 1, 3}, 3));
+    }
+
+    public static int solution0(int[] nums, int val) {
+        int i = 0;
+        for (int num : nums) {
+            if (num != val) {
+                nums[i] = num;
+                i++;
+            }
+        }
+        return i;
     }
 
     /**
-     * TODO双指针解法有点绕
+     * 双指针解法有点绕
+     * 拆成两部分看，i是有效数组，j是拿来比较的
      */
     public static int removeElement(int[] nums, int val) {
         int i = 0;
@@ -68,7 +80,7 @@ public class RemoveElement {
                 nums[i] = nums[j];
                 i++;
             }
-            System.out.println(Arrays.toString(nums));
+            //System.out.println(Arrays.toString(nums));
         }
         return i;
     }
