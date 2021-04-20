@@ -25,7 +25,7 @@ package com.zor.algorithm.leetcode;
  * @author zqq
  * @date 2021/1/18
  */
-public class ImplementStrstr {
+public class Leetcode28 {
 
     public static void main(String[] args) {
         System.out.println(strStr("smiles", "es"));
