@@ -25,7 +25,7 @@ public class Leetcode344 {
 
     public static void main(String[] args) {
 
-        reverseString("hello".toCharArray());
+        solution1("hello".toCharArray());
 
     }
 
@@ -39,6 +39,19 @@ public class Leetcode344 {
             s[i] = temp;
             j++;
             i--;
+        }
+        System.out.println(new String(s));
+
+    }
+
+
+    public static void solution1(char[] s) {
+        // 折半交换
+        int n = s.length;
+        for (int i = 0; i < n / 2; i++) {
+            char temp = s[i];
+            s[i] = s[n - i - 1];
+            s[n - i - 1] = temp;
         }
         System.out.println(new String(s));
 
