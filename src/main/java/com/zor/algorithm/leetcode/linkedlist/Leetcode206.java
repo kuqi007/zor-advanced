@@ -20,15 +20,15 @@ public class Leetcode206 {
 
     public static void main(String[] args) {
         ListNode listNode = ListNodeUtil.getListNode(1, 2, 3, 4, 5);
-        ListNodeUtil.printList(solution2(listNode));
+        ListNodeUtil.printList(solution1(listNode));
     }
-
 
     public static ListNode solution1(ListNode head) {
         ListNode pre = null, cur = head;
         while (cur != null) {
-            // 只要将当前节点指向前节点即可，无需关心next节点
+            // 保存一下原来next的指针，防止指针丢失
             ListNode next = cur.next;
+            // 只要将当前节点指向前节点即可，无需关心next节点
             cur.next = pre;
             pre = cur;
             cur = next;
