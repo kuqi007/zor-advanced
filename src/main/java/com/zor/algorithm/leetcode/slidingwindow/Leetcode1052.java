@@ -35,6 +35,9 @@ public class Leetcode1052 {
         System.out.println(i);
     }
 
+    /**
+     * 滑动窗口
+     */
     public static int maxSatisfied(int[] customers, int[] grumpy, int X) {
         int n = customers.length;
         int left = 0, right = 0;

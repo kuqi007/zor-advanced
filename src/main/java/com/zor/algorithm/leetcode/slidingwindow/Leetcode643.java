@@ -32,6 +32,12 @@ public class Leetcode643 {
     }
 
 
+    /**
+     * 滑动窗口
+     * @param nums
+     * @param k
+     * @return
+     */
     public static double findMaxAverage(int[] nums, int k) {
         int sum = 0;
         for (int i = 0; i < k; i++) {
