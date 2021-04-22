@@ -16,8 +16,38 @@ package com.zor.algorithm.leetcode;
  */
 public class Leetcode415 {
     public static void main(String[] args) {
-        String s = addStrings("155", "945");
+        String s = solution1("155", "945");
         System.out.println(s);
+
+    }
+
+
+    /**
+     * @date 2021/4/23
+     */
+    public static String solution1(String num1, String num2) {
+        int i = num1.length() - 1;
+        int j = num2.length() - 1;
+        int carry = 0;
+        StringBuilder ans = new StringBuilder();
+        while (i >= 0 || j >= 0 || carry != 0) {
+            int a = 0, b = 0;
+            if (i >= 0) {
+                // 算出某一位的值
+                a = num1.charAt(i) - '0';
+                i--;
+            }
+
+            if (j >= 0) {
+                b = num2.charAt(j) - '0';
+                j--;
+            }
+
+            int sum = a + b + carry;
+            ans.append(sum % 10);
+            carry = sum / 10;
+        }
+        return ans.reverse().toString();
 
     }
 
