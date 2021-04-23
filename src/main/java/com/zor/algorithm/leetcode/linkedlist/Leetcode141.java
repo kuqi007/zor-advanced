@@ -56,29 +56,32 @@ import java.util.Set;
  * 链接：https://leetcode-cn.com/problems/linked-list-cycle
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class LinkedListCycle {
+public class Leetcode141 {
 
     public static void main(String[] args) {
-        ListNode head = ListNodeUtil.getCycledLinkedList(new int[]{1, 2, 4, 3, 5}, -1);
-        System.out.println(solution11(head));
+        ListNode head = ListNodeUtil.getCycledLinkedList(new int[]{1, 2, 4, 3, 5}, 1);
+        System.out.println(solution1(head));
     }
 
-    /**
-     * hashSet直接遍历
-     */
-    public static boolean hasCycle(ListNode head) {
-        Set<ListNode> set = new HashSet<>();
-        while (head != null) {
-            if (!set.add(head)) {
-                return true;
-            }
-            head = head.next;
+    public static boolean solution1(ListNode head) {
+        // 如果头结点为空或者下一个节点为空则不可能成环
+        if (head == null || head.next == null) {
+            return false;
         }
-        return false;
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (slow != fast) {
+            // 快指针比较快，如果fast变为null则表明链表已经到了结尾，则不会成环，判断fast.next是为了fast.next.next不报NPE
+            if (fast == null || fast.next == null) return false;
+            slow = slow.next;
+            fast = fast.next.next;
+
+        }
+        return true;
     }
 
     /**
-     * 快慢指针法
+     * 快慢指针法 do while写法
      */
     public static boolean solution11(ListNode head) {
         if (head == null || head.next == null) {
@@ -97,6 +100,22 @@ public class LinkedListCycle {
 
         return true;
     }
+
+    /**
+     * hashSet直接遍历
+     */
+    public static boolean hasCycle(ListNode head) {
+        Set<ListNode> set = new HashSet<>();
+        while (head != null) {
+            if (!set.add(head)) {
+                return true;
+            }
+            head = head.next;
+        }
+        return false;
+    }
+
+
 
 
 }
