@@ -42,11 +42,95 @@ import java.util.Stack;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  * Created by kuqi0 on 2021/1/2
  */
-public class ValidParentheses {
+public class Leetcode20 {
     public static void main(String[] args) {
 
-        System.out.println(solution2("()[]{}"));
+        System.out.println(solution1("(("));
 
+    }
+
+    /**
+     * 这个解法有点秀，性能最好
+     */
+    public static boolean bestSolution(String s) {
+        Stack<Character> stack = new Stack<Character>();
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                stack.push(')');
+            } else if (c == '[') {
+                stack.push(']');
+            } else if (c == '{') {
+                stack.push('}');
+            } else if (stack.isEmpty() || c != stack.pop()) {
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+
+    public static boolean solution4(String s) {
+        if (s.equals("") || s.length() % 2 == 1) {
+            return false;
+        }
+        //栈：先进后出
+        Deque<Character> stk = new LinkedList<>();
+        //循环遍历字符串中的每一个括号，栈空时入栈
+        //栈不空时判断是否与栈顶元素构成有效的括号
+        //是，则栈顶元素出栈
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (!stk.isEmpty()) {
+                char t = stk.peek();
+                if (t == '(' && ch == ')' || t == '[' && ch == ']' || t == '{' && ch == '}') {
+                    stk.pop();
+                    continue;
+                }
+            }
+            stk.push(ch);
+        }
+        //只能用栈空来判断括号最终是否有效
+        return stk.isEmpty();
+
+    }
+
+
+    public static boolean solution1(String s) {
+        if (s.length() % 2 == 1) {
+            return false;
+        }
+        Deque<Character> stack = new LinkedList<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if ("]})".contains(String.valueOf(c))) {
+                Character peek = stack.peek();
+                if (stack.isEmpty() || peek != getMatch(c)) {
+                    return false;
+                } else {
+                    stack.pop();
+                }
+            } else {
+                stack.push(c);
+            }
+        }
+
+        return stack.isEmpty();
+
+    }
+
+    private static Character getMatch(Character c) {
+        Character result = null;
+        switch (c) {
+            case ')':
+                result = '(';
+                break;
+            case ']':
+                result = '[';
+                break;
+            case '}':
+                result = '{';
+                break;
+        }
+        return result;
     }
 
     public static boolean isValid(String s) {
