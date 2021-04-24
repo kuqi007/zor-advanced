@@ -49,11 +49,42 @@ public class Leetcode20 {
 
     }
 
+
+    /**
+     * 记住几点
+     * 1. 栈中保存的是左括号，用一个map存右括号与左括号的映射
+     * 2. 循环结束后判断是否栈中还有左括号，如果有则表示没有找到匹配的括号，返回false
+     */
+    public static boolean solution0(String s) {
+        if (s.length() % 2 == 1) {
+            return false;
+        }
+        Deque<Character> stack = new LinkedList<>();
+        Map<Character, Character> pairs = new HashMap<>();
+        pairs.put(')', '(');
+        pairs.put(']', '[');
+        pairs.put('}', '{');
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            // 出现右括号，必须有与之匹配的左括号，否则返回false
+            if (pairs.containsKey(c)) {
+                if (stack.isEmpty() || stack.pop() != pairs.get(c)) {
+                    return false;
+                }
+            } else {
+                stack.push(c);
+            }
+        }
+        // 如果栈中还有左括号，说明未找到匹配的括号
+        return stack.isEmpty();
+    }
+
+
     /**
      * 这个解法有点秀，性能最好
      */
     public static boolean bestSolution(String s) {
-        Stack<Character> stack = new Stack<Character>();
+        Deque<Character> stack = new LinkedList<>();
         for (char c : s.toCharArray()) {
             if (c == '(') {
                 stack.push(')');
@@ -159,35 +190,6 @@ public class Leetcode20 {
                 stack.push(c);
             }
         }
-        return stack.isEmpty();
-    }
-
-    public static boolean solution2(String s) {
-
-        if (s.length() % 2 == 1) return false;
-
-        Map<Character, Character> pairs = new HashMap<>();
-        pairs.put(']', '[');
-        pairs.put(')', '(');
-        pairs.put('}', '{');
-
-        Stack<Character> stack = new Stack<>();
-
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            // 出现右括号
-            if (pairs.containsKey(c)) {
-                // 栈为空，未发现左括号，或者栈顶与该括号不匹配
-                if (stack.isEmpty() || pairs.get(c) != stack.peek()) {
-                    return false;
-                }
-                stack.pop();
-            } else {
-                // 非右括号
-                stack.push(c);
-            }
-        }
-
         return stack.isEmpty();
     }
 
