@@ -1,4 +1,4 @@
-package com.zor.algorithm.leetcode.lcof;
+package com.zor.algorithm.lcof;
 
 /**
  * 剑指 Offer 03. 数组中重复的数字

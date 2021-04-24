@@ -1,4 +1,4 @@
-package com.zor.algorithm.leetcode.lcof;
+package com.zor.algorithm.lcof;
 
 import com.zor.algorithm.leetcode.linkedlist.base.ListNode;
 

@@ -1,4 +1,4 @@
-package com.zor.algorithm.leetcode.interview.coding;
+package com.zor.algorithm.coding;
 
 /**
  * @author zqq
