@@ -23,7 +23,7 @@ public class Lcof22 {
     }
 
     /**
-     * 这一题跟主站19题类似，使用双指针做法，
+     * 这一题跟主站19题类似，使用双指针做法，first指针先走k步，然后first和second指针一起走，first指针到头了，second就是结果
      */
     public ListNode getKthFromEnd(ListNode head, int k) {
 
