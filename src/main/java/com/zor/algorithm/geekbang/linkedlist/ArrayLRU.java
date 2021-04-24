@@ -9,6 +9,7 @@ import java.util.Map;
  * 1. 空间复杂度为O(n)
  * 2. 时间复杂度为O(n)
  * TODO 是否还有优化的空间？
+ * 使用循环数组试试
  */
 public class ArrayLRU {
 
