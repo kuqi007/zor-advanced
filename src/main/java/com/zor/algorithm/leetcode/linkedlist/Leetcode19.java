@@ -46,6 +46,25 @@ public class Leetcode19 {
 
     }
 
+    /**
+     * 双指针做法
+     */
+    public static ListNode bestSolution(ListNode head, int n) {
+        // dummyNode在删除链表节点情况下，非常好用，不用去判NPE了
+        ListNode dummyNode = new ListNode(0, head);
+        ListNode first = head;
+        ListNode second = dummyNode;
+        for (int i = 0; i < n; i++) {
+            first = first.next;
+        }
+        while (first != null) {
+            first = first.next;
+            second = second.next;
+        }
+        second.next = second.next.next;
+        return dummyNode.next;
+    }
+
     public static ListNode removeNthFromEnd(ListNode head, int n) {
 
         ListNode dummyNode = new ListNode(0, head);
@@ -91,21 +110,5 @@ public class Leetcode19 {
         return dummyNode.next;
     }
 
-    /**
-     * 双指针做法
-     */
-    public static ListNode solution2(ListNode head, int n) {
-        ListNode dummyNode = new ListNode(0, head);
-        ListNode first = head;
-        ListNode second = dummyNode;
-        for (int i = 0; i < n; i++) {
-            first = first.next;
-        }
-        while (first != null) {
-            first = first.next;
-            second = second.next;
-        }
-        second.next = second.next.next;
-        return dummyNode.next;
-    }
+
 }
