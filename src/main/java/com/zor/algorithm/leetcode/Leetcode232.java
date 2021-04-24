@@ -54,8 +54,12 @@ import java.util.LinkedList;
  */
 public class Leetcode232 {
 
+    /**
+     * 记住几个点：
+     * 1. 一个当做输入栈，一个当做输出栈，每次pop或peek时，若输出栈为空，将输入栈的数据依次弹出并压入输出栈
+     * 2. 当输出栈不为空的时候，pop或peek直接取输出栈栈顶元素，无须再将输入栈压入输出栈，因为输出栈栈顶的元素肯定是最先进来的
+     */
     static class MyQueue {
-
         Deque<Integer> inStack;
         Deque<Integer> outStack;
 
@@ -78,7 +82,7 @@ public class Leetcode232 {
          * Removes the element from in front of queue and returns that element.
          */
         public int pop() {
-            while (outStack.isEmpty()) {
+            if (outStack.isEmpty()) {
                 in2out();
             }
             return outStack.pop();
@@ -88,7 +92,7 @@ public class Leetcode232 {
          * Get the front element.
          */
         public int peek() {
-            while (outStack.isEmpty()) {
+            if (outStack.isEmpty()) {
                 in2out();
             }
             return outStack.peek();
