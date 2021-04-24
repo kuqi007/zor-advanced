@@ -26,7 +26,7 @@ public class Leetcode206 {
     /**
      * 反转链表记住两个点：
      * 1. 需要一个pre指针保存上一个节点
-     * 2. 对当前节点进行操作，不要对next节点进行反转，因为如果对next节点操作之后，将无法遍历到下一个节点
+     * 2. 对当前节点进行反转操作，不要对next节点进行反转，因为如果对next节点操作之后，将无法遍历到下一个节点
      */
     public static ListNode solution1(ListNode head) {
         ListNode pre = null, cur = head;
