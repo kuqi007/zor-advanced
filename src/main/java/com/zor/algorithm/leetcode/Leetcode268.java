@@ -52,8 +52,39 @@ public class Leetcode268 {
         int[] nums = {1};
         int i = missingNumber(nums);
         System.out.println(i);
-
     }
+
+    /**
+     * 异或位运算
+     */
+    public static int solution4(int[] nums) {
+        int n = nums.length;
+        int res = n;
+        for (int i = 0; i < n; i++) {
+            res = res ^ i ^ nums[i];
+        }
+        return res;
+    }
+
+    public static int solution3(int[] nums) {
+        int n = nums.length;
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum = sum + i - nums[i];
+        }
+        return sum + n;
+    }
+
+    public static int solution2(int[] nums) {
+        int n = nums.length;
+        int sum1 = n * (n - 1) / 2;
+        int sum2 = 0;
+        for (int num : nums) {
+            sum2 += num;
+        }
+        return sum1 - sum2;
+    }
+
 
     /**
      * 二分法
