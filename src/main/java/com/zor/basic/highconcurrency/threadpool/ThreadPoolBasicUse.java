@@ -13,14 +13,14 @@ public class ThreadPoolBasicUse {
 
     public static void main(String[] args) {
         TimeUnit unit = TimeUnit.MILLISECONDS;
-        BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(5);
+        BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(2);
         ThreadPoolExecutor threadPoolExecutor =
-                new ThreadPoolExecutor(5, 10, 1, unit, workQueue);
+                new ThreadPoolExecutor(2, 5, 1, unit, workQueue);
 
 
         // 核心线程和非核心线程不分类，一视同仁
         // 会出现一个问题，后来的任务先执行，因为先来的一部分会到队列排队
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 5; i++) {
             Command command = new Command(i);
             threadPoolExecutor.submit(command);
         }
@@ -39,7 +39,7 @@ public class ThreadPoolBasicUse {
         public void run() {
             System.out.println(name);
             try {
-                Thread.sleep(1000L);
+                Thread.sleep(10000L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
