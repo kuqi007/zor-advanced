@@ -3,6 +3,7 @@ package com.zor.algorithm.sort;
 import java.util.Arrays;
 
 /**
+ * http://data.biancheng.net/view/117.html
  * Created by kuqi0 on 2021/2/1
  */
 public class QuickSortII {
@@ -25,7 +26,7 @@ public class QuickSortII {
                     src[i] = src[j];
                     i++;
                 }
-                while (i < j && src[j] < key) {
+                while (i < j && src[i] < key) {
                     i++;
                 }
                 if (i < j) {
@@ -33,6 +34,7 @@ public class QuickSortII {
                     j--;
                 }
             }
+            src[i] = key;
             quickSort(src, begin, i - 1);
             quickSort(src, i + 1, end);
         }
