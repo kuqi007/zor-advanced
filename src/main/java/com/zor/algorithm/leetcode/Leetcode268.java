@@ -92,16 +92,20 @@ public class Leetcode268 {
     public static int missingNumber(int[] nums) {
         int n = nums.length;
         Arrays.sort(nums);
-        if (nums[0] != 0) return 0;
-        if (nums[n - 1] != n) return n;
+        //if (nums[0] != 0) return 0;
+        //if (nums[n - 1] != n) return n;
         int l = 0, r = n - 1;
         int ans = -1;
         while (l <= r) {
             int mid = l + (r - l) / 2;
+            // 如果中间值和下标相等，表示缺失受罪在右边
             if (mid == nums[mid]) {
-                ans = nums[mid] + 1;
+                // ans保存下最接近缺失数的值
+                ans = mid + 1;
                 l = mid + 1;
             } else if (mid < nums[mid]) {
+                // ans保存最后一个最接近缺失数字的值
+                ans = mid;
                 r = mid - 1;
             }
         }
