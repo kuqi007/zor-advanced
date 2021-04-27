@@ -56,6 +56,7 @@ public class SkipList<T> {
             if (t.next.score > score) {
                 t = t.down;
             } else {
+                // 下个数比他小或者等于则到下一个节点
                 t = t.next;
             }
         }
