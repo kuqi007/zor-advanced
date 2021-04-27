@@ -2,6 +2,7 @@ package com.zor.basic.highconcurrency.threadpool;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +23,10 @@ public class ThreadPoolBasicUse {
         // 会出现一个问题，后来的任务先执行，因为先来的一部分会到队列排队
         for (int i = 0; i < 5; i++) {
             Command command = new Command(i);
-            threadPoolExecutor.submit(command);
+            // submit会有返回值
+            Future<?> submit = threadPoolExecutor.submit(command);
+            // execute没有返回值
+            threadPoolExecutor.execute(command);
         }
 
     }
