@@ -11,7 +11,7 @@ public class FoundMissingNumberTest {
 
     public static void main(String[] args) {
         FoundMissingNumberTest onlineTest = new FoundMissingNumberTest();
-        int[] arr = {0, 1, 4, 5, 6, 7};
+        int[] arr = {0, 1, 2, 3, 4, 5, 7, 8, 10};
 
         System.out.println("onlineTest.test(arr) = " + Arrays.toString(onlineTest.test1(arr)));
     }
@@ -25,7 +25,7 @@ public class FoundMissingNumberTest {
         int[] ans = new int[2];
         boolean found = false;
         for (int i = 0; i < n; i++) {
-            if (arr[i] - i == 1) {
+            if (arr[i] - i == 1 && !found) {
                 ans[0] = i;
                 found = true;
             } else if (arr[i] - i == 2) {
