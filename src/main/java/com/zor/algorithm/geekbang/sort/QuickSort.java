@@ -42,7 +42,7 @@ public class QuickSort {
                 i++;
             }
         }
-        // 然后讲pivot位置的数与i交换，这样罪之后，pivot左边的数均比它小，右边数均比它大
+        // 然后讲pivot位置的数与i交换，这样做之后，pivot左边的数均比它小，右边数均比它大
         swap(A, i, r);
         return i;
     }
