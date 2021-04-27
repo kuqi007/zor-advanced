@@ -45,9 +45,9 @@ public class FoundMissingNumberTest {
     public int test(int[] arr) {
         int n = arr.length;
         int l = 0, r = n - 1;
-        int ans = -1;
-        if (arr[n - 1] != n) return n;
-        if (arr[0] != 0) return 0;
+        //int ans = -1;
+        //if (arr[n - 1] != n) return n;
+        //if (arr[0] != 0) return 0;
         while (l <= r) {
             //if (r - l < 5) {
             //    for (int i = l; i <= r; i++) {
@@ -59,14 +59,14 @@ public class FoundMissingNumberTest {
             int mid = l + (r - l) / 2;
             // 如果mid等于当前值，说明缺失的在右边
             if (mid == arr[mid]) {
-                ans = mid + 1;
+                //ans = mid + 1;
                 l = mid + 1;
             } else {
                 // mid小于当前值，缺失的在左边
                 r = mid - 1;
             }
         }
-        return ans;
+        return l;
     }
 
 }
