@@ -85,6 +85,16 @@ public class Leetcode268 {
         return sum1 - sum2;
     }
 
+    public static int solution0(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
+        if (nums[n - 1] != n) return n;
+        for (int i = 0; i < n; i++) {
+            if (i != nums[i]) return i;
+        }
+        return -1;
+    }
+
 
     /**
      * 二分法
