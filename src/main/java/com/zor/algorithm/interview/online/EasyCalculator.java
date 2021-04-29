@@ -11,30 +11,53 @@ import javax.script.ScriptException;
 public class EasyCalculator {
 
     public static void main(String[] args) {
-        //EasyCalculator easyCalculator = new EasyCalculator();
-        //String s = "1+2-5+5+58-1111+12345";
-        //long res = easyCalculator.calc(s);
-        //
-        //
-        //ScriptEngineManager manager = new ScriptEngineManager();
-        //ScriptEngine engine = manager.getEngineByName("js");
-        //try {
-        //    Object result = engine.eval(s);
-        //    System.out.println("实际结果:" + result);
-        //} catch (ScriptException e) {
-        //    e.printStackTrace();
-        //}
-        //
-        //System.out.println("算法结果: " + res);
+        EasyCalculator easyCalculator = new EasyCalculator();
+        String s = "11+2-5-5+58+1111-12345111";
+        long res = easyCalculator.solution1(s);
+
+        ScriptEngineManager manager = new ScriptEngineManager();
+        ScriptEngine engine = manager.getEngineByName("js");
+        try {
+            Object result = engine.eval(s);
+            System.out.println("实际结果:" + result);
+        } catch (ScriptException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("算法结果: " + res);
 
     }
 
-    /**
-     * 简单加减运算的计算器
-     */
-    public int calc(String s) {
-        int num = 0;
+    public int solution1(String s) {
+        s = s + "+";
+        char preSign = '+';
         int res = 0;
+        //int num = 0;
+        //for (int i = 0; i < s.length(); i++) {
+        //    char c = s.charAt(i);
+        //    if (Character.isDigit(c)) {
+        //        num = num * 10 + c - '0';
+        //    } else if (c == '+' || c == '-') {
+        //        if (preSign == '+') {
+        //            res = res + num;
+        //        } else {
+        //            res = res - num;
+        //        }
+        //        preSign = c;
+        //        num = 0;
+        //    }
+        //
+        //}
+        return res;
+    }
+
+
+    ///**
+    // * 简单加减运算的计算器
+    // */
+    //public int calc(String s) {
+    //    int num = 0;
+    //    int res = 0;
         //char preSign = '+';
         //for (int i = 0; i < s.length(); i++) {
         //    char c = s.charAt(i);
@@ -51,6 +74,8 @@ public class EasyCalculator {
         //        num = 0;
         //    }
         //}
-        return res;
-    }
+        //return res;
+    //}
+
+
 }
