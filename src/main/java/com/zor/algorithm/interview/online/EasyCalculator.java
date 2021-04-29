@@ -1,15 +1,31 @@
 package com.zor.algorithm.interview.online;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
 /**
- * Created by kuqi0 on 2021/4/28
+ * @author zhuqiqi03
+ * @date 2021/4/28
  */
 public class EasyCalculator {
 
     public static void main(String[] args) {
-        EasyCalculator easyCalculator = new EasyCalculator();
-        String expression = "11+2-1+111";
-        int calc = easyCalculator.calc(expression);
-        System.out.println(calc);
+        //EasyCalculator easyCalculator = new EasyCalculator();
+        //String s = "1+2-5+5+58-1111+12345";
+        //long res = easyCalculator.calc(s);
+        //
+        //
+        //ScriptEngineManager manager = new ScriptEngineManager();
+        //ScriptEngine engine = manager.getEngineByName("js");
+        //try {
+        //    Object result = engine.eval(s);
+        //    System.out.println("实际结果:" + result);
+        //} catch (ScriptException e) {
+        //    e.printStackTrace();
+        //}
+        //
+        //System.out.println("算法结果: " + res);
 
     }
 
@@ -19,22 +35,22 @@ public class EasyCalculator {
     public int calc(String s) {
         int num = 0;
         int res = 0;
-        char preSign = '+';
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (Character.isDigit(c)) {
-                num = num * 10 + c - '0';
-            }
-            if (c == '+' || c == '-' || i == s.length() - 1) {
-                if (preSign == '+') {
-                    res += num;
-                } else if (preSign == '-') {
-                    res -= num;
-                }
-                preSign = c;
-                num = 0;
-            }
-        }
+        //char preSign = '+';
+        //for (int i = 0; i < s.length(); i++) {
+        //    char c = s.charAt(i);
+        //    if (Character.isDigit(c)) {
+        //        num = num * 10 + c - '0';
+        //    }
+        //    if (c == '+' || c == '-' || i == s.length() - 1) {
+        //        if (preSign == '+') {
+        //            res += num;
+        //        } else if (preSign == '-') {
+        //            res -= num;
+        //        }
+        //        preSign = c;
+        //        num = 0;
+        //    }
+        //}
         return res;
     }
 }
