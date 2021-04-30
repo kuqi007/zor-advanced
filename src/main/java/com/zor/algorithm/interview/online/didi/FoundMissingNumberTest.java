@@ -11,25 +11,26 @@ public class FoundMissingNumberTest {
 
     public static void main(String[] args) {
         FoundMissingNumberTest onlineTest = new FoundMissingNumberTest();
-        int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 10};
+        int[] arr = {1, 2, 4, 5, 6, 7, 8, 9, 10};
 
         System.out.println("onlineTest.test(arr) = " + Arrays.toString(onlineTest.test1(arr)));
     }
 
     /**
-     * 缺两个
+     * 如果缺两个数字，分情况讨论
      */
-    public int[] test1(int[] arr) {
-        int n = arr.length;
-        Arrays.sort(arr);
+    public int[] test1(int[] nums) {
+        int n = nums.length;
+        Arrays.sort(nums);
         int[] ans = new int[2];
-        boolean found = false;
+        boolean foundFirst = false;
         for (int i = 0; i < n; i++) {
-            if (arr[i] - i == 1 && !found) {
+            if (nums[i] - i == 1 && !foundFirst) {
                 ans[0] = i;
-                found = true;
-            } else if (arr[i] - i == 2) {
-                if (!found) {
+                foundFirst = true;
+            } else if (nums[i] - i == 2) {
+                // 如果在找到第一个数字的情况下，那此时找到的就是第二个数字，否则代表这两个数字全部缺失
+                if (!foundFirst) {
                     ans[0] = i;
                 }
                 ans[1] = i + 1;
