@@ -1,6 +1,4 @@
-package com.zor.algorithm.coding;
-
-import java.util.Arrays;
+package com.zor.algorithm.lcci;
 
 /**
  * 面试题 17.19. 消失的两个数字

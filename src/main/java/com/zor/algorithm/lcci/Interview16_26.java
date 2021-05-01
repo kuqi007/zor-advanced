@@ -1,4 +1,4 @@
-package com.zor.algorithm.coding;
+package com.zor.algorithm.lcci;
 
 import java.util.Deque;
 import java.util.LinkedList;
