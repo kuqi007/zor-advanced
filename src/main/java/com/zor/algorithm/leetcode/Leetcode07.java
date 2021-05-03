@@ -24,7 +24,7 @@ import org.junit.Test;
  * <p>
  * 链接：https://leetcode-cn.com/problems/reverse-integer
  */
-public class ReverseInteger {
+public class Leetcode07 {
     @Test
     public void test() {
         System.out.println(reverse(123456789));
