@@ -108,7 +108,7 @@ public class Leetcode268 {
         //int ans = -1;
         while (l <= r) {
             int mid = l + (r - l) / 2;
-            // 如果中间值和下标相等，表示缺失受罪在右边
+            // 如果中间值和下标相等，表示缺失数字在右边
             if (mid == nums[mid]) {
                 // ans保存下最接近缺失数的值（小于缺失数字）
                 //ans = mid + 1;
@@ -119,7 +119,8 @@ public class Leetcode268 {
                 r = mid - 1;
             }
         }
-        return l;
+        // 找到右边界r，r+1即缺失的数字 而循环结束时l=r+1，所以也可以返回l
+        return r + 1;
     }
 
     /**

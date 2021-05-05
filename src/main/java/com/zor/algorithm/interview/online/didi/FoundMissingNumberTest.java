@@ -58,16 +58,18 @@ public class FoundMissingNumberTest {
             //    }
             //}
             int mid = l + (r - l) / 2;
+            // mid即target
             // 如果mid等于当前值，说明缺失的在右边
-            if (mid == arr[mid]) {
+            if (arr[mid] == mid) {
                 //ans = mid + 1;
                 l = mid + 1;
-            } else {
+            } else if (arr[mid] > mid) {
                 // mid小于当前值，缺失的在左边
                 r = mid - 1;
             }
         }
-        return l;
+        // 找到右边界r，r+1即缺失的数字 而循环结束时l=r+1，所以也可以返回l
+        return r + 1;
     }
 
 }
