@@ -47,7 +47,7 @@ public class Leetcode34 {
         if (nums.length == 0) return new int[]{-1, -1};
 
         int leftIndex = leftBound(nums, target);
-        // target+1指向了target结尾的下一位
+        // target+1指向了target结尾的下一位，rightIndex-1即右边界
         int rightIndex = leftBound(nums, target + 1);
 
         // 判断数组中是否未找到目标值
