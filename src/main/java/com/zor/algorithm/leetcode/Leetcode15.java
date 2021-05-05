@@ -38,9 +38,40 @@ public class Leetcode15 {
     public static void main(String[] args) {
 
         int[] nums = {-1, 0, 1, 2, -1, -4};
-        List<List<Integer>> lists = threeSum(nums);
+        List<List<Integer>> lists = solution1(nums);
         System.out.println(lists);
 
+    }
+
+    public static List<List<Integer>> solution1(int[] nums) {
+        Arrays.sort(nums);
+        int n = nums.length;
+        List<List<Integer>> ans = new ArrayList<>();
+        for (int i = 0; i < n - 2; i++) {
+            int cur = nums[i];
+            // 如果当前值已经是正数则无需遍历，因为后面的数肯定比当前大
+            if (cur > 0) return ans;
+            if (i > 0 && cur == nums[i - 1]) {
+                continue;
+            }
+            int l = i + 1, r = n - 1;
+            while (l < r) {
+                int sum = nums[l] + nums[r] + cur;
+                if (sum < 0) {
+                    l++;
+                } else if (sum > 0) {
+                    r--;
+                } else {
+                    ans.add(Arrays.asList(cur, nums[l], nums[r]));
+                    // 过滤掉重复的
+                    while (l < r && nums[l + 1] == nums[l]) l++;
+                    while (l < r && nums[r - 1] == nums[r]) r--;
+                    l++;
+                    r--;
+                }
+            }
+        }
+        return ans;
     }
 
     public static List<List<Integer>> threeSum(int[] nums) {
