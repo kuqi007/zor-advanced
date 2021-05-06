@@ -75,4 +75,20 @@ public class BinarySearch {
         return right;
     }
 
+    public int recursiveBinarySearch(int[] nums, int target) {
+        return bSearchInternally(nums, 0, nums.length - 1, target);
+    }
+
+    private int bSearchInternally(int[] nums, int low, int high, int value) {
+        if (low > high) return -1;
+        int mid = low + ((high - low) >> 1);
+        if (nums[mid] == value) {
+            return mid;
+        } else if (nums[mid] < value) {
+            return bSearchInternally(nums, mid + 1, high, value);
+        } else {
+            return bSearchInternally(nums, low, mid - 1, value);
+        }
+    }
+
 }
