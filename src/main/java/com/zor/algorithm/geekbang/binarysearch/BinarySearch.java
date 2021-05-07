@@ -8,9 +8,85 @@ public class BinarySearch {
 
     public static void main(String[] args) {
         BinarySearch binarySearch = new BinarySearch();
-        int[] nums = {1, 1, 1, 2, 2};
-        int i = binarySearch.rightBound(nums, 1);
+        int[] nums = {3, 5, 6, 8, 9, 10};
+        int i = binarySearch.findLastLesserNumber(nums, 7);
         System.out.println(i);
+    }
+
+    /**
+     * 查找最后一个小于等于给定值的元素
+     */
+    public int findLastLesserNumber(int[] a, int value) {
+        int n = a.length;
+        int low = 0, high = n - 1;
+        while (low <= high) {
+            int mid = low + ((high - low) >> 1);
+            if (a[mid] > value) {
+                high = mid - 1;
+            } else {
+                if (mid == n - 1 || a[mid + 1] > value) return mid;
+                else low = mid + 1;
+            }
+        }
+        return -1;
+    }
+
+
+    /**
+     * 查找第一个大于等于给定值的元素
+     */
+    public int findFirstBiggerNumber(int[] a, int value) {
+        int n = a.length;
+        int low = 0, high = n - 1;
+        while (low <= high) {
+            int mid = low + ((high - low) >> 1);
+            if (a[mid] >= value) {
+                if (mid == 0 || a[mid - 1] < value) return mid;
+                else high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 通俗易懂的查找左边界写法
+     */
+    public int bSearchLeftBound(int[] a, int value) {
+        int low = 0, high = a.length - 1;
+        while (low <= high) {
+            int mid = low + ((high - low) >> 1);
+            if (a[mid] > value) {
+                high = mid - 1;
+            } else if (a[mid] < value) {
+                low = mid + 1;
+            } else {
+                if (mid == 0 || a[mid - 1] != value) return mid;
+                else high = mid - 1;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 通俗易懂的查找右边界写法
+     */
+    public int bSearchRightBound(int[] a, int value) {
+        int n = a.length;
+        int low = 0, high = n - 1;
+        while (low <= high) {
+            int mid = low + ((high - low) >> 1);
+            if (a[mid] > value) {
+                high = mid - 1;
+            } else if (a[mid] < value) {
+                low = mid + 1;
+            } else {
+                if (mid == n - 1 || a[mid] != a[mid + 1]) return mid;
+                else low = mid + 1;
+            }
+        }
+        return -1;
     }
 
     public int binarySearch(int[] nums, int target) {
