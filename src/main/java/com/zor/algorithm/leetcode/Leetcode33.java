@@ -53,18 +53,18 @@ public class Leetcode33 {
         while (l <= r) {
             int mid = l + ((r - l) >> 1);
             if (nums[mid] == target) return mid;
-            // 左边有序
-            if (nums[0] <= nums[mid]) {
+            if (nums[l] <= nums[mid]) {
+                // 循环段在右侧
                 // target在左边
-                if (nums[0] <= target && nums[mid] > target) {
+                if (nums[l] <= target && nums[mid] > target) {
                     r = mid - 1;
                 } else {
                     l = mid + 1;
                 }
             } else {
-                // 右边有序
+                // 循环段在左侧
                 // target在右边
-                if (nums[n - 1] >= target && nums[mid] < target) {
+                if (nums[r] >= target && nums[mid] < target) {
                     l = mid + 1;
                 } else {
                     r = mid - 1;
