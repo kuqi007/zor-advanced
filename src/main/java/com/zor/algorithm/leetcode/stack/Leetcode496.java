@@ -1,5 +1,11 @@
 package com.zor.algorithm.leetcode.stack;
 
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
 /**
  * 496. 下一个更大元素 I
  * 给你两个 没有重复元素 的数组 nums1 和 nums2 ，其中nums1 是 nums2 的子集。
@@ -39,8 +45,42 @@ package com.zor.algorithm.leetcode.stack;
  */
 public class Leetcode496 {
 
+    public static void main(String[] args) {
+        Leetcode496 leetcode496 = new Leetcode496();
+        int[] n1 = {4, 1, 2};
+        int[] n2 = {1, 3, 4, 2};
+
+        int[] res = leetcode496.nextGreaterElement(n1, n2);
+        System.out.println(Arrays.toString(res));
+
+    }
+
+
+    /**
+     * 单调栈解法
+     */
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
-        // TODO
+        Map<Integer, Integer> map = new HashMap<>();
+        Deque<Integer> stack = new LinkedList<>();
+        for (int i = 0; i < nums2.length; i++) {
+            int num = nums2[i];
+            while (!stack.isEmpty() && nums2[stack.peek()] < num) {
+                map.put(nums2[stack.pop()], num);
+            }
+            stack.push(i);
+        }
+
+        for (int i = 0; i < nums1.length; i++) {
+            int num = nums1[i];
+            Integer next = map.get(num);
+            if (next != null) {
+                nums1[i] = next;
+            } else {
+                nums1[i] = -1;
+            }
+        }
+
+
         return nums1;
     }
 }
