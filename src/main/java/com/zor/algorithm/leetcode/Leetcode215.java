@@ -31,8 +31,10 @@ public class Leetcode215 {
     }
 
     public int findKthLargest(int[] nums, int k) {
-        //return nums[quickSort(nums, 0, nums.length - 1, k)];
+        return nums[quickSort(nums, 0, nums.length - 1, k)];
+    }
 
+    private int heapSort(int[] nums, int k) {
         // 堆排序
         // 默认最小堆
         PriorityQueue<Integer> heap = new PriorityQueue<>();
@@ -45,7 +47,6 @@ public class Leetcode215 {
             }
         }
         return heap.peek();
-
     }
 
 
@@ -53,7 +54,7 @@ public class Leetcode215 {
      * 快排变体
      */
     private int quickSort(int[] arr, int left, int right, int k) {
-        int partition = partition(arr, left, right);
+        int partition = randomPartition(arr, left, right);
         if (partition + 1 == k) {
             return partition;
         } else if (partition + 1 < k) {
@@ -64,6 +65,7 @@ public class Leetcode215 {
     }
 
     private int randomPartition(int[] arr, int left, int right) {
+        // r-l+1, 上边界是开区间
         int i = new Random().nextInt(right - left + 1) + left;
         swap(arr, i, right);
         return partition(arr, left, right);
