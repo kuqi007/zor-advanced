@@ -1,6 +1,8 @@
 package com.zor.algorithm.leetcode.slidingwindow;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -30,9 +32,26 @@ public class Leetcode03 {
 
     public static void main(String[] args) {
 
-        int count = solution3("pwwkew");
+        int count = solution("pwwkew");
         System.out.println(count);
 
+    }
+
+    public static int solution(String s) {
+        int n = s.length(), ans = 0;
+        Map<Character, Integer> map = new HashMap<>();
+        for (int end = 0, start = 0; end < n; end++) {
+            char alpha = s.charAt(end);
+            if (map.containsKey(alpha)) {
+                // 加 1 表示从字符位置后一个才开始不重复
+                start = Math.max(map.get(alpha) + 1, start);
+            }
+
+            ans = Math.max(ans, end - start + 1);
+            // 保存该字符的位置
+            map.put(alpha, end);
+        }
+        return ans;
     }
 
     /**
