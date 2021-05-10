@@ -30,6 +30,30 @@ public class Leetcode07 {
         System.out.println(reverse(123456789));
     }
 
+    public int solution0(int x) {
+        int rev = 0;
+        while (x != 0) {
+            // 这样想，整数*10变大，负数乘10变小
+            if (rev > Integer.MAX_VALUE / 10 || rev < Integer.MIN_VALUE / 10) {
+                return 0;
+            }
+            int digit = x % 10;
+            x /= 10;
+            rev = rev * 10 + digit;
+        }
+        return rev;
+
+    }
+
+    public static int solution2(int x) {
+        long n = 0;
+        while (x != 0) {
+            n = n * 10 + x % 10;
+            x = x / 10;
+        }
+        return (int) n == n ? (int) n : 0;
+    }
+
     /**
      * int范围 -2147483648~2147483647
      * <p>
@@ -82,16 +106,4 @@ public class Leetcode07 {
         return rev;
     }
 
-    public static int solution2(int x) {
-        long n = 0;
-        while (x != 0) {
-            n = n * 10 + x % 10;
-            x = x / 10;
-        }
-        return (int) n == n ? (int) n : 0;
-    }
-
-    public static void main(String[] args) {
-        System.out.println(solution2(-123456));
-    }
 }
