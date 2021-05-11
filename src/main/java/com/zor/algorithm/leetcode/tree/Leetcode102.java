@@ -29,7 +29,32 @@ import java.util.Queue;
  * @author zqq
  * @date 2021/2/3
  */
-public class BinaryTreeLevelOrderTraversal {
+public class Leetcode102 {
+
+    public static List<List<Integer>> solution1(TreeNode root) {
+        if (root == null) return new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        List<List<Integer>> list = new ArrayList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int n = queue.size();
+            List<Integer> tmp = new ArrayList<>();
+            for (int i = 0; i < n; i++) {
+                TreeNode node = queue.poll();
+                tmp.add(node.val);
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+            }
+            list.add(tmp);
+        }
+
+        return list;
+
+    }
 
     public static List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
