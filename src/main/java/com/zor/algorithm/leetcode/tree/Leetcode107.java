@@ -30,7 +30,7 @@ import java.util.Queue;
  * @author zqq
  * @date 2021/2/3
  */
-public class BinaryTreeLevelOrderTraversalII {
+public class Leetcode107 {
 
     public static List<List<Integer>> levelOrderBottom(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
