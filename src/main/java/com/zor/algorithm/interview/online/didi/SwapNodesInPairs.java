@@ -21,7 +21,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 滴滴面试
  * Created by kuqi0 on 2021/5/11
  */
-public class MyTest {
+public class SwapNodesInPairs {
 
     public static void main(String[] args) {
         ListNode listNode = ListNodeUtil.getListNode(1, 2, 3, 4);
