@@ -63,7 +63,7 @@ public class Leetcode82 {
     }
 
     /**
-     * 递归
+     * TODO 递归没看懂
      */
     public static ListNode deleteDuplicates(ListNode head) {
         // 没有节点或者只有一个节点，必然没有重复元素

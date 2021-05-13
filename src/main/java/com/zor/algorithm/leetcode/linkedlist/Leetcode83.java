@@ -42,6 +42,9 @@ public class Leetcode83 {
     }
 
     /**
+     * 1. 找终止条件：当head指向链表只剩一个元素的时候，自然是不可能重复的，因此return
+     * 2. 想想应该返回什么值：应该返回的自然是已经去重的链表的头节点
+     * 3. 每一步要做什么：宏观上考虑，此时head.next已经指向一个去重的链表了，而根据第二步，我应该返回一个去重的链表的头节点。因此这一步应该做的是判断当前的head和head.next是否相等，如果相等则说明重了，返回head.next，否则返回head
      * TODO 递归写法 回头再看
      */
     public static ListNode solution0(ListNode head) {
