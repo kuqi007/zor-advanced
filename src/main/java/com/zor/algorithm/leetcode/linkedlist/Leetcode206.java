@@ -20,7 +20,25 @@ public class Leetcode206 {
 
     public static void main(String[] args) {
         ListNode listNode = ListNodeUtil.getListNode(1, 2, 3, 4, 5);
-        ListNodeUtil.printList(solution1(listNode));
+        ListNodeUtil.printList(reverse(listNode));
+    }
+
+
+    /**
+     * 递归
+     */
+    public static ListNode reverse(ListNode head) {
+        // 节点为空或者节点节点只剩一个无需反转
+        if (head == null || head.next == null) {
+            // 此时默认已经认为已经反转好了，返回head节点
+            return head;
+        }
+        // newHead认为是已经反转好的链表的头结点
+        ListNode newHead = reverse(head.next);
+        // 再处理未反转好的部分
+        head.next.next = head;
+        head.next = null;
+        return newHead;
     }
 
     /**
