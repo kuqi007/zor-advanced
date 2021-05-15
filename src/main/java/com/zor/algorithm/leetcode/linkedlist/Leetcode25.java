@@ -47,8 +47,8 @@ public class Leetcode25 {
 
     public static void main(String[] args) {
         Leetcode25 leetcode25 = new Leetcode25();
-        ListNode listNode = ListNodeUtil.getListNode(1, 2, 3, 4, 5);
-        ListNode ans = leetcode25.reverseKGroup(listNode, 2);
+        ListNode listNode = ListNodeUtil.getListNode(1, 2, 3, 4, 5, 6, 7, 8);
+        ListNode ans = leetcode25.reverseKGroup(listNode, 3);
 
         ListNodeUtil.printList(ans);
     }
@@ -58,6 +58,8 @@ public class Leetcode25 {
         ListNode pre = dummyNode;
         ListNode end = dummyNode;
 
+        // 判断end.next!=null可以省一次for循环，假设上一组已经结束，end是上一组最后节点，end.next=null没有必要进循环体，
+        // 如果判断end!=null则要进一次循环体，虽然结果一样，因为会有break逻辑
         while (end.next != null) {
             for (int i = 0; i < k && end != null; i++) {
                 end = end.next;
