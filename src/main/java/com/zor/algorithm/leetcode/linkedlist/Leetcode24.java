@@ -40,9 +40,49 @@ public class Leetcode24 {
     public static void main(String[] args) {
         Leetcode24 leetcode24 = new Leetcode24();
         ListNode listNode = ListNodeUtil.getListNode(1, 2, 3, 4);
-        ListNode res = leetcode24.swapPairs(listNode);
+        ListNode res = leetcode24.solution0(listNode);
         ListNodeUtil.printList(res);
 
+    }
+
+    public ListNode solution0(ListNode head) {
+        return reverseKGroup(head, 2);
+    }
+
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode dummyNode = new ListNode(-1, head);
+        ListNode pre = dummyNode;
+        ListNode end = dummyNode;
+        while (end.next != null) {
+            for (int i = 0; i < k && end != null; i++) {
+                end = end.next;
+            }
+            // 如果end为空，表示不足k个，不翻转
+            if (end == null) break;
+            ListNode start = pre.next;
+            // 先保存下一组的头结点
+            ListNode next = end.next;
+            end.next = null;
+            pre.next = reverse(pre.next);
+            // 连接下一组
+            start.next = next;
+
+            pre = start;
+            end = start;
+
+        }
+        return dummyNode.next;
+    }
+
+    private ListNode reverse(ListNode head) {
+        ListNode cur = head, pre = null;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
     }
 
 
