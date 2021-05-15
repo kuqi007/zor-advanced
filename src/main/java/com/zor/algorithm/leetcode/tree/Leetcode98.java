@@ -41,6 +41,25 @@ public class Leetcode98 {
     private long pre = Long.MIN_VALUE;
 
     /**
+     * 中序遍历
+     */
+    public boolean solution0(TreeNode root) {
+        if (root == null) return true;
+        if (!isValidBST(root.left)) {
+            return false;
+        }
+
+        if (root.val <= pre) {
+            return false;
+        }
+
+        pre = root.val;
+
+        return isValidBST(root.right);
+
+    }
+
+    /**
      * TODO 树相关不够熟悉
      *
      * @param root
