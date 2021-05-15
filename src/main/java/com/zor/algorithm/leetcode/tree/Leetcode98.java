@@ -36,7 +36,7 @@ import com.zor.algorithm.leetcode.tree.TreeNode;
  * @author zqq
  * @date 2021/1/8
  */
-public class ValidateBST {
+public class Leetcode98 {
 
     private long pre = Long.MIN_VALUE;
 
