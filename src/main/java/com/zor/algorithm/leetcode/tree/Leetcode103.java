@@ -42,7 +42,7 @@ public class Leetcode103 {
             for (int i = 0; i < size; i++) {
                 TreeNode node = queue.poll();
                 if (count % 2 == 1) {
-                   deque.offerLast(node.val);
+                    deque.offerLast(node.val);
                 } else {
                     deque.offerFirst(node.val);
                 }
