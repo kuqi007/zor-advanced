@@ -53,7 +53,7 @@ import java.util.Set;
  * 链接：https://leetcode-cn.com/problems/linked-list-cycle-ii
  * Created by kuqi0 on 2021/1/1
  */
-public class LinkedListCycleII {
+public class Leetcode142 {
     public static void main(String[] args) {
         ListNode cycledLinkedList = ListNodeUtil.getCycledLinkedList(new int[]{3, 2, 0, -4}, 1);
         ListNode listNode = detectCycle(cycledLinkedList);
@@ -80,6 +80,7 @@ public class LinkedListCycleII {
         ListNode fast = head;
 
         do {
+            // 如果fast为空或者fast.next为空，则表示没有环
             if (fast == null || fast.next == null) {
                 return null;
             }
