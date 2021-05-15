@@ -1,6 +1,7 @@
 package com.zor.algorithm.leetcode.tree;
 
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -28,20 +29,64 @@ import java.util.Queue;
  */
 public class Leetcode103 {
 
-
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        if (root != null) {
+            queue.add(root);
+        }
+        int count = 1;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            Deque<Integer> deque = new LinkedList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode node = queue.poll();
+                if (count % 2 == 1) {
+                   deque.offerLast(node.val);
+                } else {
+                    deque.offerFirst(node.val);
+                }
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+            }
+            ans.add(new LinkedList<>(deque));
+            count++;
+        }
+        return ans;
+    }
+
+
+    public List<List<Integer>> solution1(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<>();
         List<List<Integer>> ans = new ArrayList<>();
         if (root != null) {
             queue.add(root);
         }
-
+        int count = 1;
         while (!queue.isEmpty()) {
             int n = queue.size();
-
-
+            List<Integer> level = new ArrayList<>(n);
+            for (int i = 0; i < n; i++) {
+                TreeNode node = queue.poll();
+                if (count % 2 == 0) {
+                    level.add(0, node.val);
+                } else {
+                    level.add(node.val);
+                }
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+            }
+            ans.add(level);
+            count++;
         }
-
         return ans;
     }
 
