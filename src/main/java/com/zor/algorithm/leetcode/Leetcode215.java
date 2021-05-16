@@ -36,7 +36,7 @@ public class Leetcode215 {
 
     private int heapSort(int[] nums, int k) {
         // 堆排序
-        // 默认最小堆
+        // 默认最小堆（左右节点都比根节点小）
         PriorityQueue<Integer> heap = new PriorityQueue<>();
         for (Integer num : nums) {
             if (heap.size() < k) {
