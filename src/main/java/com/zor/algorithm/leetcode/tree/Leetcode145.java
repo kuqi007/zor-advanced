@@ -1,6 +1,8 @@
 package com.zor.algorithm.leetcode.tree;
 
 import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -21,6 +23,29 @@ import java.util.List;
  * Created by kuqi0 on 2021/5/15
  */
 public class Leetcode145 {
+
+
+    /**
+     * 迭代后序遍历
+     */
+    public List<Integer> solution1(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        Deque<TreeNode> stack = new LinkedList<>();
+        if (root != null) {
+            stack.push(root);
+        }
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            res.add(0, node.val);
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+        }
+        return res;
+    }
 
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
