@@ -1,4 +1,4 @@
-package com.zor.basic.highconcurrency.ThreadLocal;
+package com.zor.basic.highconcurrency.threadlocal;
 
 /**
  * 两个方法参数的传递方式

@@ -1,4 +1,4 @@
-package com.zor.basic.highconcurrency.ThreadLocal;
+package com.zor.basic.highconcurrency.threadlocal;
 
 /**
  * Created by zqq on 2020/3/2.
