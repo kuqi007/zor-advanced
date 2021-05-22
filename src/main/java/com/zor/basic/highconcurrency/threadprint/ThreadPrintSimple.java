@@ -1,4 +1,4 @@
-package com.zor.algorithm.interview.online;
+package com.zor.basic.highconcurrency.threadprint;
 
 /**
  * @author zqq
