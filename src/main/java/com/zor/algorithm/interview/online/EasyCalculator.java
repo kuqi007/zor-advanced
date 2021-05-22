@@ -32,50 +32,50 @@ public class EasyCalculator {
         s = s + "+";
         char preSign = '+';
         int res = 0;
-        //int num = 0;
-        //for (int i = 0; i < s.length(); i++) {
-        //    char c = s.charAt(i);
-        //    if (Character.isDigit(c)) {
-        //        num = num * 10 + c - '0';
-        //    } else if (c == '+' || c == '-') {
-        //        if (preSign == '+') {
-        //            res = res + num;
-        //        } else {
-        //            res = res - num;
-        //        }
-        //        preSign = c;
-        //        num = 0;
-        //    }
-        //
-        //}
+        int num = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (Character.isDigit(c)) {
+                num = num * 10 + c - '0';
+            } else if (c == '+' || c == '-') {
+                if (preSign == '+') {
+                    res = res + num;
+                } else {
+                    res = res - num;
+                }
+                preSign = c;
+                num = 0;
+            }
+
+        }
         return res;
     }
 
 
-    ///**
-    // * 简单加减运算的计算器
-    // */
-    //public int calc(String s) {
-    //    int num = 0;
-    //    int res = 0;
-        //char preSign = '+';
-        //for (int i = 0; i < s.length(); i++) {
-        //    char c = s.charAt(i);
-        //    if (Character.isDigit(c)) {
-        //        num = num * 10 + c - '0';
-        //    }
-        //    if (c == '+' || c == '-' || i == s.length() - 1) {
-        //        if (preSign == '+') {
-        //            res += num;
-        //        } else if (preSign == '-') {
-        //            res -= num;
-        //        }
-        //        preSign = c;
-        //        num = 0;
-        //    }
-        //}
-        //return res;
-    //}
+    /**
+     * 简单加减运算的计算器
+     */
+    public int calc(String s) {
+        int num = 0;
+        int res = 0;
+        char preSign = '+';
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (Character.isDigit(c)) {
+                num = num * 10 + c - '0';
+            }
+            if (c == '+' || c == '-' || i == s.length() - 1) {
+                if (preSign == '+') {
+                    res += num;
+                } else if (preSign == '-') {
+                    res -= num;
+                }
+                preSign = c;
+                num = 0;
+            }
+        }
+        return res;
+    }
 
 
 }
