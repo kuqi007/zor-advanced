@@ -1,4 +1,4 @@
-package com.zor.algorithm.practice;
+package com.zor.basic.highconcurrency.test;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
