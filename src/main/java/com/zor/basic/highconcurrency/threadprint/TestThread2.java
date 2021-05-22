@@ -4,6 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 多线程打印奇偶数
+ * 参考https://zhuanlan.zhihu.com/p/47948392
  */
 public class TestThread2 {
 
