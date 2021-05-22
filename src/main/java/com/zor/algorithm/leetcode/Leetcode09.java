@@ -24,7 +24,7 @@ package com.zor.algorithm.leetcode;
  * <p>
  * 链接：https://leetcode-cn.com/problems/palindrome-number
  */
-public class PalindromeNumber {
+public class Leetcode09 {
     public static void main(String[] args) {
 
         System.out.println(solution3(12121));
@@ -35,6 +35,20 @@ public class PalindromeNumber {
 
         return solution1(x);
 
+    }
+
+    /**
+     * 简单做法，直接反转数字
+     */
+    private static boolean solution4(int x) {
+        if (x < 0) return false;
+        int oldNum = x;
+        int revertNum = 0;
+        while (x > 0) {
+            revertNum = revertNum * 10 + x % 10;
+            x /= 10;
+        }
+        return oldNum == revertNum;
     }
 
     private static boolean solution1(int x) {
