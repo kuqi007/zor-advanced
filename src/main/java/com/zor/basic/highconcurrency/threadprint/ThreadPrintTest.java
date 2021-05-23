@@ -1,4 +1,4 @@
-package com.zor.algorithm.interview.online;
+package com.zor.basic.highconcurrency.threadprint;
 
 /**
  * 线程A每次处理只能输出一个A
