@@ -31,6 +31,31 @@ import java.util.Queue;
  */
 public class Leetcode102 {
 
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        if (root != null) {
+            queue.add(root);
+        }
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Integer> level = new ArrayList<>();
+            while (size > 0) {
+                TreeNode cur = queue.poll();
+                level.add(cur.val);
+                if (cur.left != null) {
+                    queue.add(cur.left);
+                }
+                if (cur.right != null) {
+                    queue.add(cur.right);
+                }
+                size--;
+            }
+            res.add(level);
+        }
+        return res;
+    }
+
     public static List<List<Integer>> solution1(TreeNode root) {
         if (root == null) return new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
@@ -51,14 +76,11 @@ public class Leetcode102 {
             }
             list.add(tmp);
         }
-
         return list;
-
     }
 
-    public static List<List<Integer>> levelOrder(TreeNode root) {
+    public static List<List<Integer>> solution2(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
-
         Queue<TreeNode> queue = new LinkedList<>();
         if (root != null) {
             queue.add(root);
