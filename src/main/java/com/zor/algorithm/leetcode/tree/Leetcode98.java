@@ -1,7 +1,8 @@
 package com.zor.algorithm.leetcode.tree;
 
 
-import com.zor.algorithm.leetcode.tree.TreeNode;
+import java.util.Deque;
+import java.util.LinkedList;
 
 /**
  * 给定一个二叉树，判断其是否是一个有效的二叉搜索树。
@@ -38,6 +39,14 @@ import com.zor.algorithm.leetcode.tree.TreeNode;
  */
 public class Leetcode98 {
 
+    public static void main(String[] args) {
+        Leetcode98 leetcode98 = new Leetcode98();
+        TreeNode node = new TreeNode(2, new TreeNode(1), new TreeNode(3));
+        boolean validBST = leetcode98.inorder(node);
+        System.out.println(validBST);
+
+    }
+
     private long pre = Long.MIN_VALUE;
 
     /**
@@ -57,6 +66,31 @@ public class Leetcode98 {
 
         return isValidBST(root.right);
 
+    }
+
+    /**
+     * 中序遍历迭代写法
+     */
+    public boolean inorder(TreeNode root) {
+        if (root == null) return true;
+        Deque<TreeNode> stack = new LinkedList<>();
+        TreeNode cur = root;
+        // 保存上一个节点的值
+        long preNumber = Long.MIN_VALUE;
+        while (cur != null || !stack.isEmpty()) {
+            if (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            } else {
+                cur = stack.pop();
+                if (cur.val <= preNumber) {
+                    return false;
+                }
+                preNumber = cur.val;
+                cur = cur.right;
+            }
+        }
+        return true;
     }
 
     /**
@@ -85,5 +119,6 @@ public class Leetcode98 {
         // 再访问右子树，判断右子树是否符合条件
         return isValidBST(root.right);
     }
+
 
 }
