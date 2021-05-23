@@ -1,5 +1,8 @@
 package com.zor.algorithm.leetcode.tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 104. 二叉树的最大深度
  * 给定一个二叉树，找出其最大深度。
@@ -29,6 +32,28 @@ public class Leetcode104 {
         int leftHeight = maxDepth(root.left);
         int rightHeight = maxDepth(root.right);
         return Math.max(leftHeight, rightHeight) + 1;
+    }
 
+
+    public int bfs(TreeNode root) {
+        if (root == null) return 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int depth = 0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            while (size > 0) {
+                TreeNode cur = queue.poll();
+                if (cur.left != null) {
+                    queue.add(cur.left);
+                }
+                if (cur.right != null) {
+                    queue.add(cur.right);
+                }
+                size--;
+            }
+            depth++;
+        }
+        return depth;
     }
 }
