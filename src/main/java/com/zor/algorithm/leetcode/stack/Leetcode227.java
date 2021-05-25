@@ -46,9 +46,7 @@ public class Leetcode227 {
     }
 
     /**
-     * TODO 没太理解
-     * @param s
-     * @return
+     * 一个栈解决问题
      */
     public static int calculate(String s) {
         Deque<Integer> stack = new LinkedList<>();
