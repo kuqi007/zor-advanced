@@ -67,14 +67,12 @@ public class Leetcode144 {
         }
         while (!stack.isEmpty()) {
             root = stack.pop();
-            System.out.println("res" + res);
-            System.out.println("root" + root);
             res.add(root.val);
             if (root.right != null) {
                 stack.push(root.right);
             }
             if (root.left != null) {
-                stack.push(root.right);
+                stack.push(root.left);
             }
         }
         return res;
