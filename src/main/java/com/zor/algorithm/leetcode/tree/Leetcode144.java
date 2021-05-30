@@ -50,6 +50,36 @@ import java.util.List;
  */
 public class Leetcode144 {
 
+    public static void main(String[] args) {
+        Leetcode144 leetcode144=new Leetcode144();
+        TreeNode treeNode=new TreeNode(1);
+        treeNode.left=null;
+        treeNode.right=new TreeNode(2,new TreeNode(3),null);
+        List<Integer> res = leetcode144.ss(treeNode);
+        System.out.println(res);
+    }
+
+    public List<Integer> ss(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        Deque<TreeNode> stack = new LinkedList<>();
+        if (root != null) {
+            stack.push(root);
+        }
+        while (!stack.isEmpty()) {
+            root = stack.pop();
+            System.out.println("res" + res);
+            System.out.println("root" + root);
+            res.add(root.val);
+            if (root.right != null) {
+                stack.push(root.right);
+            }
+            if (root.left != null) {
+                stack.push(root.right);
+            }
+        }
+        return res;
+    }
+
     /**
      * 迭代前序遍历
      */
