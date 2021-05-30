@@ -52,7 +52,8 @@ public class Leetcode227 {
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             if (Character.isDigit(c)) {
-                num = num * 10 + c - '0';
+                // (c - '0')的这个括号不能省略，否则可能造成整型溢出。
+                num = num * 10 + (c - '0');
             }
             if (!Character.isDigit(c) && c != ' ' || i == s.length() - 1) {
                 switch (preSign) {
