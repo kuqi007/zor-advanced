@@ -47,6 +47,10 @@ import java.util.List;
  */
 public class Leetcode94 {
 
+    /**
+     * 1. 借用指针的遍历来帮助访问节点
+     * 2. 栈用来处理节点上的元素
+     */
     public List<Integer> test(TreeNode root) {
         List<Integer> res = new ArrayList<>();
         Deque<TreeNode> stack = new LinkedList<>();
