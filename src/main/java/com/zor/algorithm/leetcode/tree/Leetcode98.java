@@ -41,35 +41,36 @@ public class Leetcode98 {
 
     public static void main(String[] args) {
         Leetcode98 leetcode98 = new Leetcode98();
-        TreeNode node = new TreeNode(2, new TreeNode(1), new TreeNode(3));
+        TreeNode node = new TreeNode(1, new TreeNode(1), null);
         boolean validBST = leetcode98.inorder(node);
         System.out.println(validBST);
 
     }
 
-    private long pre = Long.MIN_VALUE;
 
     /**
-     * 中序遍历
+     * 递归中序
+     * 1. 用一个成员变量pre保存上一个节点的值
      */
+    private long pre = Long.MIN_VALUE;
+
     public boolean solution0(TreeNode root) {
         if (root == null) return true;
         if (!isValidBST(root.left)) {
             return false;
         }
-
         if (root.val <= pre) {
             return false;
         }
-
         pre = root.val;
-
         return isValidBST(root.right);
-
     }
 
     /**
      * 中序遍历迭代写法
+     * 记住几个点：
+     * 1. 二叉搜索树中序遍历是递增的
+     * 2. 需要一个变量保存上一个节点的值
      */
     public boolean inorder(TreeNode root) {
         if (root == null) return true;
