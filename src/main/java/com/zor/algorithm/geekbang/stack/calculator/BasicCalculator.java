@@ -2,6 +2,7 @@ package com.zor.algorithm.geekbang.stack.calculator;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * 基本计算器通关
@@ -119,7 +120,7 @@ public class BasicCalculator {
      * @return 结果
      */
     public int calc_04(String s) {
-        Deque<Character> stack = new LinkedList<>();
+        Queue<Character> stack = new LinkedList<>();
         for (int i = 0; i < s.length(); i++) {
             stack.offer(s.charAt(i));
         }
@@ -130,20 +131,20 @@ public class BasicCalculator {
      * 递归写法，性能较差
      * 参考https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247484903&idx=1&sn=184beaad36a71c9a8dd93c41a8ba74ac&chksm=9bd7fbefaca072f9beccff92a715d92ee90f46c297277eec10c322bc5ccd053460da6afb76c2&scene=21#wechat_redirect
      */
-    private int dfs(Deque<Character> q) {
+    private int dfs(Queue<Character> queue) {
         Deque<Integer> stack = new LinkedList<>();
         int preSign = '+';
         int num = 0;
-        while (!q.isEmpty()) {
-            Character c = q.pop();
+        while (!queue.isEmpty()) {
+            Character c = queue.poll();
             if (Character.isDigit(c)) {
                 num = num * 10 + (c - '0');
             }
             if (c == '(') {
-                num = dfs(q);
+                num = dfs(queue);
             }
             // 当c遇到运算符或者遇到最后一个字符时
-            if ((c != ' ' && !Character.isDigit(c)) || q.isEmpty()) {
+            if ((c != ' ' && !Character.isDigit(c)) || queue.isEmpty()) {
                 switch (preSign) {
                     case '+':
                         stack.push(num);
