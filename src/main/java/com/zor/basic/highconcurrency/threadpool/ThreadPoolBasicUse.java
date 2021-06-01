@@ -16,6 +16,12 @@ public class ThreadPoolBasicUse {
             1, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(10));
 
     public static void main(String[] args) {
+
+        // 开启所有核心线程，线程预热
+        threadPoolExecutor.prestartAllCoreThreads();
+        // 开启一个核心线程
+        //threadPoolExecutor.prestartCoreThread();
+
         // 核心线程和非核心线程不分类，一视同仁
         // 会出现一个问题，后来的任务先执行，因为先来的一部分会到队列排队
         for (int i = 0; i < 20; i++) {
@@ -32,9 +38,10 @@ public class ThreadPoolBasicUse {
         threadPoolExecutor.setCorePoolSize(corePoreSize);
         threadPoolExecutor.setMaximumPoolSize(maxPoolSize);
 
+
         // 模拟监控线程池负载情况
         Thread command = new Thread(() -> {
-            while (true){
+            while (true) {
                 getLoadPercent();
                 try {
                     Thread.sleep(10000);
