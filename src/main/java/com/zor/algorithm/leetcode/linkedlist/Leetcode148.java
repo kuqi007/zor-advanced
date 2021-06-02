@@ -41,24 +41,64 @@ public class Leetcode148 {
 
     public static void main(String[] args) {
         Leetcode148 leetcode148 = new Leetcode148();
-        ListNode listNode = ListNodeUtil.getListNode(-1, 5, 3, 4, 0);
-        ListNode res = leetcode148.sort(listNode);
+        ListNode listNode1 = ListNodeUtil.getListNode(5, 4, 3, 2, 1, 0, -1);
+        ListNode listNode2 = ListNodeUtil.getListNode(-1, 5, 3, 4, 0);
+        ListNode res = leetcode148.mergeSort(listNode1);
         ListNodeUtil.printList(res);
     }
 
     public ListNode sortList(ListNode head) {
-        ListNode cur = head;
-
-
-        return cur;
+        return mergeSort(head);
     }
 
     /**
-     * // TODO: 2021/6/1
-      * @param head
-     * @return
+     * 自顶向下的归并排序
      */
-    public  ListNode sort(ListNode head) {
+    private ListNode mergeSort(ListNode head) {
+        if (head.next == null) return head;
+        ListNode p = head;
+        ListNode q = head;
+        ListNode pre = null;
+        while (p != null && p.next != null) {
+            pre = q;
+            p = p.next.next;
+            q = q.next;
+        }
+        pre.next = null;
+        ListNode l1 = mergeSort(head);
+        ListNode l2 = mergeSort(q);
+        return merge(l1, l2);
+    }
+
+
+    private ListNode merge(ListNode l1, ListNode l2) {
+        ListNode dummyNode = new ListNode(-1);
+        ListNode cur = dummyNode;
+        while (l1 != null || l2 != null) {
+            if (l1 == null) {
+                cur.next = l2;
+                l2 = l2.next;
+            } else if (l2 == null) {
+                cur.next = l1;
+                l1 = l1.next;
+            } else if (l1.val < l2.val) {
+                cur.next = l1;
+                l1 = l1.next;
+            } else {
+                cur.next = l2;
+                l2 = l2.next;
+            }
+            cur = cur.next;
+        }
+        return dummyNode.next;
+    }
+
+
+    /**
+     * // TODO: 2021/6/1
+     * 链表冒泡排序
+     */
+    public ListNode sort(ListNode head) {
         ListNode dummyNode = new ListNode(-1);
         dummyNode.next = head;
         ListNode cur = head;
