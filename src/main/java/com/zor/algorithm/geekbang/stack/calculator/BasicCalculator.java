@@ -120,11 +120,11 @@ public class BasicCalculator {
      * @return 结果
      */
     public int calc_04(String s) {
-        Queue<Character> stack = new LinkedList<>();
+        Queue<Character> queue = new LinkedList<>();
         for (int i = 0; i < s.length(); i++) {
-            stack.offer(s.charAt(i));
+            queue.offer(s.charAt(i));
         }
-        return dfs(stack);
+        return dfs(queue);
     }
 
     /**
