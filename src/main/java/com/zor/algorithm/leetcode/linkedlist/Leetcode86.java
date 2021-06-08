@@ -30,32 +30,55 @@ import com.zor.algorithm.leetcode.linkedlist.base.ListNodeUtil;
  */
 public class Leetcode86 {
     public static void main(String[] args) {
-        Leetcode86 leetcode86=new Leetcode86();
-        ListNode list = ListNodeUtil.getListNode(1, 4, 3, 2, 5, 2);
-        ListNode partition = leetcode86.partition(list, 3);
+        Leetcode86 leetcode86 = new Leetcode86();
+        ListNode list = ListNodeUtil.getListNode(2, 1);
+        ListNode partition = leetcode86.partition(list, 2);
 
         ListNodeUtil.printList(partition);
     }
 
     public ListNode partition(ListNode head, int x) {
-        ListNode dummyNode = new ListNode(-1, head);
+        ListNode small = new ListNode(-1), large = new ListNode(-1);
+        ListNode smallCur = small, largeCur = large;
         while (head != null) {
             if (head.val < x) {
-                moveToFirst(dummyNode, head);
+                smallCur.next = head;
+                smallCur = smallCur.next;
+            } else {
+                largeCur.next = head;
+                largeCur = largeCur.next;
             }
             head = head.next;
         }
+        largeCur.next = null;
+        smallCur.next = large.next;
+        return small.next;
+    }
+
+
+    /**
+     * 我的做法
+     */
+    public ListNode solution1(ListNode head, int x) {
+        ListNode dummyNode = new ListNode(-1, head);
+        ListNode pre = dummyNode;
+        ListNode first = dummyNode;
+        while (head != null) {
+            ListNode n2 = head.next;
+            if (head.val < x) {
+                if (first.next != head) {
+                    ListNode n1 = first.next;
+                    first.next = head;
+                    head.next = n1;
+                    pre.next = n2;
+                }
+                first = head;
+            } else {
+                pre = head;
+            }
+            head = n2;
+        }
         return dummyNode.next;
-
     }
-
-    private void moveToFirst(ListNode head, ListNode node) {
-
-        ListNode next = head.next;
-        head.next=node;
-        node.next=next;
-    }
-
-
 
 }
