@@ -1,4 +1,4 @@
-package com.zor.basic.highconcurrency.test;
+package com.zor.basic.highconcurrency;
 
 /**
  * Created by kuqi0 on 2021/5/22
@@ -22,7 +22,7 @@ public class ThreadJoinTest {
         Thread thread2 = new Thread(() -> {
             System.out.println("线程2运行-------");
             try {
-                Thread.sleep(2000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
