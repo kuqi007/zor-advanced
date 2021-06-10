@@ -12,7 +12,7 @@ public class ReadWriteLockDemo {
 
 
     public static void main(String[] args) {
-        // TODO: 2021/6/9  
+        // TODO: 2021/6/9
         ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
         Lock lock = readWriteLock.readLock();
 
