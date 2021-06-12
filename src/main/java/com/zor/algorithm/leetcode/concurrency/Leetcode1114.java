@@ -46,8 +46,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Leetcode1114 {
     class Foo {
-        AtomicBoolean firstDone=new AtomicBoolean(false);
-        AtomicBoolean secondDone=new AtomicBoolean(false);
+        AtomicBoolean firstDone = new AtomicBoolean(false);
+        AtomicBoolean secondDone = new AtomicBoolean(false);
 
         public Foo() {
 
@@ -61,7 +61,7 @@ public class Leetcode1114 {
         }
 
         public void second(Runnable printSecond) throws InterruptedException {
-            while (!firstDone.get()){
+            while (!firstDone.get()) {
 
             }
 
@@ -71,7 +71,7 @@ public class Leetcode1114 {
         }
 
         public void third(Runnable printThird) throws InterruptedException {
-            while (!secondDone.get()){
+            while (!secondDone.get()) {
 
             }
 
