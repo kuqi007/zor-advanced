@@ -1,4 +1,4 @@
-package com.zor.basic.highconcurrency.tools;
+package com.zor.basic.highconcurrency.tools.countdownlatch;
 
 import java.util.concurrent.CountDownLatch;
 

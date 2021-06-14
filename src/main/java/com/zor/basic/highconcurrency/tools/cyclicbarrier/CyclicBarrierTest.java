@@ -1,4 +1,4 @@
-package com.zor.basic.highconcurrency.tools;
+package com.zor.basic.highconcurrency.tools.cyclicbarrier;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
@@ -13,7 +13,12 @@ public class CyclicBarrierTest {
     /**
      * CyclicBarrier 适用再多线程相互等待，直到到达一个屏障点。并且CyclicBarrier是可重用的。
      */
-    CyclicBarrier cyclicBarrier = new CyclicBarrier(10);
+    volatile CyclicBarrier cyclicBarrier = new CyclicBarrier(10, new Runnable() {
+        @Override
+        public void run() {
+            System.out.println("所有线程准备完毕");
+        }
+    });
 
     private void runThread() {
         ExecutorService executorService = Executors.newFixedThreadPool(10);
@@ -34,8 +39,8 @@ public class CyclicBarrierTest {
             @Override
             public void run() {
                 try {
-                    cyclicBarrier.await();
                     System.out.println("Thread:" + Thread.currentThread().getName() + "准备完毕,time:" + System.currentTimeMillis());
+                    cyclicBarrier.await();
                 } catch (InterruptedException | BrokenBarrierException e) {
                     e.printStackTrace();
                 }
