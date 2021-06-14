@@ -35,57 +35,50 @@ import java.util.List;
 public class Leetcode658 {
     public static void main(String[] args) {
         Leetcode658 leetcode658 = new Leetcode658();
-        int[] arr = {1, 2, 3, 4, 5};
-        List<Integer> res = leetcode658.findClosestElements(arr, 4, 3);
+        int[] arr = {1, 1, 1, 10, 10, 10};
+        List<Integer> res = leetcode658.solution1(arr, 4, 9);
         System.out.println(res);
     }
 
-    public List<Integer> findClosestElements(int[] arr, int k, int x) {
-        List<Integer> res = new ArrayList<>();
-        int n = arr.length;
-        int idx = bsearch(arr, x);
-        if (idx < 0) {
-            for (int i = 0; i < k; i++) {
-                res.add(arr[i]);
-            }
-        } else if (idx >= n) {
-            for (int i = n - 1 - k; i < n; i++) {
-                res.add(arr[i]);
-            }
-        } else if (arr[idx] == x) {
-            // 找到的情况
-            if ((k - 1) % 2 == 0) {
-                int cnt = (k - 2) / 2;
-                for (int i = idx - cnt; i <= idx + cnt; i++) {
-                    res.add(arr[i]);
-                }
+    public List<Integer> solution1(int[] arr, int k, int x) {
+        int left = 0, right = arr.length - k;
+        // 找到左边界
+        while (left < right) {
+            int mid = (left + right) >>> 1;
+            if (x - arr[mid] > arr[mid + k] - x) {
+                left = mid + 1;
             } else {
-                int cnt = (k - 1) / 2;
-                for (int i = idx - cnt - 1; i <= idx + cnt; i++) {
-                    res.add(arr[i]);
-                }
+                right = mid;
             }
-        } else {
-            // 未找到的情况
+        }
+        //System.out.println(left + ":" + right);
+        List<Integer> res = new ArrayList<>();
+        for (int i = left; i <= left + k; i++) {
+            res.add(arr[left]);
+        }
+        return res;
+    }
 
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        int low = 0, high = arr.length - 1;
+        while (high - low >= k) {
+            // 收缩左右边界
+            if (x - arr[low] > arr[high] - x) {
+                low++;
+            } else {
+                high--;
+            }
+        }
 
+        //System.out.println(low);
 
+        List<Integer> res = new ArrayList<>();
+        for (; low <= high; low++) {
+            res.add(arr[low]);
         }
 
         return res;
-
     }
 
-    private int bsearch(int[] arr, int x) {
-        int l = 0, r = arr.length;
-        while (l < r) {
-            int mid = (l + r) >>> 1;
-            if (arr[mid] < x) {
-                l = mid + 1;
-            } else {
-                r = mid;
-            }
-        }
-        return l;
-    }
+
 }
