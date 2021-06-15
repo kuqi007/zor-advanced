@@ -73,6 +73,9 @@ public class Leetcode852 {
         return high;
     }
 
+    /**
+     * 常规写法
+     */
     public int peakIndexInMountainArray(int[] arr) {
         int low = 0, high = arr.length;
         while (low < high) {
