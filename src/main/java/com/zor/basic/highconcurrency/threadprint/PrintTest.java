@@ -24,8 +24,8 @@ public class PrintTest {
         for (int i = 0; i < 10; i++) {
             int threadNum = i;
             new Thread(() -> {
-                synchronized (obj) {
-                    while (index < n) {
+                while (index < n) {
+                    synchronized (obj) {
                         int num = s.charAt(index) - '0';
                         if (threadNum != num) {
                             try {
@@ -34,7 +34,7 @@ public class PrintTest {
                                 e.printStackTrace();
                             }
                         } else {
-                            System.out.print(threadNum - 1);
+                            System.out.print(threadNum);
                             index++;
                             obj.notifyAll();
                         }
