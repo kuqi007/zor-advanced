@@ -50,6 +50,9 @@ public class RateLimiter {
 
     private volatile Long startTime;
 
+    /**
+     * 无需开新线程版
+     */
     public String requestApi() {
         if (startTime == null) {
             startTime = System.currentTimeMillis();
@@ -98,7 +101,7 @@ public class RateLimiter {
                 }
             }
         });
-        // 设置守护线程
+        // 设置守护线程，让jvm执行完能退出
         thread.setDaemon(true);
         thread.start();
     }
