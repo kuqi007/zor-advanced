@@ -1,4 +1,4 @@
-package com.zor.algorithm.leetcode;
+package com.zor.algorithm.leetcode.binarysearch;
 
 /**
  * 278. 第一个错误的版本

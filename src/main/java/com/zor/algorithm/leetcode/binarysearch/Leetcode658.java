@@ -1,4 +1,4 @@
-package com.zor.algorithm.leetcode;
+package com.zor.algorithm.leetcode.binarysearch;
 
 import java.util.ArrayList;
 import java.util.List;

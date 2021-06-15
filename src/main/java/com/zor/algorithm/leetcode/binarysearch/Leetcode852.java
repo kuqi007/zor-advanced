@@ -1,4 +1,4 @@
-package com.zor.algorithm.leetcode;
+package com.zor.algorithm.leetcode.binarysearch;
 
 /**
  * 852. 山脉数组的峰顶索引
