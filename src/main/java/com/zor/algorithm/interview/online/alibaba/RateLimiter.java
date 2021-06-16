@@ -1,5 +1,7 @@
 package com.zor.algorithm.interview.online.alibaba;
 
+import org.junit.Test;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -15,40 +17,47 @@ public class RateLimiter {
     public static void main(String[] args) throws InterruptedException {
 
         // 为什么不能一直跑？？？，想看到第二分钟
+        //int i = 0;
+        //while (i++ < 1) {
+
+        //mockRequestApi();
 
 
-        int i = 0;
-        while (i++ < 2) {
+        //Thread.sleep(60 * 1000);
 
-            mockRequest();
-
-
-            //Thread.sleep(60 * 1000);
-
-        }
-    }
-
-    private static void mockRequest() throws InterruptedException {
-        RateLimiter rt = new RateLimiter();
-        //rt.timer();
-        for (int j = 0; j < 60; j++) {
-            String result = rt.requestApi();
-            if (result.equals("请求失败")) {
-                Thread.sleep(1000);
-            } else {
-                Thread.sleep(100);
-            }
-            System.out.println(result);
-            //Thread.yield();
-        }
+        //}
     }
 
     /**
-     * 有一个API网关，出于对API接口的保护，需要建立一个流控功能，根据API名称，每分钟最多只能请求指定的次数（如1000次），超过限制则这分钟内返回错误，但下一分钟又可以正常请求。
+     * 计数器
      */
     private final AtomicInteger counter = new AtomicInteger(0);
 
+    /**
+     * 循环记录的起始时间，如果超过一分钟，时间重置
+     */
     private volatile Long startTime;
+
+
+    /*=================================第一种写法，无需开启新线程，每次请求时判断如果时间超过一分钟则刷新时间和计数器=================================*/
+    @Test
+    public void mockRequestApi() throws InterruptedException {
+        RateLimiter rt = new RateLimiter();
+        long start = System.currentTimeMillis();
+        for (int j = 0; j < 200; j++) {
+            String response;
+            String code = rt.requestApi();
+            if (code.equals("200")) {
+                response = "请求成功";
+                Thread.sleep(100);
+            } else {
+                response = "请求失败";
+                Thread.sleep(1000);
+            }
+            System.out.println("当前耗时：" + (System.currentTimeMillis() - start) + " ms");
+            System.out.println("第" + (j + 1) + "次请求结果：" + response);
+        }
+    }
 
     /**
      * 无需开新线程版
@@ -65,18 +74,37 @@ public class RateLimiter {
         }
 
         if (counter.get() >= limit) {
-            return "请求失败";
+            return "500";
         }
 
-        System.out.println("一分钟已经请求了" + counter.incrementAndGet() + "次");
-        return "请求成功";
+        int i = counter.incrementAndGet();
+
+        //System.out.println("一分钟已经请求了" + i + "次");
+        return "200";
+    }
+
+    /*=================================第二种写法，开启新线程刷新counter=================================*/
+    @Test
+    public void mockRequest1() throws InterruptedException {
+        timer();
+        int i = 0;
+        while (i++ < 2) {
+            for (int j = 0; j < 60; j++) {
+                String res = request();
+                if (res.equals("请求失败")) {
+                    Thread.sleep(1000);
+                } else {
+                    Thread.sleep(100);
+                }
+                System.out.println(res);
+            }
+        }
     }
 
     public String request() {
 
         if (counter.get() >= limit) {
             return "请求失败";
-            //throw new RuntimeException("限流命中");
         }
 
         System.out.println("一分钟已经请求了" + counter.incrementAndGet() + "次");
@@ -101,7 +129,7 @@ public class RateLimiter {
                 }
             }
         });
-        // 设置守护线程，让jvm执行完能退出
+        // 设置守护线程，让主进程执行完能退出
         thread.setDaemon(true);
         thread.start();
     }
