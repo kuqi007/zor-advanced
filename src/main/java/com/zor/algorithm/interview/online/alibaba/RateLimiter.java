@@ -71,16 +71,20 @@ public class RateLimiter {
         if (now - startTime >= 60 * 1000) {
             startTime = now;
             counter.set(0);
+            return "200";
+        } else {
+            counter.incrementAndGet();
+            return counter.get() > limit ? "500" : "200";
         }
 
-        if (counter.get() >= limit) {
-            return "500";
-        }
+        //if (counter.get() >= limit) {
+        //    return "500";
+        //}
 
-        int i = counter.incrementAndGet();
+        //int i = counter.incrementAndGet();
 
         //System.out.println("一分钟已经请求了" + i + "次");
-        return "200";
+        //return "200";
     }
 
     /*=================================第二种写法，开启新线程刷新counter=================================*/
