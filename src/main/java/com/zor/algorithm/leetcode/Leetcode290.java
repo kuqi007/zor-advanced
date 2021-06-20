@@ -34,13 +34,44 @@ import java.util.Objects;
  * 链接：https://leetcode-cn.com/problems/word-pattern
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class WordPattern {
+public class Leetcode290 {
 
     public static void main(String[] args) {
 
-        System.out.println(wordPattern("aaaa", "dog cat cat dog"));
+        System.out.println(solution1("abba", "dog cat cat dog"));
 
     }
+
+    /**
+     * 这种解法最通俗易懂
+     */
+    public static boolean solution1(String pattern, String s) {
+        int length = pattern.length();
+        String[] words = s.split(" ");
+        if (length != words.length) {
+            return false;
+        }
+        Map<Character, String> mapS = new HashMap<>();
+        for (int i = 0; i < length; i++) {
+            char c = pattern.charAt(i);
+            String word = words[i];
+            if (mapS.containsKey(c)) {
+                // key不存在
+                if (!mapS.get(c).equals(word)) {
+                    return false;
+                }
+            } else {
+                //key不存在
+                // 两个value的值一样 a-dog b-dog->false
+                if (mapS.containsValue(word)) {
+                    return false;
+                }
+                mapS.put(c, word);
+            }
+        }
+        return true;
+    }
+
 
     public static boolean wordPattern(String pattern, String s) {
 
@@ -74,7 +105,7 @@ public class WordPattern {
      * 2：所以我们直接遍历 pattern 就可以了，第一次 map.put(a)跟 map.put(dog)都是返回 null，第二次 map.put(a)跟 map.put(dog)都是返回 0，以此类推下去即可；
      * 3：这种解决问题的方法的重点在于利用两个字符串的下标是一一对应的，其次则是利用put的返回值；
      * 代码如下
-     *
+     * <p>
      * 作者：zheng-rong-huai
      * 链接：https://leetcode-cn.com/problems/word-pattern/solution/liang-chong-si-lu-9894-9853-by-zheng-ron-4x63/
      */
