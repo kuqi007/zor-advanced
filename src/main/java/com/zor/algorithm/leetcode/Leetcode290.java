@@ -1,8 +1,10 @@
 package com.zor.algorithm.leetcode;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Created by kuqi0 on 2020/12/27
@@ -52,6 +54,8 @@ public class Leetcode290 {
             return false;
         }
         Map<Character, String> mapS = new HashMap<>();
+        // Map containsValue太耗费性能，用set来优化下
+        Set<String> values = new HashSet<>();
         for (int i = 0; i < length; i++) {
             char c = pattern.charAt(i);
             String word = words[i];
@@ -63,10 +67,11 @@ public class Leetcode290 {
             } else {
                 //key不存在
                 // 两个value的值一样 a-dog b-dog->false
-                if (mapS.containsValue(word)) {
+                if (values.contains(word)) {
                     return false;
                 }
                 mapS.put(c, word);
+                values.add(word);
             }
         }
         return true;
