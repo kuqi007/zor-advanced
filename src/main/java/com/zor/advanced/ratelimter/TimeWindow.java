@@ -3,6 +3,7 @@ package com.zor.advanced.ratelimter;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 滑动窗口计数器
@@ -16,12 +17,12 @@ public class TimeWindow {
     private final ConcurrentLinkedQueue<Long> queue = new ConcurrentLinkedQueue<>();
 
     /**
-     * 间隔秒数
+     * 时间窗口间隔秒数
      */
     private final int seconds;
 
     /**
-     * 最大限流
+     * 时间窗口最大限流
      */
     private final int max;
 
@@ -33,7 +34,7 @@ public class TimeWindow {
         /*
          * 永续线程执行清理queue任务
          */
-        new Thread(() -> {
+        Thread cleanThread = new Thread(() -> {
             while (true) {
                 try {
                     // 等待 间隔秒数-1 执行清理操作
@@ -43,78 +44,66 @@ public class TimeWindow {
                 }
                 clean();
             }
-        }).start();
+        });
+        // 设置为守护线程
+        cleanThread.setDaemon(true);
+        cleanThread.start();
     }
 
     public static void main(String[] args) {
+        // 将时间分片，seconds是时间窗口大小，max代表seconds时间最大访问上限
+        TimeWindow timeWindow = new TimeWindow(1, 1);
 
-        // 将时间分片，seconds就是最小单元，max代表seconds时间最大访问上限
-        TimeWindow timeWindow = new TimeWindow(2, 2);
-        //// 测试三个线程
-        //IntStream.range(0, 3).forEach((i) -> {
-        //    new Thread(() -> {
-        //
-        //        while (true) {
-        //            try {
-        //                Thread.sleep(new Random().nextInt(20) * 100);
-        //            } catch (InterruptedException e) {
-        //                e.printStackTrace();
-        //            }
-        //            boolean result = timeWindow.take();
-        //            System.out.println(result ? "请求成功" : "请求失败");
-        //        }
-        //    }).start();
-        //
-        //});
-
-        for (int i = 0; i < 120; i++) {
+        int requestCnt = 60;
+        AtomicInteger successCnt = new AtomicInteger();
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < requestCnt; i++) {
             boolean result = timeWindow.take();
-            System.out.println(result ? "请求成功" : "请求失败");
+            if (result) {
+                successCnt.incrementAndGet();
+            }
+            String resultStr = result ? "请求成功" : "请求失败";
+            long now = System.currentTimeMillis();
+            System.out.println("第" + (i + 1) + "次请求结果：" + resultStr + "，耗时：" + (now - start));
             try {
                 Thread.sleep(new Random().nextInt(20) * 100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
-
+        System.out.println("全部请求结束，成功率：" + (successCnt.get() * 100 / requestCnt) + "%");
     }
 
     /**
      * 获取令牌，并且添加时间
      */
     public boolean take() {
-        long start = System.currentTimeMillis();
+        long now = System.currentTimeMillis();
 
-        int size = sizeOfValid();
-        if (size > max) {
-            System.out.println("超限1");
-        }
-
-        synchronized (queue) {
-            if (sizeOfValid() > max) {
-                System.out.println("超限2");
-                System.out.println("queue中有" + queue.size() + " 最大数量 " + max);
-                return false;
-            }
+        int curCnt = sizeOfValid();
+        System.out.println("当前窗口请求数量：" + curCnt + "，最大数量：" + max);
+        if (curCnt > max) {
+            System.out.println("超限，请求拒绝");
+            return false;
+        } else {
             // 将当前请求时间放入队列
-            this.queue.offer(System.currentTimeMillis());
+            this.queue.offer(now);
         }
-        System.out.println("queue中有 " + queue.size() + " 最大数量 " + max);
         return true;
     }
 
 
     /**
-     * 获取当前调用者往前seconds时间内访问总数
+     * 获取当前时间窗口总访问数
      */
     public int sizeOfValid() {
         Iterator<Long> it = queue.iterator();
-        long ms = System.currentTimeMillis() - seconds * 1000L;
+        // 当前窗口的起点
+        long windowStart = System.currentTimeMillis() - seconds * 1000L;
         int count = 0;
         while (it.hasNext()) {
             long t = it.next();
-            if (t > ms) {
+            if (t > windowStart) {
                 // 在当前的统计时间范围内
                 count++;
             }
@@ -126,12 +115,19 @@ public class TimeWindow {
      * 清理过期的时间
      */
     private void clean() {
-        long c = System.currentTimeMillis() - seconds * 1000L;
+        // 当前窗口的起点，如果小于起点，表示失效，清理该数据
+        long curWindowStart = System.currentTimeMillis() - seconds * 1000L;
+        int before = queue.size();
+        boolean hasClean = false;
         Long tl;
-        while ((tl = queue.peek()) != null && tl < c) {
-            System.out.println("清理数据");
+        while ((tl = queue.peek()) != null && tl < curWindowStart) {
+            System.out.println("清理过期数据");
             queue.poll();
+            hasClean = true;
+        }
+        int after = queue.size();
+        if (hasClean) {
+            System.out.println("队列清理之前数量：" + before + "，清理之后：" + after);
         }
     }
-
 }
