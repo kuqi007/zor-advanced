@@ -5,7 +5,12 @@ import org.junit.Test;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 计数器
+ * 固定窗口计数器算法
+ * 该算法规定我们单位时间处理的请求数量。比如我们规定我们的一个接口一分钟只能访问10次的话。
+ * 使用固定窗口计数器算法的话可以这样实现：给定一个变量counter来记录处理的请求数量，当1分钟之内处理一个请求之后counter+1，
+ * 1分钟之内的如果counter=100的话，后续的请求就会被全部拒绝。等到 1分钟结束后，将counter回归成0，重新开始计数（ps：只要过了一个周期就讲counter回归成0）。
+ *
+ * 这种限流算法无法保证限流速率，因而无法保证突然激增的流量。比如我们限制一个接口一分钟只能访问10次的话，前半分钟一个请求没有接收，后半分钟接收了10个请求。
  * Created by kuqi0 on 2021/6/17
  */
 public class Counter {
@@ -27,7 +32,6 @@ public class Counter {
      */
     private final AtomicInteger reqCount = new AtomicInteger(0);
 
-
     public boolean limit() {
         // 初始化time
         if (time == null) {
@@ -43,7 +47,6 @@ public class Counter {
             reqCount.set(0);
             return true;
         }
-
     }
 
     @Test

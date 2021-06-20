@@ -1,14 +1,14 @@
 package com.zor.advanced.ratelimter;
 
-import com.sun.media.sound.SoftTuning;
-
 import java.util.Iterator;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.stream.IntStream;
 
 /**
- * 滑动窗口
+ * 滑动窗口计数器
+ * 该算法算的上是固定窗口计数器算法的升级版。滑动窗口计数器算法相比于固定窗口计数器算法的优化在于：它把时间以一定比例分片。
+ * 例如我们的接口限流每分钟处理60个请求，我们可以把 1 分钟分为60个窗口。每隔1秒移动一次，每个窗口一秒只能处理 不大于 60(请求数)/60（窗口数） 的请求，
+ * 如果当前窗口的请求计数总和超过了限制的数量的话就不再处理其他请求。
  * Created by kuqi0 on 2021/6/20
  */
 public class TimeWindow {
@@ -48,22 +48,34 @@ public class TimeWindow {
 
     public static void main(String[] args) {
 
-        TimeWindow timeWindow = new TimeWindow(10, 1);
-        // 测试三个线程
-        IntStream.range(0, 3).forEach((i) -> {
-            new Thread(() -> {
+        // 将时间分片，seconds就是最小单元，max代表seconds时间最大访问上限
+        TimeWindow timeWindow = new TimeWindow(2, 2);
+        //// 测试三个线程
+        //IntStream.range(0, 3).forEach((i) -> {
+        //    new Thread(() -> {
+        //
+        //        while (true) {
+        //            try {
+        //                Thread.sleep(new Random().nextInt(20) * 100);
+        //            } catch (InterruptedException e) {
+        //                e.printStackTrace();
+        //            }
+        //            boolean result = timeWindow.take();
+        //            System.out.println(result ? "请求成功" : "请求失败");
+        //        }
+        //    }).start();
+        //
+        //});
 
-                while (true) {
-                    try {
-                        Thread.sleep(new Random().nextInt(20) * 100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    timeWindow.take();
-                }
-            }).start();
-
-        });
+        for (int i = 0; i < 120; i++) {
+            boolean result = timeWindow.take();
+            System.out.println(result ? "请求成功" : "请求失败");
+            try {
+                Thread.sleep(new Random().nextInt(20) * 100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
 
     }
@@ -71,26 +83,31 @@ public class TimeWindow {
     /**
      * 获取令牌，并且添加时间
      */
-    public void take() {
+    public boolean take() {
         long start = System.currentTimeMillis();
 
         int size = sizeOfValid();
         if (size > max) {
-            System.out.println("超限");
+            System.out.println("超限1");
         }
 
         synchronized (queue) {
             if (sizeOfValid() > max) {
-                System.out.println("超限");
+                System.out.println("超限2");
                 System.out.println("queue中有" + queue.size() + " 最大数量 " + max);
+                return false;
             }
+            // 将当前请求时间放入队列
             this.queue.offer(System.currentTimeMillis());
         }
         System.out.println("queue中有 " + queue.size() + " 最大数量 " + max);
-
+        return true;
     }
 
 
+    /**
+     * 获取当前调用者往前seconds时间内访问总数
+     */
     public int sizeOfValid() {
         Iterator<Long> it = queue.iterator();
         long ms = System.currentTimeMillis() - seconds * 1000L;
