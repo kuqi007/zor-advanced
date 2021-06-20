@@ -5,9 +5,11 @@ import org.junit.Test;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * 计数器
  * Created by kuqi0 on 2021/6/17
  */
 public class Counter {
+
     /**
      * 最大访问数量
      */
@@ -19,7 +21,7 @@ public class Counter {
     /**
      * 请求时间
      */
-    private Long time;
+    private volatile Long time;
     /**
      * 当前计数器
      */
@@ -57,7 +59,6 @@ public class Counter {
                 Thread.sleep(timeout / 100);
             }
         }
-
     }
 
 }
