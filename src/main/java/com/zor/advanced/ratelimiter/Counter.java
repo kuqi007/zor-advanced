@@ -1,4 +1,4 @@
-package com.zor.advanced.ratelimter;
+package com.zor.advanced.ratelimiter;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.zor.advanced.ratelimter;
+package com.zor.advanced.ratelimiter;
 
 /**
  * 漏桶算法
