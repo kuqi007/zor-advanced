@@ -1,6 +1,5 @@
 package com.zor.advanced.ratelimiter;
 
-import com.google.common.util.concurrent.Monitor;
 import com.google.common.util.concurrent.RateLimiter;
 
 /**
@@ -8,12 +7,18 @@ import com.google.common.util.concurrent.RateLimiter;
  */
 public class RateLimiterDemo {
     public static void main(String[] args) {
+        RateLimiter rateLimiter = RateLimiter.create(60);
         RateLimiterDemo rateLimiterDemo = new RateLimiterDemo();
         for (int i = 0; i < 120; i++) {
-            boolean request = rateLimiterDemo.request();
-            System.out.println(request);
+            //boolean request = rateLimiterDemo.request();
+            boolean b = rateLimiter.tryAcquire();
+            if (b) {
+                System.out.println("请求成功");
+            } else {
+                System.out.println("请求失败");
+            }
             try {
-                Thread.sleep(100);
+            Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -21,12 +26,10 @@ public class RateLimiterDemo {
         }
 
 
-
     }
 
-    public boolean request() {
-        RateLimiter rateLimiter = RateLimiter.create(2);
-        return rateLimiter.tryAcquire();
-
-    }
+    //public boolean request() {
+    //    RateLimiter rateLimiter = RateLimiter.create(2);
+    //    rateLimiter.acquire();
+    //}
 }
