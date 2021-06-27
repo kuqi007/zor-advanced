@@ -45,6 +45,8 @@ public class Counter {
         } else {
             time = now;
             reqCount.set(0);
+            // 超时这一次也算是成功
+            reqCount.addAndGet(1);
             return true;
         }
     }

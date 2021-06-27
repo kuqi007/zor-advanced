@@ -1,7 +1,6 @@
 package com.zor.advanced.ratelimiter.simple;
 
 import java.util.Iterator;
-import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -50,30 +49,6 @@ public class TimeWindow {
         cleanThread.start();
     }
 
-    public static void main(String[] args) {
-        // 将时间分片，seconds是时间窗口大小，max代表seconds时间最大访问上限
-        TimeWindow timeWindow = new TimeWindow(1, 1);
-
-        int requestCnt = 60;
-        AtomicInteger successCnt = new AtomicInteger();
-        long start = System.currentTimeMillis();
-        for (int i = 0; i < requestCnt; i++) {
-            boolean result = timeWindow.take();
-            if (result) {
-                successCnt.incrementAndGet();
-            }
-            String resultStr = result ? "请求成功" : "请求失败";
-            long now = System.currentTimeMillis();
-            System.out.println("第" + (i + 1) + "次请求结果：" + resultStr + "，耗时：" + (now - start));
-            try {
-                Thread.sleep(new Random().nextInt(20) * 100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        System.out.println("全部请求结束，成功率：" + (successCnt.get() * 100 / requestCnt) + "%");
-    }
-
     /**
      * 获取令牌，并且添加时间
      */
@@ -82,8 +57,8 @@ public class TimeWindow {
 
         int curCnt = sizeOfValid();
         System.out.println("当前窗口请求数量：" + curCnt + "，最大数量：" + max);
-        if (curCnt > max) {
-            System.out.println("超限，请求拒绝");
+        if (curCnt >= max) {
+            //System.out.println("超限，请求拒绝");
             return false;
         } else {
             // 将当前请求时间放入队列
@@ -129,5 +104,30 @@ public class TimeWindow {
         if (hasClean) {
             System.out.println("队列清理之前数量：" + before + "，清理之后：" + after);
         }
+    }
+
+    public static void main(String[] args) {
+        // 将时间分片，seconds是时间窗口大小，max代表seconds时间最大访问上限
+        TimeWindow timeWindow = new TimeWindow(10, 2);
+
+        int requestCnt = 60;
+        AtomicInteger successCnt = new AtomicInteger();
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < requestCnt; i++) {
+            boolean result = timeWindow.take();
+            if (result) {
+                successCnt.incrementAndGet();
+            }
+            String resultStr = result ? "请求成功" : "请求失败";
+            long now = System.currentTimeMillis();
+            System.out.println("第" + (i + 1) + "次请求结果：" + resultStr + "，耗时：" + (now - start));
+            try {
+                //Thread.sleep(new Random().nextInt(20) * 100);
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("全部请求结束，成功率：" + (successCnt.get() * 100 / requestCnt) + "%");
     }
 }
