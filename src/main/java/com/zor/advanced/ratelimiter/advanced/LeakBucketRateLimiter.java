@@ -1,6 +1,5 @@
 package com.zor.advanced.ratelimiter.advanced;
 
-import com.zor.algorithm.leetcode.tree.TreeNode;
 import org.junit.Test;
 
 import java.util.LinkedList;
@@ -9,7 +8,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by kuqi0 on 2021/6/27
@@ -47,6 +45,47 @@ public class LeakBucketRateLimiter implements MyRateLimiter {
         }
     }
 
+
+    @Test
+    public static void testLeakBucketRateLimiter() throws InterruptedException {
+        ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+        ExecutorService singleThread = Executors.newSingleThreadExecutor();
+
+        LeakBucketRateLimiter rateLimiter = new LeakBucketRateLimiter(20, 1);
+        // 存储流量的队列
+        Queue<Integer> queue = new LinkedList<>();
+        // 模拟请求  不确定速率注水
+        singleThread.execute(() -> {
+            int index = 0;
+            while (true) {
+                index++;
+                boolean flag = rateLimiter.tryAcquire();
+                if (flag) {
+                    queue.offer(index);
+                    System.out.println(index + "--------流量被放行----------");
+                } else {
+                    System.out.println(index + "流量被限制");
+                }
+                try {
+                    Thread.sleep((long) (Math.random() * 1000));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        // 模拟处理请求 固定速率漏水
+        scheduledExecutorService.scheduleAtFixedRate(() -> {
+            if (!queue.isEmpty()) {
+                System.out.println(queue.poll() + "被处理");
+            }
+        }, 0, 100, TimeUnit.MILLISECONDS);
+
+        // 保证主线程不会退出
+        while (true) {
+            Thread.sleep(10000);
+        }
+    }
+
     public static void main(String[] args) throws InterruptedException {
         //// 将时间分片，seconds是时间窗口大小，max代表seconds时间最大访问上限
         //MyRateLimiter myRateLimiter = new LeakBucketRateLimiter(20, 1);
@@ -71,42 +110,5 @@ public class LeakBucketRateLimiter implements MyRateLimiter {
         //System.out.println("全部请求结束，成功率：" + (successCnt.get() * 100 / requestCnt) + "%");
 
         testLeakBucketRateLimiter();
-    }
-
-    //@Test
-    public static void testLeakBucketRateLimiter() throws InterruptedException {
-        ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-        ExecutorService singleThread = Executors.newSingleThreadExecutor();
-
-        LeakBucketRateLimiter rateLimiter = new LeakBucketRateLimiter(20, 1);
-        // 存储流量的队列
-        Queue<Integer> queue = new LinkedList<>();
-        singleThread.execute(() -> {
-            int index = 0;
-            while (true) {
-                index++;
-                boolean flag = rateLimiter.tryAcquire();
-                if (flag) {
-                    queue.offer(index);
-                    System.out.println(index + "--------流量被放行----------");
-                } else {
-                    System.out.println(index + "流量被限制");
-                }
-                try {
-                    Thread.sleep((long) (Math.random() * 1000));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        scheduledExecutorService.scheduleAtFixedRate(() -> {
-            if (!queue.isEmpty()) {
-                System.out.println(queue.poll() + "被处理");
-            }
-        }, 0, 100, TimeUnit.MILLISECONDS);
-
-        while (true) {
-            Thread.sleep(10000);
-        }
     }
 }
