@@ -35,7 +35,7 @@ public class LeakBucket {
 
     public boolean limit() {
         long now = System.currentTimeMillis();
-        nowSize = Math.max(0, (nowSize - (now - time) * rate));
+        nowSize = Math.max(0, (nowSize - (now - time) / 1000D * rate));
         time = now;
         if ((nowSize + 1) < total) {
             nowSize++;
