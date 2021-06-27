@@ -3,12 +3,13 @@ package com.zor.advanced.ratelimiter;
 import com.google.common.util.concurrent.RateLimiter;
 
 /**
+ * Guava RateLimiter Demo
  * Created by kuqi0 on 2021/6/20
  */
-public class RateLimiterDemo {
+public class GuavaRateLimiterDemo {
     public static void main(String[] args) {
         RateLimiter rateLimiter = RateLimiter.create(60);
-        RateLimiterDemo rateLimiterDemo = new RateLimiterDemo();
+        GuavaRateLimiterDemo rateLimiterDemo = new GuavaRateLimiterDemo();
         for (int i = 0; i < 120; i++) {
             //boolean request = rateLimiterDemo.request();
             boolean b = rateLimiter.tryAcquire();
