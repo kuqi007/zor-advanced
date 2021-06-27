@@ -1,4 +1,4 @@
-package com.zor.advanced.ratelimiter;
+package com.zor.advanced.ratelimiter.simple;
 
 import java.util.Iterator;
 import java.util.Random;
