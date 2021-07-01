@@ -11,6 +11,9 @@ import java.util.concurrent.ExecutionException;
  */
 public class CompletableFutureTest {
 
+    /**
+     * combine多个任务同时执行，无需等待上一步的结果
+     */
     @Test
     public void testCombine() throws ExecutionException, InterruptedException {
         long start = System.currentTimeMillis();
@@ -25,6 +28,9 @@ public class CompletableFutureTest {
     }
 
 
+    /**
+     * compose是流水线，需要等待上一步的结果
+     */
     @Test
     public void testCompose() throws ExecutionException, InterruptedException {
         long start = System.currentTimeMillis();
