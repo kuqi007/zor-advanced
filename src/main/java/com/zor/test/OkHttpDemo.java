@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by kuqi0 on 2021/7/12
@@ -18,9 +19,9 @@ import java.util.concurrent.ThreadLocalRandom;
 public class OkHttpDemo {
 
     public static void main(String[] args) throws InterruptedException {
-        String url = "https://hrworkbench.alibaba-inc.com/offer/offerRpc/nickNameRecommend.json?name=%E6%9C%B1%E7%90%A6%E7%90%A6&sex=M&containKey=%E8%90%BD%E6%B5%B7&_tb_token_=Gg2QQdtAEv&_=1626090907319";
+        String url = "https://hrworkbench.alibaba-inc.com/offer/offerRpc/nickNameRecommend.json?name=%E6%9C%B1%E7%90%A6%E7%90%A6&sex=M&containKey=%E5%A4%A9%E9%82%88&_tb_token_=Gg2QQdtAEv&_=1626181851251";
         Map<String, String> headers = new HashMap<>();
-        headers.put("cookie", "cookieLanguageKey=0F34391E1ED476FAD959C955E2AB24B7; JSESSIONID=BD666U91-OKGRJDIO32J2U8WFSO663-Q5W75SQK-CJ7; tmp0=eNrz4A12DQ729PeL9%2FV3cfUxiKzOTLFScnIxMzMLtTTU9fd2D%2FJy8fQ3NvIyCrUIdwv2NzMz1g00DTc3DQ701nX2MlfSSS6xMjQzMjW1MDQxMbQ0NtFJTEYTyK2wMqjlii9Jii%2FJz07Ni%2BdyTzcKDEwpcXQtiwIAt74jKQ%3D%3D; xlly_s=1; offer=9B5A732A0D3D5359405E1E8CD2E52FA45FD355BF0D222AA2C23FAA0D9E652F96F7A4B493B1F6B4ED83237A898AF91A795B21C101587E0AA8CE4F64F98E687B783CA06DE615790F70905F58F949F2A9FB1074CADC6A671503785B6DBA5FCC5A2C; tfstk=cv2FBgV0w9BetAH5MvMyVnl4tM9OCxZ3qdojt5T5Xe-24BbZuk5c4UnGxSmZVqBit; l=eBryMC3Pjb6pq8dMBO5anurza77taEdX0sPzaNbMiInca1ye6UI3iNCBvLsAJdtjgT1qUyKuRYtW2d43cnQckxkbzD0WF5qTskrezexP.; isg=BHp61Aj7zhmZMkKnqz5dmv4_y6CcK_4FGH2hqoRq843Yd2qx7bhSFI7BxwOrZ3ad");
+        headers.put("cookie", "cookieLanguageKey=0F34391E1ED476FAD959C955E2AB24B7; JSESSIONID=BD666U91-OKGRJDIO32J2U8WFSO663-Q5W75SQK-CJ7; tmp0=eNrz4A12DQ729PeL9%2FV3cfUxiKzOTLFScnIxMzMLtTTU9fd2D%2FJy8fQ3NvIyCrUIdwv2NzMz1g00DTc3DQ701nX2MlfSSS6xMjQzMjW1MDQxMbQ0NtFJTEYTyK2wMqjlii9Jii%2FJz07Ni%2BdyTzcKDEwpcXQtiwIAt74jKQ%3D%3D; lang=0F34391E1ED476FAD959C955E2AB24B7; xlly_s=1; offer=A105AF81BAABE029E83C5F040B844625FA25F5E2C88C749110AB26702B068D46F7A4B493B1F6B4ED83237A898AF91A795B21C101587E0AA8CE4F64F98E687B783CA06DE615790F70905F58F949F2A9FB1074CADC6A671503785B6DBA5FCC5A2C; tfstk=cgJPBuOM9YHzZ-BI6T6UAqPjs1QRaJtkx-S1ZIaTs9w3Ox1A7s0UJimksiSCWxfl.; l=eBryMC3Pjb6pqXWUBO5Zlurza779gQOflsPzaNbMiInca6glTFPEsNCBAy_W7dtjgt5x0EtrFQx-eRF27vaU-xOj64AeHJzzYBJpRe1..; isg=BF1dax9g4RGbZoXukA8CA6VebDlXepHM83wmox8hi7Tj1ncI68kcndAAAMpQFqmE");
         while (true) {
             String s = OkHttpUtils.httpGet(url, headers);
             JSONObject jsonObject = JSON.parseObject(s);
@@ -28,8 +29,9 @@ public class OkHttpDemo {
             for (int i = 0; i < content.size(); i++) {
                 JSONObject object = content.getJSONObject(i);
                 System.out.println(object.getString("comWord"));
-                if ("落海".equals(object.getString("comWord"))) {
+                if ("天邈".equals(object.getString("comWord"))) {
                     System.out.println(object.toJSONString());
+                    TimeUnit.SECONDS.sleep(600);
                     break;
                 }
             }
