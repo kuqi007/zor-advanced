@@ -29,8 +29,8 @@ import java.util.Random;
 public class Lcof39 {
 
     /**
-     * https://leetcode-cn.com/problems/majority-element/solution/3chong-fang-fa-by-gfu-2/
      * 摩尔投票法
+     * https://leetcode-cn.com/problems/majority-element/solution/3chong-fang-fa-by-gfu-2/
      */
     public int solution4(int[] nums) {
         int cand_num = nums[0], count = 1;
@@ -76,6 +76,9 @@ public class Lcof39 {
     }
 
 
+    /**
+     * 暴力
+     */
     public int solution2(int[] nums) {
         Map<Integer, Integer> counters = countNums(nums);
         Map.Entry<Integer, Integer> majorEntry = null;
@@ -96,6 +99,9 @@ public class Lcof39 {
     }
 
 
+    /**
+     * 直接排序，中位数就是众数
+     */
     public int solution1(int[] nums) {
         Arrays.sort(nums);
         return nums[nums.length / 2];
