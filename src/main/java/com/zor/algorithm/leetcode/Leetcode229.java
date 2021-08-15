@@ -43,25 +43,31 @@ public class Leetcode229 {
     public List<Integer> majorityElement(int[] nums) {
         List<Integer> res = new ArrayList<>();
         int n = nums.length;
+        // 最多有2个众数(出现超过 ⌊n/3⌋ 次), 后面打擂台更新
         int cand1 = nums[0], cand2 = nums[0];
         int count1 = 0, count2 = 0;
+        // 第1阶段 - 成对抵销
         for (int num : nums) {
+            // votes1 之前已经出现过, 这里再次出现
             if (count1 > 0 && num == cand1) {
                 count1++;
             } else if (count2 > 0 && num == cand2) {
                 count2++;
             } else if (count1 == 0) {
+                // cand1 第一次出现
                 cand1 = num;
                 count1++;
             } else if (count2 == 0) {
                 cand2 = num;
                 count2++;
             } else {
+                // cand1或cand2 之前已经出现过, 但此时第3个数(竞争者)第1次出现
                 count1--;
                 count2--;
             }
         }
 
+        // 第2阶段 - 计数, 数目要超过三分之一
         count1 = 0;
         count2 = 0;
         for (int num : nums) {
