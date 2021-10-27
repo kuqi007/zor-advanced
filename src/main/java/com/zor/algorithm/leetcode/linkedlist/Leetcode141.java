@@ -63,6 +63,21 @@ public class Leetcode141 {
         System.out.println(solution1(head));
     }
 
+    /**
+     * 链表成环另一种写法
+     */
+    public static boolean solution2(ListNode head) {
+        ListNode car = head, bike = head;
+        while (car != null && car.next != null) {
+            car = car.next.next;
+            bike = bike.next;
+            if (car == bike) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static boolean solution1(ListNode head) {
         // 如果头结点为空或者下一个节点为空则不可能成环
         if (head == null || head.next == null) {
@@ -114,8 +129,6 @@ public class Leetcode141 {
         }
         return false;
     }
-
-
 
 
 }
