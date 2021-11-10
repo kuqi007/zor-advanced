@@ -1,7 +1,7 @@
 package com.zor.advanced.cache.lru;
 
 /**
- * 参考LinkedList的双向链表的不完全实现
+ * 参考LinkedList的双向链表的不完全实现，不使用傀儡节点
  *
  * @see java.util.LinkedList
  * Created by kuqi0 on 2021/3/9
