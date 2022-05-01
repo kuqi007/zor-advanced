@@ -11,9 +11,50 @@ public class MergeSort {
         MergeSort mergeSort = new MergeSort();
         int[] arr = {4, 5, -1, 7, 9, 1, -11};
 
-        mergeSort.mergeSort(arr, arr.length);
+        mergeSort.merge_sort(arr, arr.length);
 
         System.out.println(Arrays.toString(arr));
+
+
+    }
+
+    public void merge_sort(int[] A, int n) {
+        merge_sort_c(A, 0, n - 1);
+    }
+
+    public void merge_sort_c(int[] A, int p, int r) {
+
+        if (p >= r) return;
+        int q = (p + r) / 2;
+        merge_sort_c(A, p, q);
+        merge_sort_c(A, q + 1, r);
+
+        merge_(A, p, q, r);
+    }
+
+    public void merge_(int[] A, int p, int q, int r) {
+
+        int i = p, j = q + 1, k = 0;
+
+        int[] tmp = new int[r - p + 1];
+        while (i <= q && j <= r) {
+            if (A[i] <= A[j]) {
+                tmp[k++] = A[i++];
+            } else {
+                tmp[k++] = A[j++];
+            }
+        }
+        int start = i, end = q;
+        if (j <= r) {
+            start = j;
+            end = r;
+        }
+        while (start <= end) {
+            tmp[k++] = A[start++];
+        }
+        for (i = 0; i <= r - p; i++) {
+            A[p + i] = tmp[i];
+        }
 
 
     }
@@ -96,7 +137,7 @@ public class MergeSort {
 
 
     /**
-     * 这样写不是更简单？
+     * TODO 这样写不是更简单？
      */
     private void merge1(int[] A, int p, int q, int r) {
         int i = p, j = q + 1, k = 0;
