@@ -14,7 +14,7 @@ import com.zor.algorithm.leetcode.linkedlist.base.ListNodeUtil;
  * 进阶:
  * 你可以迭代或递归地反转链表。你能否用两种方法解决这道题？
  * <p>
- * 链接：https://leetcode-cn.com/problems/reverse-linked-list
+ * 链接：<a href="https://leetcode-cn.com/problems/reverse-linked-list">https://leetcode-cn.com/problems/reverse-linked-list</a>
  */
 public class Leetcode206 {
 
