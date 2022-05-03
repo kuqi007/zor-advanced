@@ -49,6 +49,7 @@ public class Leetcode98 {
 
 
     /**
+     * 有效二叉搜索树的中序遍历是升序
      * 递归中序
      * 1. 用一个成员变量pre保存上一个节点的值
      */
@@ -120,6 +121,8 @@ public class Leetcode98 {
         // 再访问右子树，判断右子树是否符合条件
         return isValidBST(root.right);
     }
+
+
 
 
 }

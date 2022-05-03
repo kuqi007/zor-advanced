@@ -38,7 +38,7 @@ public class Leetcode110 {
 
     /**
      * 自底向上
-     * https://leetcode-cn.com/problems/balanced-binary-tree/solution/balanced-binary-tree-di-gui-fang-fa-by-jin40789108/
+     * <a href="https://leetcode-cn.com/problems/balanced-binary-tree/solution/balanced-binary-tree-di-gui-fang-fa-by-jin40789108/">https://leetcode-cn.com/problems/balanced-binary-tree/solution/balanced-binary-tree-di-gui-fang-fa-by-jin40789108/</a>
      */
     public boolean isBalanced(TreeNode root) {
         return recur(root) != -1;
@@ -65,6 +65,35 @@ public class Leetcode110 {
     private int depth(TreeNode root) {
         if (root == null) return 0;
         return Math.max(depth(root.left), depth(root.right)) + 1;
+    }
+
+    private static class ReturnNode {
+        boolean isB;
+        int depth;
+
+        public ReturnNode(int depth, boolean isB) {
+            this.depth = depth;
+            this.isB = isB;
+        }
+    }
+
+    /**
+     * 这个递归太令人疑惑了
+     * <a href="https://lyl0724.github.io/2020/01/25/1/">三道题解决递归问题</a>
+     */
+    public ReturnNode isBST(TreeNode root) {
+        if (root == null) {
+            return new ReturnNode(0, true);
+        }
+        ReturnNode left = isBST(root.left);
+        ReturnNode right = isBST(root.right);
+        if (!left.isB || !right.isB) {
+            return new ReturnNode(0, false);
+        }
+        if (Math.abs(left.depth - right.depth) > 1) {
+            return new ReturnNode(0, false);
+        }
+        return new ReturnNode(Math.max(left.depth, right.depth) + 1, true);
     }
 
 
