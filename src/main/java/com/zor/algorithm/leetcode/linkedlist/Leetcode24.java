@@ -40,7 +40,7 @@ public class Leetcode24 {
     public static void main(String[] args) {
         Leetcode24 leetcode24 = new Leetcode24();
         ListNode listNode = ListNodeUtil.getListNode(1, 2, 3, 4);
-        ListNode res = leetcode24.solution0(listNode);
+        ListNode res = leetcode24.swapPairs1(listNode);
         ListNodeUtil.printList(res);
 
     }
@@ -86,14 +86,29 @@ public class Leetcode24 {
     }
 
 
-    public ListNode swapPairs(ListNode head) {
+    public ListNode swapPairs1(ListNode head) {
         if (head == null || head.next == null) {
             return head;
         }
 
         ListNode next = head.next;
-        head.next = swapPairs(next.next);
+        head.next = swapPairs1(next.next);
         next.next = head;
+        return next;
+    }
+
+    public ListNode swapPairs(ListNode head) {
+        // 递归终止条件，当节点为空或者只有一个节点时无需交换
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode next = head.next;
+        // 这里我们只需要处理三个节点，也就是head、next以及已经处理完的链表部分
+        // 把head指向已经处理好的链表部分
+        head.next = swapPairs(next.next);
+        // next指向head
+        next.next = head;
+        // 返回新的头结点
         return next;
     }
 
@@ -114,6 +129,26 @@ public class Leetcode24 {
         return dummyNode.next;
 
 
+    }
+
+    /**
+     * 迭代做法
+     * 2022年5月3日12:08:52
+     */
+    public ListNode swapPairs2(ListNode head) {
+        // 创建哑结点
+        ListNode dummyNode = new ListNode(0, head);
+        // 三个节点，temp，p1和p2，处理完本次交换后，temp指针往后走即可
+        ListNode temp = dummyNode;
+        while (temp.next != null && temp.next.next != null) {
+            ListNode p1 = temp.next;
+            ListNode p2 = temp.next.next;
+            temp.next = p2;
+            p1.next = p2.next;
+            p2.next = p1;
+            temp = p1;
+        }
+        return dummyNode.next;
     }
 
 

@@ -56,4 +56,29 @@ public class Leetcode104 {
         }
         return depth;
     }
+
+    /**
+     * bfs 层序遍历
+     */
+    public int levelOrder(TreeNode root) {
+        int ans = 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        if (root != null) {
+            queue.add(root);
+        }
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = queue.poll();
+                if (cur.left != null) {
+                    queue.add(cur.left);
+                }
+                if (cur.right != null) {
+                    queue.add(cur.right);
+                }
+            }
+            ans++;
+        }
+        return ans;
+    }
 }

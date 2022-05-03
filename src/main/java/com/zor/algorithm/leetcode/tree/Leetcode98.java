@@ -32,7 +32,7 @@ import java.util.LinkedList;
  *      根节点的值为 5 ，但是其右子节点值为 4 。
  * <p>
  * 来源：力扣（LeetCode）
- * 链接：https://leetcode-cn.com/problems/validate-binary-search-tree
+ * 链接：<a href="https://leetcode-cn.com/problems/validate-binary-search-tree">https://leetcode-cn.com/problems/validate-binary-search-tree</a>
  *
  * @author zqq
  * @date 2021/1/8
