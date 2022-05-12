@@ -25,6 +25,25 @@ public class Leetcode21 {
 
     }
 
+    /**
+     *  递归。。一看就会，一写就废
+     */
+    public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        if (l1 == null) {
+            // 如果l1已经到尽头，把此时没有结束的l2返回
+            return l2;
+        } else if (l2 == null) {
+            return l1;
+        } else if (l1.val < l2.val) {
+            // 拆成子问题，把l1的下一个节点指向l1.next与l2的合并的结果
+            l1.next = mergeTwoLists(l1.next, l2);
+            return l1;
+        } else {
+            l2.next = mergeTwoLists(l1, l2.next);
+            return l2;
+        }
+    }
+
 
     /**
      * 分支合并
@@ -85,23 +104,6 @@ public class Leetcode21 {
         }
         head.next = l1 != null ? l1 : l2;
         return dummyNode.next;
-    }
-
-    /**
-     * TODO 递归。。一看就会，一写就废
-     */
-    public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        if (l1 == null) {
-            return l2;
-        } else if (l2 == null) {
-            return l1;
-        } else if (l1.val < l2.val) {
-            l1.next = mergeTwoLists(l1.next, l2);
-            return l1;
-        } else {
-            l2.next = mergeTwoLists(l1, l2.next);
-            return l2;
-        }
     }
 
     /**
