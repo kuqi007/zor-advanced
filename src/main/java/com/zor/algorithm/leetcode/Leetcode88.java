@@ -34,9 +34,24 @@ public class Leetcode88 {
     public static void main(String[] args) {
         int[] nums1 = {1, 2, 3, 0, 0, 0};
         int[] nums2 = {2, 5, 6};
-        solution0(nums1, 3, nums2, 3);
+        solution3(nums1, 3, nums2, 3);
         System.out.println(Arrays.toString(nums1));
 
+    }
+
+    /**
+     * 最简约写法：逆向双指针，空间复杂度O(1),时间复杂度O(m+n)
+     */
+    public static void solution3(int[] nums1, int m, int[] nums2, int n) {
+        int i = m - 1, j = n - 1, cur = m + n - 1;
+        while (i >= 0 || j >= 0) {
+            if (j < 0 || (i >= 0 && nums1[i] > nums2[j])) {
+                nums1[cur] = nums1[i--];
+            } else {
+                nums1[cur] = nums2[j--];
+            }
+            cur--;
+        }
     }
 
     /**
@@ -58,6 +73,30 @@ public class Leetcode88 {
             }
             nums1[tail--] = tmp;
         }
+    }
+
+    /**
+     * 简约写法，需要额外空间
+     */
+    public static void solution2(int[] nums1, int m, int[] nums2, int n) {
+        int[] ans = new int[m + n];
+        int i = 0, j = 0, cur = 0;
+        while (i < m || j < n) {
+            if (i >= m || (j < n && nums1[i] > nums2[j])) {
+                ans[cur] = nums2[j++];
+            } else {
+                ans[cur] = nums1[i++];
+            }
+            cur++;
+        }
+
+        for (int k = 0; k < ans.length; k++) {
+            nums1[k] = ans[k];
+        }
+        //System.arraycopy(ans, 0, nums1, 0, ans.length);
+
+        //System.out.println(Arrays.toString(ans));
+
     }
 
     /**
