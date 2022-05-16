@@ -35,7 +35,7 @@ public class Leetcode111 {
 
     /**
      * 通俗易懂
-     * https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/solution/111-er-cha-shu-de-zui-xiao-shen-du-di-gu-ztum/
+     * <a href="https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/solution/111-er-cha-shu-de-zui-xiao-shen-du-di-gu-ztum/">https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/solution/111-er-cha-shu-de-zui-xiao-shen-du-di-gu-ztum/</a>
      */
     public int minDepth(TreeNode root) {
         if (root == null) return 0;
@@ -72,6 +72,10 @@ public class Leetcode111 {
         return res + 1;
     }
 
+    /**
+     * 层序遍历，当我们找到第一个叶子节点时候，这就是最小深度
+     * 广度优先搜索的性质保证了最先搜索到的叶子节点的深度一定最小。
+     */
     public int bfs(TreeNode root) {
         if (root == null) return 0;
         Queue<TreeNode> queue = new LinkedList<>();
