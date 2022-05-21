@@ -25,7 +25,7 @@ public class QuickSortII {
 
     /**
      * 快排的关键是就是分区函数
-     * https://cdn.jsdelivr.net/gh/kuqi007/picGo/202120210427201802.jpeg
+     * <a href="https://cdn.jsdelivr.net/gh/kuqi007/picGo/202120210427201802.jpeg">...</a>
      */
     private int partition(int[] arr, int left, int right) {
         int pivot = arr[right];
