@@ -32,23 +32,56 @@ import java.util.LinkedList;
  * s 表示一个 有效表达式
  * 表达式中的所有整数都是非负整数，且在范围 [0, 231 - 1] 内
  * 题目数据保证答案是一个 32-bit 整数
- * Created by kuqi0 on 2021/3/11
+ *
+ * @author zhuqiqi03
+ * @date 2021/4/29
  */
 public class Leetcode227 {
 
     public static void main(String[] args) {
-
-        String s = "3+2*2";
-        int calculate = calculate(s);
-        System.out.println(calculate);
-
+        Leetcode227 leetcode227 = new Leetcode227();
+        int calculate = leetcode227.calculate("3+2*2");
+        System.out.println("calculate = " + calculate);
 
     }
 
-    /**
-     * 一个栈解决问题
-     */
-    public static int calculate(String s) {
+    public int calculate(String s) {
+        int num = 0;
+        char preSign = '+';
+        Deque<Integer> stack = new LinkedList<>();
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (Character.isDigit(c)) {
+                // (c - '0')的这个括号不能省略，否则可能造成整型溢出。
+                num = num * 10 + (c - '0');
+            }
+            if (!Character.isDigit(c) && c != ' ' || i == s.length() - 1) {
+                switch (preSign) {
+                    case '+':
+                        stack.push(num);
+                        break;
+                    case '-':
+                        stack.push(-num);
+                        break;
+                    case '*':
+                        stack.push(stack.pop() * num);
+                        break;
+                    case '/':
+                        stack.push(stack.pop() / num);
+                        break;
+                }
+                preSign = c;
+                num = 0;
+            }
+        }
+        int res = 0;
+        while (!stack.isEmpty()) {
+            res += stack.pop();
+        }
+        return res;
+    }
+
+    public static int calculate1(String s) {
         Deque<Integer> stack = new LinkedList<>();
         char preSign = '+';
         int num = 0;
@@ -83,4 +116,5 @@ public class Leetcode227 {
         }
         return ans;
     }
+
 }
