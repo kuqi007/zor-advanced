@@ -32,9 +32,11 @@ public class Leetcode912 {
         return nums;
     }
 
+
+
     private void quickSort(int[] arr, int left, int right) {
         if (left < right) {
-            int partitionIndex = randomPartition(arr, left, right);
+            int partitionIndex = selectPivotPartition(arr, left, right);
             quickSort(arr, left, partitionIndex - 1);
             quickSort(arr, partitionIndex + 1, right);
         }
@@ -47,6 +49,23 @@ public class Leetcode912 {
         int i = new Random().nextInt(right - left + 1) + left;
         swap(arr, right, i);
         return partition(arr, left, right);
+    }
+
+    /**
+     * 三数取中法
+     * 从首、尾、中间各取一个数，取中间值作为分区点
+     */
+    private int selectPivotPartition(int[] nums, int p, int r) {
+        int mid = p + (r - p) / 2;
+        int e1 = nums[p], e2 = nums[mid], e3 = nums[r];
+        int q = r;
+        if (e1 > e2 && e1 < e3 || (e1 > e3 && e1 < e2)) {
+            q = p;
+        } else if (e2 > e1 && e2 < e3 || (e2 > e3 && e2 < e1)) {
+            q = mid;
+        }
+        swap(nums, q, r);
+        return partition(nums, p, r);
     }
 
     private int partition(int[] arr, int left, int right) {
