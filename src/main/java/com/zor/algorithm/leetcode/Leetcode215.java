@@ -64,6 +64,19 @@ public class Leetcode215 {
         }
     }
 
+    private int selectPartition(int[] nums, int p, int r) {
+        int mid = p + (r - p) / 2;
+        int e1 = nums[p], e2 = nums[mid], e3 = nums[r];
+        int q = r;
+        if (e1 > e2 && e1 < e3 || (e1 > e3 && e1 < e2)) {
+            q = p;
+        } else if (e2 > e1 && e2 < e3 || (e2 > e3 && e2 < e1)) {
+            q = mid;
+        }
+        swap(nums, q, r);
+        return partition(nums, p, r);
+    }
+
     private int randomPartition(int[] arr, int left, int right) {
         // r-l+1, 上边界是开区间
         int i = new Random().nextInt(right - left + 1) + left;
