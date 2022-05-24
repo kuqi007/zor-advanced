@@ -11,7 +11,7 @@ public class MergeSort {
         MergeSort mergeSort = new MergeSort();
         int[] arr = {4, 5, -1, 7, 9, 1, -11};
 
-        mergeSort.merge_sort(arr, arr.length);
+        mergeSort.mergeSort(arr, arr.length);
 
         System.out.println(Arrays.toString(arr));
 
@@ -75,7 +75,7 @@ public class MergeSort {
         mergeSortC(A, p, q);
         mergeSortC(A, q + 1, r);
         // 将A[p...q]和[q+1...r]合并为A[p...r]
-        merge(A, p, q, r);
+        merge1(A, p, q, r);
     }
 
     private void merge(int[] A, int p, int q, int r) {
@@ -143,17 +143,11 @@ public class MergeSort {
         int i = p, j = q + 1, k = 0;
         int[] tempArr = new int[r - p + 1];
         while (i <= q || j <= r) {
-            int tmp;
-            if (i > q) {
-                tmp = A[j++];
-            } else if (j > r) {
-                tmp = A[i++];
-            } else if (A[i] < A[j]) {
-                tmp = A[i++];
+            if (i > q || (j <= r && A[i] > A[j])) {
+                tempArr[k++] = A[j++];
             } else {
-                tmp = A[j++];
+                tempArr[k++] = A[i++];
             }
-            tempArr[k++] = tmp;
         }
 
         for (i = 0; i <= r - p; i++) {
