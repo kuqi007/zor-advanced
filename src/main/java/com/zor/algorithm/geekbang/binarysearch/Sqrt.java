@@ -7,11 +7,10 @@ package com.zor.algorithm.geekbang.binarysearch;
 public class Sqrt {
     public static void main(String[] args) {
         Sqrt sqrt = new Sqrt();
-        double a = 6;
+        double a = 1000;
         double num = sqrt.sqrt(a, 0.000001);
         System.out.println("算法结果：" + num);
         System.out.println("实际结果：" + Math.sqrt(a));
-
     }
 
     public double sqrt(double a, double precision) {
@@ -27,7 +26,8 @@ public class Sqrt {
         while (low <= high) {
             mid = (low + high) / 2.000;
             tmp = mid * mid;
-            if (tmp < precision + 1 && tmp >= a - precision) {
+            // 如果当前求得的平方根在target+0.000001和target-0.000001之间，那么返回mid
+            if (tmp < a + precision && tmp >= a - precision) {
                 return mid;
             } else if (tmp > a) {
                 high = mid;
@@ -35,7 +35,6 @@ public class Sqrt {
                 low = mid;
             }
         }
-
         return -1.000;
     }
 }

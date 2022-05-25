@@ -25,7 +25,7 @@ package com.zor.algorithm.leetcode;
 public class Leetcode69 {
 
     public static void main(String[] args) {
-        System.out.println("mySqrt() = " + mySqrt(1));
+        System.out.println("mySqrt() = " + mySqrt1(2147395599));
     }
 
     public static int mySqrt(int x) {
@@ -43,7 +43,26 @@ public class Leetcode69 {
         }
 
         return ans;
+    }
 
+
+    public static int mySqrt1(int x) {
+        int l = 0, r = x;
+        while (l <= r) {
+            int mid = l + ((r - l) >> 2);
+            long tmp = (long) mid * mid;
+            if (tmp <= x) {
+                // 如果+1之后已经大于x了，那么mid肯定是最接近x的数
+                long i = (long) (mid + 1) * (mid + 1);
+                if (mid == x || i > x) {
+                    return mid;
+                }
+                l = mid + 1;
+            } else {
+                r = mid - 1;
+            }
+        }
+        return -1;
 
     }
 }

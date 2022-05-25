@@ -38,23 +38,42 @@ import java.util.Arrays;
 public class Leetcode34 {
     public static void main(String[] args) {
         Leetcode34 leetcode34 = new Leetcode34();
-        int[] nums = {5, 7, 7, 8, 8, 10};
-        int[] ints = leetcode34.searchRange(nums, 10);
+        int[] nums = {1};
+        int[] ints = leetcode34.searchRange(nums, 1);
         System.out.println(Arrays.toString(ints));
     }
 
     public int[] searchRange(int[] nums, int target) {
         if (nums.length == 0) return new int[]{-1, -1};
 
-        int leftIndex = leftBound(nums, target);
+        int leftIndex = bsearch(nums, target);
         // target+1指向了target结尾的下一位，rightIndex-1即右边界
-        int rightIndex = leftBound(nums, target + 1);
+        int rightIndex = bsearch(nums, target + 1);
 
         // 判断数组中是否未找到目标值
         if (leftIndex == nums.length || nums[leftIndex] != target) {
             return new int[]{-1, -1};
         }
         return new int[]{leftIndex, rightIndex - 1};
+    }
+
+
+    private int bsearch(int[] nums, int target) {
+        int n = nums.length;
+        int l = 0, r = n - 1;
+        while (l <= r) {
+            int mid = l + ((r - l) >> 2);
+            if (nums[mid] >= target) {
+                if (mid == 0 || nums[mid - 1] < target) {
+                    return mid;
+                }
+                // 向左逼近
+                r = mid - 1;
+            } else if (nums[mid] < target) {
+                l = mid + 1;
+            }
+        }
+        return l;
     }
 
     /**

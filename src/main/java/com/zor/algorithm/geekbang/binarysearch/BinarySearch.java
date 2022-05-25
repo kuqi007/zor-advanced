@@ -51,7 +51,7 @@ public class BinarySearch {
     }
 
     /**
-     * 通俗易懂的查找左边界写法
+     * 通俗易懂地查找左边界写法
      */
     public int bSearchLeftBound(int[] a, int value) {
         int low = 0, high = a.length - 1;
@@ -62,6 +62,7 @@ public class BinarySearch {
             } else if (a[mid] < value) {
                 low = mid + 1;
             } else {
+                // mid左边的数跟目标值不相等了，那么代表mid是最后一个相等的
                 if (mid == 0 || a[mid - 1] != value) return mid;
                 else high = mid - 1;
             }
@@ -70,7 +71,7 @@ public class BinarySearch {
     }
 
     /**
-     * 通俗易懂的查找右边界写法
+     * 通俗易懂地查找右边界写法
      */
     public int bSearchRightBound(int[] a, int value) {
         int n = a.length;
@@ -82,6 +83,7 @@ public class BinarySearch {
             } else if (a[mid] < value) {
                 low = mid + 1;
             } else {
+                // mid右边的数跟目标值不相等了，那么代表mid是最后一个相等的
                 if (mid == n - 1 || a[mid] != a[mid + 1]) return mid;
                 else low = mid + 1;
             }
@@ -151,6 +153,9 @@ public class BinarySearch {
         return right;
     }
 
+    /**
+     * 递归写法
+     */
     public int recursiveBinarySearch(int[] nums, int target) {
         return bSearchInternally(nums, 0, nums.length - 1, target);
     }
