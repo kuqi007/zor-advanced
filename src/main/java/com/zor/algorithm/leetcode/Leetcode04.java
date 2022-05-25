@@ -23,7 +23,7 @@ package com.zor.algorithm.leetcode;
 public class Leetcode04 {
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-
+        // todo 这破题 太难了
 
         return 0;
     }

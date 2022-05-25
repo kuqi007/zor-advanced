@@ -47,14 +47,14 @@ import java.util.Arrays;
  *     print(nums[i]);
  * }
  * <p>
- * 链接：https://leetcode-cn.com/problems/remove-element
+ * 链接：<a href="https://leetcode-cn.com/problems/remove-element">...</a>
  *
  * @author zqq
  * @date 2021/1/13
  */
 public class Leetcode27 {
     public static void main(String[] args) {
-        System.out.println(solution0(new int[]{2, 3, 2, 1, 1, 3}, 3));
+        System.out.println(solution3(new int[]{1,1,1,5}, 1));
     }
 
     public static int solution0(int[] nums, int val) {
@@ -109,6 +109,8 @@ public class Leetcode27 {
                 nums[i] = nums[ans - 1];
                 // 只要出现目标元素则-1，所以最后数组长度即ans
                 ans--;
+                //System.out.println(ans);
+                //System.out.println(i);
                 // i不加1是因为可能换过来的数也可能等于val
             } else {
                 i++;
