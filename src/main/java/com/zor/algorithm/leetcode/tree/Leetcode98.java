@@ -41,8 +41,8 @@ public class Leetcode98 {
 
     public static void main(String[] args) {
         Leetcode98 leetcode98 = new Leetcode98();
-        TreeNode node = new TreeNode(1, new TreeNode(1), null);
-        boolean validBST = leetcode98.inorder(node);
+        TreeNode root = TreeNodeUtil.constructBinaryTree(1, 1, null);
+        boolean validBST = leetcode98.inorder(root);
         System.out.println(validBST);
 
     }
@@ -121,8 +121,6 @@ public class Leetcode98 {
         // 再访问右子树，判断右子树是否符合条件
         return isValidBST(root.right);
     }
-
-
 
 
 }
