@@ -8,8 +8,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * https://leetcode-cn.com/problems/binary-tree-inorder-traversal/solution/che-di-chi-tou-er-cha-shu-de-qian-zhong-hou-xu-d-2/
- * 树的中序遍历
+ * 参考代码随想录
+ * <a href="https://leetcode.cn/problems/binary-tree-inorder-traversal/solution/che-di-chi-tou-er-cha-shu-de-qian-zhong-y0emt/">...</a>
+ * 树的中序遍历统一写法
  * Created by kuqi0 on 2021/5/16
  */
 public class InorderTraversal {
