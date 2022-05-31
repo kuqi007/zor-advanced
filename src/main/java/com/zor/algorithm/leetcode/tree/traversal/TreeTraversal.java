@@ -17,7 +17,7 @@ public class TreeTraversal {
     public static void main(String[] args) {
         TreeNode root = TreeNodeUtil.constructBinaryTree(5, 4, 6, 1, 2);
         TreeTraversal traversal = new TreeTraversal();
-        List<Integer> res = traversal.postOrder(root);
+        List<Integer> res = traversal.preOrder(root);
         TreeNodeUtil.show(root);
         System.out.println(res);
     }
@@ -75,6 +75,7 @@ public class TreeTraversal {
      */
     public List<Integer> postOrder(TreeNode root) {
         LinkedList<Integer> res = new LinkedList<>();
+        // 后序遍历是左右中，反过来就是中右左，将前序遍历入栈的顺序调换一下，然后res revert一下就可以了
         Deque<TreeNode> stack = new LinkedList<>();
         if (root != null) {
             stack.push(root);
