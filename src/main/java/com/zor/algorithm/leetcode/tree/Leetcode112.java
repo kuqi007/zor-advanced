@@ -1,5 +1,6 @@
 package com.zor.algorithm.leetcode.tree;
 
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -36,6 +37,56 @@ import java.util.Queue;
  */
 public class Leetcode112 {
 
+    public static void main(String[] args) {
+        Leetcode112 leetcode = new Leetcode112();
+        TreeNode root = TreeNodeUtil.constructBinaryTree(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1);
+        boolean b = leetcode.solution2(root, 22);
+        System.out.println(b);
+    }
+
+    public boolean solution2(TreeNode root, int targetSum) {
+        return dfs(root, 0, targetSum);
+    }
+
+    public boolean dfs(TreeNode root, int cur, int targetSum) {
+        if (root == null) return false;
+        int ncur = root.val + cur;
+        // 退出条件
+        if (root.left == null && root.right == null) {
+            return ncur == targetSum;
+        }
+
+        return dfs(root.left, ncur, targetSum) || dfs(root.right, ncur, targetSum);
+    }
+
+    /**
+     * 前序遍历迭代做法
+     */
+    public boolean solution1(TreeNode root, int targetSum) {
+        Deque<TreeNode> stack = new LinkedList<>();
+        if (root != null) {
+            stack.push(root);
+        }
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.pop();
+            int curVal = cur.val;
+            if (cur.left != null) {
+                cur.left.val = curVal + cur.left.val;
+                stack.push(cur.left);
+            }
+            if (cur.right != null) {
+                cur.right.val = curVal + cur.right.val;
+                stack.push(cur.right);
+            }
+
+            if (cur.left == null && cur.right == null && curVal == targetSum) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * 深度优先遍历
      */
@@ -50,8 +101,6 @@ public class Leetcode112 {
         }
 
         return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val);
-
-
     }
 
     /**

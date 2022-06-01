@@ -1,6 +1,7 @@
 package com.zor.algorithm.leetcode.tree;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
@@ -41,6 +42,57 @@ import java.util.Queue;
  * Created by kuqi0 on 2021/5/23
  */
 public class Leetcode113 {
+
+    public static void main(String[] args) {
+        Leetcode113 leetcode113 = new Leetcode113();
+        TreeNode root = TreeNodeUtil.constructBinaryTree(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1);
+        List<List<Integer>> res = leetcode113.solution1(root, 22);
+        System.out.println(res);
+    }
+
+    /**
+     * todo
+     * @param root
+     * @param targetSum
+     * @return
+     */
+    public List<List<Integer>> solution1(TreeNode root, int targetSum) {
+        List<List<Integer>> res = new ArrayList<>();
+
+        //List<Integer> path = new ArrayList<>();
+        Deque<TreeNode> stack = new LinkedList<>();
+        Deque<List<Integer>> path = new LinkedList<>();
+        stack.push(root);
+        path.push(Arrays.asList(root.val));
+        while (!stack.isEmpty()) {
+            List<Integer> curPath = path.pop();
+            TreeNode cur = stack.pop();
+            if (cur.left == null && cur.right == null) {
+                int sum = 0;
+                for (Integer i : curPath) {
+                    sum += i;
+                }
+                if (targetSum == sum) {
+                    res.add(curPath);
+                }
+            }
+
+            if (cur.left != null) {
+                stack.push(cur.left);
+                List<Integer> tmp = new ArrayList<>(curPath);
+                tmp.add(cur.left.val);
+                path.push(tmp);
+            }
+
+            if (cur.right != null) {
+                stack.push(cur.right);
+                List<Integer> tmp = new ArrayList<>(curPath);
+                tmp.add(cur.right.val);
+                path.push(tmp);
+            }
+        }
+        return  res;
+    }
 
     List<List<Integer>> ret = new LinkedList<>();
     Deque<Integer> path = new LinkedList<>();
