@@ -40,10 +40,40 @@ public class Leetcode1022 {
     public static void main(String[] args) {
         Leetcode1022 leetcode257 = new Leetcode1022();
         TreeNode root = TreeNodeUtil.constructBinaryTree(1, 0, 1, 0, 1, 0, 1);
-        int i = leetcode257.solution3(root);
+        int i = leetcode257.solution4(root);
         System.out.println(i);
     }
 
+    /**
+     * 迭代做法，入栈时候修改子节点的值为当前路径对应的二进制数，这样的话叶子节点的值就是当前路径的二进制数
+     */
+    public int solution4(TreeNode root) {
+        Deque<TreeNode> stack = new LinkedList<>();
+        if (root != null) {
+            stack.push(root);
+        }
+        int ans = 0;
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.pop();
+            int curVal = cur.val;
+            if (cur.left != null) {
+                cur.left.val = curVal << 1 | cur.left.val;
+                stack.push(cur.left);
+            }
+            if (cur.right != null) {
+                cur.right.val = curVal << 1 | cur.right.val;
+                stack.push(cur.right);
+            }
+            if (cur.left == null && cur.right == null) {
+                ans += curVal;
+            }
+        }
+        return ans;
+    }
+
+    /**
+     * 全局变量的递归
+     */
     public int solution3(TreeNode root) {
         dfs1(root, 0);
         return ans;
@@ -63,6 +93,9 @@ public class Leetcode1022 {
     }
 
 
+    /**
+     * 带返回值的递归
+     */
     public int solution2(TreeNode root) {
         return dfs(root, 0);
     }
