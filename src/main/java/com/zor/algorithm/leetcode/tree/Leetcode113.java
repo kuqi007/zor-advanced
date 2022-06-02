@@ -46,24 +46,22 @@ public class Leetcode113 {
     public static void main(String[] args) {
         Leetcode113 leetcode113 = new Leetcode113();
         TreeNode root = TreeNodeUtil.constructBinaryTree(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1);
+        TreeNodeUtil.printTree(root);
         List<List<Integer>> res = leetcode113.solution1(root, 22);
         System.out.println(res);
     }
 
     /**
-     * todo
-     * @param root
-     * @param targetSum
-     * @return
+     * 比较愚蠢的做做法，使用一个List保存已经遍历过的路径，但是比较好理解
+     *
      */
     public List<List<Integer>> solution1(TreeNode root, int targetSum) {
         List<List<Integer>> res = new ArrayList<>();
-
-        //List<Integer> path = new ArrayList<>();
+        if (root == null) return res;
         Deque<TreeNode> stack = new LinkedList<>();
         Deque<List<Integer>> path = new LinkedList<>();
         stack.push(root);
-        path.push(Arrays.asList(root.val));
+        path.push(Collections.singletonList(root.val));
         while (!stack.isEmpty()) {
             List<Integer> curPath = path.pop();
             TreeNode cur = stack.pop();
@@ -77,21 +75,21 @@ public class Leetcode113 {
                 }
             }
 
-            if (cur.left != null) {
-                stack.push(cur.left);
-                List<Integer> tmp = new ArrayList<>(curPath);
-                tmp.add(cur.left.val);
-                path.push(tmp);
-            }
-
             if (cur.right != null) {
                 stack.push(cur.right);
                 List<Integer> tmp = new ArrayList<>(curPath);
                 tmp.add(cur.right.val);
                 path.push(tmp);
             }
+
+            if (cur.left != null) {
+                stack.push(cur.left);
+                List<Integer> tmp = new ArrayList<>(curPath);
+                tmp.add(cur.left.val);
+                path.push(tmp);
+            }
         }
-        return  res;
+        return res;
     }
 
     List<List<Integer>> ret = new LinkedList<>();

@@ -40,8 +40,16 @@ public class Leetcode112 {
     public static void main(String[] args) {
         Leetcode112 leetcode = new Leetcode112();
         TreeNode root = TreeNodeUtil.constructBinaryTree(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1);
-        boolean b = leetcode.solution2(root, 22);
+        boolean b = leetcode.dfs1(root, 22);
         System.out.println(b);
+    }
+
+    public boolean dfs1(TreeNode root, int targetSum) {
+        if (root == null) return false;
+        if (root.left == null && root.right == null && targetSum - root.val == 0) {
+            return true;
+        }
+        return dfs1(root.left, targetSum - root.val) || dfs1(root.right, targetSum - root.val);
     }
 
     public boolean solution2(TreeNode root, int targetSum) {
@@ -70,18 +78,22 @@ public class Leetcode112 {
         while (!stack.isEmpty()) {
             TreeNode cur = stack.pop();
             int curVal = cur.val;
-            if (cur.left != null) {
-                cur.left.val = curVal + cur.left.val;
-                stack.push(cur.left);
+
+            if (cur.left == null && cur.right == null && curVal == targetSum) {
+                return true;
             }
+
             if (cur.right != null) {
                 cur.right.val = curVal + cur.right.val;
                 stack.push(cur.right);
             }
 
-            if (cur.left == null && cur.right == null && curVal == targetSum) {
-                return true;
+            if (cur.left != null) {
+                cur.left.val = curVal + cur.left.val;
+                stack.push(cur.left);
             }
+
+
         }
 
         return false;
