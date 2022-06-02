@@ -1,7 +1,6 @@
 package com.zor.algorithm.leetcode.tree;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
@@ -47,13 +46,43 @@ public class Leetcode113 {
         Leetcode113 leetcode113 = new Leetcode113();
         TreeNode root = TreeNodeUtil.constructBinaryTree(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1);
         TreeNodeUtil.printTree(root);
-        List<List<Integer>> res = leetcode113.solution1(root, 22);
+        List<List<Integer>> res = leetcode113.pathSum(root, 22);
         System.out.println(res);
     }
 
     /**
+     * 递归写法，这个写法比较容易理解
+     */
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) return res;
+        List<Integer> path = new ArrayList<>();
+        pathSum(root, targetSum, path, res);
+        return res;
+    }
+
+    private void pathSum(TreeNode root, int targetSum, List<Integer> path, List<List<Integer>> res) {
+        int curVal = root.val;
+        path.add(curVal);
+        // 遇到叶子节点
+        if (root.left == null && root.right == null && targetSum == curVal) {
+            res.add(new ArrayList<>(path));
+        }
+
+        if (root.left != null) {
+            pathSum(root.left, targetSum - curVal, path, res);
+            // 回溯
+            path.remove(path.size() - 1);
+        }
+        if (root.right != null) {
+            pathSum(root.right, targetSum - curVal, path, res);
+            // 回溯
+            path.remove(path.size() - 1);
+        }
+    }
+
+    /**
      * 比较愚蠢的做做法，使用一个List保存已经遍历过的路径，但是比较好理解
-     *
      */
     public List<List<Integer>> solution1(TreeNode root, int targetSum) {
         List<List<Integer>> res = new ArrayList<>();
@@ -96,9 +125,10 @@ public class Leetcode113 {
     Deque<Integer> path = new LinkedList<>();
 
     /**
-     * todo 没看懂
+     * 2021-05-23日没看懂
+     * 2022-06-02看懂了(*^▽^*)
      */
-    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+    public List<List<Integer>> solution0(TreeNode root, int targetSum) {
         dfs(root, targetSum);
         return ret;
     }
@@ -116,53 +146,4 @@ public class Leetcode113 {
         dfs(root.right, sum);
         path.pollLast();
     }
-
-    /**
-     * // todo 解答错误
-     */
-    public List<List<Integer>> bfs(TreeNode root, int targetSum) {
-        if (root == null) return new ArrayList<>();
-        // 保存子节点和父节点的关系
-        Map<TreeNode, TreeNode> map = new HashMap<>();
-
-        List<List<Integer>> res = new LinkedList<>();
-
-        Queue<TreeNode> path = new LinkedList<>();
-        Queue<Integer> sum = new LinkedList<>();
-        path.add(root);
-        sum.add(root.val);
-
-        while (!path.isEmpty()) {
-            TreeNode cur = path.poll();
-            int tmpSum = sum.poll();
-
-            if (cur.left == null && cur.right == null) {
-                if (tmpSum == targetSum) {
-                    List<Integer> tmp = new LinkedList<>();
-                    TreeNode node = cur;
-                    while (node != null) {
-                        tmp.add(node.val);
-                        node = map.get(node);
-                    }
-                    Collections.reverse(tmp);
-                    res.add(new LinkedList<>(tmp));
-                    continue;
-                }
-            }
-
-            if (cur.left != null) {
-                map.put(cur.left, cur);
-                path.add(cur.left);
-                sum.add(tmpSum + cur.left.val);
-            }
-            if (cur.right != null) {
-                map.put(cur.left, cur);
-                path.add(cur.right);
-                sum.add(tmpSum + cur.right.val);
-            }
-        }
-        return res;
-    }
-
-    //private void
 }
