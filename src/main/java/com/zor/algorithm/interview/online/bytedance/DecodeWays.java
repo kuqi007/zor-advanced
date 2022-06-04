@@ -9,7 +9,7 @@ import java.util.Scanner;
  * 123
  * abc
  *
- * 参考 https://leetcode-cn.com/problems/decode-ways/
+ * 参考 <a href="https://leetcode-cn.com/problems/decode-ways/">...</a>
  */
 // todo
 public class DecodeWays {

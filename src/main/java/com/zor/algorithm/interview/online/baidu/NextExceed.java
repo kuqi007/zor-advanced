@@ -24,7 +24,7 @@ public class NextExceed {
     }
 
     /**
-     * https://zhuanlan.zhihu.com/p/26465701
+     * <a href="https://zhuanlan.zhihu.com/p/26465701">...</a>
      * 这题跟leetcode739是一样的https://leetcode-cn.com/problems/daily-temperatures/
      * 单调栈解法，此为最优解，时间空间均为 O(N)
      * 单调递减栈
