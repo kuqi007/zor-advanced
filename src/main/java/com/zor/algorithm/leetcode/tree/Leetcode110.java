@@ -1,5 +1,8 @@
 package com.zor.algorithm.leetcode.tree;
 
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  * 110. 平衡二叉树
  * 给定一个二叉树，判断它是否是高度平衡的二叉树。
@@ -35,6 +38,94 @@ package com.zor.algorithm.leetcode.tree;
  */
 public class Leetcode110 {
 
+    public static void main(String[] args) {
+        Leetcode110 leetcode111 = new Leetcode110();
+        TreeNode root = TreeNodeUtil.constructBinaryTree(3, 9, 20, null, null, 15, 7);
+        TreeNodeUtil.show(root);
+        System.out.println(leetcode111.solution3(root));
+
+    }
+
+
+    public boolean solution3(TreeNode root) {
+        Deque<TreeNode> stack = new LinkedList<>();
+        if (root != null) stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            // middle
+            if (Math.abs(getDepth(node.left) - getDepth(node.right)) > 1) {
+                return false;
+            }
+            // right
+            if (node.right != null) stack.push(node.right);
+            // left
+            if (node.left != null) stack.push(node.left);
+        }
+        return true;
+    }
+
+
+    private int getDepth(TreeNode root) {
+        Deque<TreeNode> stack = new LinkedList<>();
+        if (root != null) stack.push(root);
+        int result = 0;
+        int depth = 0;
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.pop();
+            if (cur != null) {
+                stack.push(cur);
+                stack.push(null);
+                depth++;
+                if (cur.right != null) stack.push(cur.right);
+                if (cur.left != null) stack.push(cur.left);
+            } else {
+                stack.pop();
+                depth--;
+            }
+            result = Math.max(result, depth);
+        }
+        return result;
+    }
+
+    public boolean solution2(TreeNode root) {
+        return getHeight(root) != -1;
+    }
+
+    /**
+     * 简化之后的递归
+     */
+    private int getHeight1(TreeNode root) {
+        if (root == null) return 0;
+        int l = getHeight1(root.left);
+        if (l == -1) return -1;
+        int r = getHeight1(root.right);
+        if (r == -1) return -1;
+        return Math.abs(l - r) > 1 ? -1 : Math.max(l, r) + 1;
+
+    }
+
+    /**
+     * 好理解的递归，-1代表为非平衡树
+     */
+    private int getHeight(TreeNode root) {
+        // 明确终止条件
+        if (root == null) {
+            return 0;
+        }
+        // 左子树高度
+        int l = getHeight(root.left);
+        // 如果左子树不是平衡树，直接返回-1
+        if (l == -1) return -1;
+        int r = getHeight(root.right);
+        // 如果左子树不是平衡树，直接返回-1
+        if (r == -1) return -1;
+        // 左右子树高度差大于1，返回-1
+        if (Math.abs(l - r) > 1) {
+            return -1;
+        }
+        return Math.max(l, r) + 1;
+    }
+
 
     /**
      * 自底向上
@@ -55,7 +146,7 @@ public class Leetcode110 {
 
 
     /**
-     * 从顶至底（暴力法）
+     * 从顶至底 | 自顶向下（暴力法）
      */
     public boolean solution1(TreeNode root) {
         if (root == null) return true;

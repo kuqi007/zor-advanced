@@ -23,7 +23,64 @@ import java.util.Queue;
  * Created by kuqi0 on 2021/5/7
  */
 public class Leetcode104 {
+    public static void main(String[] args) {
+        Leetcode104 leetcode104 = new Leetcode104();
+        TreeNode root = TreeNodeUtil.constructBinaryTree(3, 9, 20, null, null, 15, 7);
+        System.out.println(leetcode104.solution1(root));
+    }
 
+
+    public int solution1(TreeNode root) {
+        if (root == null) return 0;
+        dfs2(root, 1);
+        return result;
+    }
+
+
+    public void dfs2(TreeNode root, Integer depth) {
+        result = Math.max(depth, result);
+        if (root.left == null && root.right == null) {
+            return;
+        }
+        // 左
+        if (root.left != null) {
+            dfs2(root.left, depth+1);
+        }
+        // 右
+        if (root.right != null) {
+            dfs2(root.right, depth+1);
+        }
+
+    }
+
+    private int result = 0;
+
+    /**
+     * 最容易理解的递归和回溯
+     */
+    public void dfs1(TreeNode root, Integer depth) {
+        result = Math.max(depth, result);
+        if (root.left == null && root.right == null) {
+            return;
+        }
+        // 左
+        if (root.left != null) {
+            // 深度+1
+            depth++;
+            dfs1(root.left, depth);
+            // 回溯，深度-1
+            depth--;
+        }
+        // 右
+        if (root.right != null) {
+            // 深度+1
+            depth++;
+            dfs1(root.right, depth);
+            // 回溯，深度-1
+            depth--;
+        }
+
+    }
 
     public int maxDepth(TreeNode root) {
         if (root == null) {

@@ -32,6 +32,44 @@ import java.util.Queue;
  */
 public class Leetcode111 {
 
+    public static void main(String[] args) {
+        Leetcode111 leetcode111 = new Leetcode111();
+        TreeNode root = TreeNodeUtil.constructBinaryTree(2, null, 3, null, 4, null, 5, null, 6);
+        TreeNodeUtil.show(root);
+        int i = leetcode111.solution1(root);
+        System.out.println(i);
+
+
+    }
+
+    /**
+     * 层序遍历
+     */
+    public int solution2(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        if (root != null) {
+            queue.offer(root);
+        }
+        int depth = 0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = queue.poll();
+                if (cur.left == null && cur.right == null) {
+                    return depth + 1;
+                }
+                if (cur.left != null) {
+                    queue.add(cur.left);
+                }
+                if (cur.right != null) {
+                    queue.add(cur.right);
+                }
+            }
+            depth++;
+        }
+        return depth;
+    }
+
 
     /**
      * 通俗易懂
