@@ -1,5 +1,6 @@
 package com.zor.algorithm.leetcode.tree;
 
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -32,7 +33,7 @@ import java.util.Queue;
 public class Leetcode226 {
 
     /**
-     * 递归
+     * 后序遍历的递归，其实前序也可以，但是中序不可行，会将左侧节点反转两次，画个图看一下就知道了
      */
     public TreeNode invertTree(TreeNode root) {
         if (root == null) return root;
@@ -44,6 +45,23 @@ public class Leetcode226 {
         return root;
     }
 
+    public TreeNode preOrder(TreeNode root) {
+        Deque<TreeNode> stack = new LinkedList<>();
+        if (root != null) stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            TreeNode right = node.right;
+            node.right = node.left;
+            node.left = right;
+            if (node.right != null) stack.push(node.right);
+            if (node.left != null) stack.push(node.left);
+        }
+        return root;
+    }
+
+    /**
+     *
+     */
     public TreeNode bfs(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<>();
         if (root != null) queue.add(root);

@@ -49,12 +49,64 @@ public class Leetcode116 {
     /**
      * todo 递归
      */
-    public Node connect(Node root){
+    public Node connect(Node root) {
+        if (root == null) return root;
+
+        dfs(root);
 
         return root;
     }
+
     /**
-     * TODO 这个是O(n)空间，其实不符合要求
+     * 使用n-1去操作n层，当前层实际上已经连接好了
+     */
+    private void dfs(Node root) {
+        // 已经是叶子节点了，退出
+        if (root.left == null || root.right == null) return;
+        // 左边节点指向右边节点
+        root.left.next = root.right;
+        // 如果不是最右侧的节点
+        if (root.next != null) {
+            root.right.next = root.next.left;
+        }
+
+        dfs(root.left);
+        dfs(root.right);
+
+    }
+
+    /**
+     * 层序遍历，O(N)空间，不满足题意
+     */
+    public Node levelOrder(Node root) {
+        Queue<Node> queue = new LinkedList<>();
+        if (root != null) queue.add(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            Node cur = null;
+            Node preNode = null;
+            for (int i = 0; i < size; i++) {
+                cur = queue.poll();
+                if (i == 0) {
+                    preNode = cur;
+                } else {
+                    preNode.next = cur;
+                    preNode = cur;
+                }
+                if (cur.left != null) {
+                    queue.add(cur.left);
+                }
+                if (cur.right != null) {
+                    queue.add(cur.right);
+                }
+            }
+        }
+        return root;
+    }
+
+    /**
+     * 这个是O(n)空间，其实不符合要求
+     * 从右往左的层序遍历，无需记录指针
      */
     public Node bfs(Node root) {
         Queue<Node> queue = new LinkedList<>();

@@ -44,6 +44,7 @@ public class Leetcode113 {
 
     public static void main(String[] args) {
         Leetcode113 leetcode113 = new Leetcode113();
+
         TreeNode root = TreeNodeUtil.constructBinaryTree(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1);
         TreeNodeUtil.printTree(root);
         List<List<Integer>> res = leetcode113.pathSum(root, 22);
@@ -82,6 +83,7 @@ public class Leetcode113 {
     }
 
     /**
+     * 迭代前序遍历
      * 比较愚蠢的做做法，使用一个List保存已经遍历过的路径，但是比较好理解
      */
     public List<List<Integer>> solution1(TreeNode root, int targetSum) {

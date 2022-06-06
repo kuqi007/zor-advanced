@@ -25,7 +25,7 @@ public class BFS {
 
     }
 
-    private void visit(TreeNode tn) {
-        System.out.println(tn.val);
+    private void visit(TreeNode root) {
+        System.out.println(root.val);
     }
 }

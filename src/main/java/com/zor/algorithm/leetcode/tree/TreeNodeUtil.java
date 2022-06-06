@@ -13,6 +13,10 @@ import java.util.Queue;
 public class TreeNodeUtil {
 
     /**
+     * todo [5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1] 这种非完全二叉树是无法构造的
+     * <p/>
+     * 这棵树的实际结构：<a href="https://assets.leetcode.com/uploads/2021/01/18/pathsumii1.jpg"/>
+     * <p>
      * 根据数组构造二叉树
      */
     public static TreeNode constructBinaryTree(Integer... nodeArr) {
@@ -96,10 +100,11 @@ public class TreeNodeUtil {
 
     /**
      * <a href="https://jueee.github.io/2021/03/2021-03-05-Java%E6%8C%89%E7%85%A7%E6%A0%91%E5%BD%A2%E7%BB%93%E6%9E%84%E6%89%93%E5%8D%B0%E4%BA%8C%E5%8F%89%E6%A0%91/">...</a>
+     *
      * @param root
      */
     public static void show(TreeNode root) {
-        if (root == null){
+        if (root == null) {
             System.out.println("EMPTY!");
             return;
         }
@@ -137,7 +142,7 @@ public class TreeNodeUtil {
     }
 
     public static void main(String[] args) {
-        TreeNode root = constructBinaryTree(1,2,3,4,null,5,null);
+        TreeNode root = constructBinaryTree(1, 2, 3, 4, null, 5, null);
         show(root);
     }
 }
