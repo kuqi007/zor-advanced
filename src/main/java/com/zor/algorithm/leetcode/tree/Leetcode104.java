@@ -37,6 +37,9 @@ public class Leetcode104 {
     }
 
 
+    /**
+     * 简化之后的递归和回溯
+     */
     public void dfs2(TreeNode root, Integer depth) {
         result = Math.max(depth, result);
         if (root.left == null && root.right == null) {
@@ -44,11 +47,11 @@ public class Leetcode104 {
         }
         // 左
         if (root.left != null) {
-            dfs2(root.left, depth+1);
+            dfs2(root.left, depth + 1);
         }
         // 右
         if (root.right != null) {
-            dfs2(root.right, depth+1);
+            dfs2(root.right, depth + 1);
         }
 
     }
@@ -56,9 +59,10 @@ public class Leetcode104 {
     private int result = 0;
 
     /**
-     * 最容易理解的递归和回溯
+     * 很容易理解的递归和回溯
      */
     public void dfs1(TreeNode root, Integer depth) {
+        // 中
         result = Math.max(depth, result);
         if (root.left == null && root.right == null) {
             return;

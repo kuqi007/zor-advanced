@@ -38,7 +38,25 @@ public class Leetcode111 {
         TreeNodeUtil.show(root);
         int i = leetcode111.solution1(root);
         System.out.println(i);
+    }
 
+
+    public int dfs(TreeNode root) {
+        if (root == null) return 0;
+        int l = dfs(root.left); // 左
+        int r = dfs(root.right);// 右
+                                // 中
+        // 当一个左子树为空，右子树不为空，取右子树高度+1
+        if (root.left == null && root.right != null) {
+            return r + 1;
+        }
+        // 当一个左子树不为空，右子树为空，取左子树高度+1
+        if (root.left != null && root.right == null) {
+            return l + 1;
+        }
+
+        // 都不为空，取两者最小值+1
+        return Math.min(l, r) + 1;
 
     }
 

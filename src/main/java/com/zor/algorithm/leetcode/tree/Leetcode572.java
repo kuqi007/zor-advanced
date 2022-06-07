@@ -38,14 +38,25 @@ public class Leetcode572 {
 
     }
 
+    /**
+     * todo 递归性能较差，寻找性能更好的做法
+     */
+    public boolean solution1(TreeNode root, TreeNode subRoot){
+
+        return false;
+    }
+
+    /**
+     * dfs暴力匹配
+     */
     public boolean isSubtree(TreeNode root, TreeNode subRoot) {
         if (root == null && subRoot == null) return true;
         if (root == null) return false;
-
+        // 当前节点是否和subRoot相等
         boolean isSame = compare(root, subRoot);
-
+        // 左子树是否跟subRoot相等
         boolean left = isSubtree(root.left, subRoot);
-
+        // 右子树是否跟subRoot相等
         boolean right = isSubtree(root.right, subRoot);
         return isSame || left || right;
     }
