@@ -47,6 +47,9 @@ public class Leetcode110 {
     }
 
 
+    /**
+     * 前序遍历
+     */
     public boolean solution3(TreeNode root) {
         Deque<TreeNode> stack = new LinkedList<>();
         if (root != null) stack.push(root);
@@ -73,10 +76,13 @@ public class Leetcode110 {
         while (!stack.isEmpty()) {
             TreeNode cur = stack.pop();
             if (cur != null) {
+                // 中
                 stack.push(cur);
                 stack.push(null);
                 depth++;
+                // 右
                 if (cur.right != null) stack.push(cur.right);
+                // 左
                 if (cur.left != null) stack.push(cur.left);
             } else {
                 stack.pop();
