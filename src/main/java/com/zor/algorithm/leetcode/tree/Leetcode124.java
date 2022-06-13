@@ -31,13 +31,31 @@ package com.zor.algorithm.leetcode.tree;
  * create by tm on 2022/6/10
  */
 public class Leetcode124 {
-
-    int res = Integer.MIN_VALUE;
-
-    public int maxPathSum(TreeNode root) {
-        // todo
-        return 0;
+    public static void main(String[] args) {
+        Leetcode124 leetcode124 = new Leetcode124();
+        TreeNode root = TreeNodeUtil.constructBinaryTree(5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1);
+        System.out.println(leetcode124.solution1(root));
     }
 
+    private int res = Integer.MIN_VALUE;
 
+    public int solution1(TreeNode root) {
+        dfs(root);
+        return res;
+    }
+
+    /**
+     * 计算每个节点的最大贡献值，叶子节点最大贡献值为自身的值，非叶子节点的贡献值等于max(左子树贡献值，右子树贡献值)+cur.val
+     */
+    public int dfs(TreeNode root) {
+        // 节点为空，返回0
+        if (root == null) return 0;
+
+        int left = dfs(root.left);
+        int right = dfs(root.right);
+
+        res = Math.max(res, left + right + root.val);
+        // 计算单边贡献值
+        return Math.max(left, right) + root.val;
+    }
 }
