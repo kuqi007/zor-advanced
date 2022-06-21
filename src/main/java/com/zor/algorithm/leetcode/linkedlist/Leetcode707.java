@@ -33,65 +33,122 @@ package com.zor.algorithm.leetcode.linkedlist;
  */
 public class Leetcode707 {
     public static void main(String[] args) {
-        MyDoubleLinkedList linkedList = new MyDoubleLinkedList();
-        linkedList.addAtIndex(0, 10);
-        linkedList.addAtIndex(0, 20);
-        linkedList.addAtIndex(1, 30);
-        System.out.println(linkedList.get(0));
+        MyLinkedList linkedList = new MyLinkedList();
+        linkedList.addAtHead(7);
+        linkedList.addAtTail(7);
+        linkedList.addAtHead(9);
+        linkedList.addAtTail(8);
+        linkedList.addAtHead(6);
+        linkedList.addAtHead(0);
+        System.out.println(linkedList.get(5));
+        linkedList.addAtHead(0);
+        System.out.println(linkedList.get(2));
+        System.out.println(linkedList.get(5));
+        linkedList.addAtTail(5);
 
 
     }
 
     // todo 单链表版本，更加简单
-    class MyLinkedList {
-        public MyLinkedList() {
+    static class MyLinkedList {
+        Node dummyHead;
+        Integer size;
 
+        public MyLinkedList() {
+            dummyHead = new Node(-1);
+            size = 0;
         }
 
         public int get(int index) {
-
-            return index;
+            if (index < 0 || index > size - 1) return -1;
+            Node cur = dummyHead.next;
+            while (index > 0) {
+                cur = cur.next;
+                index--;
+            }
+            return cur.val;
         }
 
         public void addAtHead(int val) {
-
+            Node next = dummyHead.next;
+            Node node = new Node(val);
+            dummyHead.next = node;
+            node.next = next;
+            size++;
         }
 
         public void addAtTail(int val) {
-
+            Node cur = dummyHead;
+            while (cur.next != null) {
+                cur = cur.next;
+            }
+            cur.next = new Node(val);
+            size++;
         }
 
         public void addAtIndex(int index, int val) {
+            if (index == size) {
+                addAtTail(val);
+            } else if (index < 0) {
+                addAtHead(val);
+            } else if (index < size) {
+                Node prev = dummyHead;
+                for (int i = 0; i < index; i++) {
+                    prev = prev.next;
+                }
+                Node next = prev.next;
+                Node node = new Node(val);
+                prev.next = node;
+                node.next = next;
+                size++;
+            }
 
         }
 
         public void deleteAtIndex(int index) {
+            if (index < 0 || index > size - 1) return;
+            Node prev = dummyHead;
+            for (int i = 0; i < index; i++) {
+                prev = prev.next;
+            }
+            prev.next = prev.next.next;
 
+            size--;
         }
     }
 
+    static class Node {
+        int val;
+        Node next;
+
+        Node(int val) {
+            this.val = val;
+        }
+    }
+
+
     static class MyDoubleLinkedList {
         int size;
-        Node head;
-        Node tail;
+        DNode head;
+        DNode tail;
 
         public MyDoubleLinkedList() {
             this.size = 0;
-            head = new Node(-1);
-            tail = new Node(-1);
+            head = new DNode(-1);
+            tail = new DNode(-1);
             head.next = tail;
             tail.prev = head;
         }
 
         public int get(int index) {
-            Node node = getNodeAt(index);
+            DNode node = getNodeAt(index);
             if (node != null) return node.val;
             return -1;
         }
 
         public void addAtHead(int val) {
-            Node node = new Node(val);
-            Node next = head.next;
+            DNode node = new DNode(val);
+            DNode next = head.next;
             head.next = node;
             node.prev = head;
             node.next = next;
@@ -100,8 +157,8 @@ public class Leetcode707 {
         }
 
         public void addAtTail(int val) {
-            Node node = new Node(val);
-            Node prev = tail.prev;
+            DNode node = new DNode(val);
+            DNode prev = tail.prev;
             prev.next = node;
             node.prev = prev;
             node.next = tail;
@@ -115,10 +172,10 @@ public class Leetcode707 {
             } else if (index < 0) {
                 addAtHead(val);
             } else if (index < size) {
-                Node prev = getNodeAt(index - 1);
+                DNode prev = getNodeAt(index - 1);
                 if (prev == null) return;
-                Node node = new Node(val);
-                Node next = prev.next;
+                DNode node = new DNode(val);
+                DNode next = prev.next;
                 prev.next = node;
                 node.next = next;
                 node.prev = prev;
@@ -128,10 +185,10 @@ public class Leetcode707 {
         }
 
         public void deleteAtIndex(int index) {
-            Node node = getNodeAt(index);
+            DNode node = getNodeAt(index);
             if (node != null) {
-                Node prev = node.prev;
-                Node next = node.next;
+                DNode prev = node.prev;
+                DNode next = node.next;
                 prev.next = next;
                 next.prev = prev;
                 node.prev = null;
@@ -139,9 +196,9 @@ public class Leetcode707 {
             }
         }
 
-        private Node getNodeAt(int index) {
+        private DNode getNodeAt(int index) {
             int temp = 0;
-            Node cur = head;
+            DNode cur = head;
             while (temp <= index && cur.next != tail) {
                 cur = cur.next;
                 temp++;
@@ -153,12 +210,12 @@ public class Leetcode707 {
         }
     }
 
-    static class Node {
+    static class DNode {
         int val;
-        Node prev;
-        Node next;
+        DNode prev;
+        DNode next;
 
-        Node(int val) {
+        DNode(int val) {
             this.val = val;
         }
     }
