@@ -23,6 +23,21 @@ public class Leetcode206 {
         ListNodeUtil.printList(reverse(listNode));
     }
 
+    public ListNode solution3(ListNode head) {
+        return dfs(head, null);
+    }
+
+    private ListNode dfs(ListNode cur, ListNode pre) {
+        // 和双指针做法类似，也是一个pre指针和cur指针
+        if (cur == null) return pre;
+        ListNode temp = cur.next;
+        cur.next = pre;
+
+        // 这里相当于
+        // pre=cur;
+        // cur = temp;
+        return dfs(temp, cur);
+    }
 
     /**
      * 递归
