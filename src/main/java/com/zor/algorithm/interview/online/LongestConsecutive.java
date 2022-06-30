@@ -18,15 +18,15 @@ public class LongestConsecutive {
     public static void main(String[] args) {
 
 //        int[] nums = {0, 3, 7, 2, 5, 8, 4, 6, 0, 1};
-        int[] nums = {1,2,0,1};
+        int[] nums = {0};
         int max = solution1(nums);
         System.out.println(max);
-
 
     }
 
 
     public static int getMax(int[] nums) {
+        // todo 滑动窗口能搞定吗？
         int n = nums.length;
         Arrays.sort(nums);
 
@@ -45,18 +45,19 @@ public class LongestConsecutive {
 
     public static int solution1(int[] nums) {
         int n = nums.length;
+        if (n == 0) return 0;
         Arrays.sort(nums);
 
-        int cur = 1, max = 0;
-        for (int i = 1; i < n; i++) {
-            if (nums[i] - nums[i - 1] == 1) {
+        int cur = 1, max = cur;
+        for (int i = 0; i < n - 1; i++) {
+            // 如果相同，则直接跳过
+            if (nums[i + 1] == nums[i]) continue;
+            if (nums[i + 1] - nums[i] == 1) {
                 cur++;
             } else {
                 cur = 1;
             }
-
             max = Math.max(cur, max);
-
         }
 
         return max;
