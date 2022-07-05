@@ -40,10 +40,32 @@ import java.util.LinkedList;
 public class Leetcode19 {
     public static void main(String[] args) {
 
-        ListNode listNode = ListNodeUtil.getListNode(1);
-        ListNode listNode1 = solution1(listNode, 1);
+        ListNode listNode = ListNodeUtil.getListNode(1, 2);
+        ListNode listNode1 = solution2(listNode, 2);
         ListNodeUtil.printList(listNode1);
 
+    }
+
+    /**
+     * 1. 使用dummyNode，方便操作，不然要判断特殊情况
+     * 2. 快慢指针，均指向快指针dummyNode，fast走n+1步，那么最后slow会走到要删除节点的前驱节点，即倒数n+1个节点（slow走了size-n-1步）
+     */
+    public static ListNode solution2(ListNode head, int n) {
+        ListNode dummyNode = new ListNode(-1, head);
+        // 快慢指针均指向dummyNode
+        ListNode fast = dummyNode, slow = dummyNode;
+        // fast走n+1步，这样slow最后会走到要删除节点的前驱节点
+        for (int i = 0; i < n + 1; i++) {
+            fast = fast.next;
+        }
+
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        // slow是要删除节点的前驱节点
+        slow.next = slow.next.next;
+        return dummyNode.next;
     }
 
     /**
