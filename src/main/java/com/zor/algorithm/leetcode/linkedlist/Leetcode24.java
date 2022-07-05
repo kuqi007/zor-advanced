@@ -39,12 +39,51 @@ public class Leetcode24 {
 
     public static void main(String[] args) {
         Leetcode24 leetcode24 = new Leetcode24();
-        ListNode listNode = ListNodeUtil.getListNode(1, 2, 3, 4);
-        ListNode res = leetcode24.swapPairs1(listNode);
+        ListNode listNode = ListNodeUtil.getListNode(3, 4, 6, 1, 2);
+        ListNode res = leetcode24.solution3(listNode);
         ListNodeUtil.printList(res);
 
     }
 
+    /**
+     * 迭代写法记住3指针即可，pre-cur-next，依次往后走
+     */
+    public ListNode solution3(ListNode head) {
+        ListNode dummyNode = new ListNode(-1, head);
+        // 3指针写法，pre、cur、next
+        ListNode pre = dummyNode, cur = dummyNode.next;
+        while (cur != null && cur.next != null) {
+            ListNode next = cur.next;
+            pre.next = next;
+            cur.next = next.next;
+            next.next = cur;
+
+            pre = cur;
+            cur = cur.next;
+        }
+        return dummyNode.next;
+    }
+
+
+    /**
+     * 递归写法：假设后面的节点都已经交换完毕，只需处理最后1次交换
+     */
+    public ListNode dfs(ListNode head) {
+        // 如果节点为空或者只剩一个节点，直接返回head
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode next = head.next;
+        // 假设后面已经交换好了，此时把head.next指向已经交换好的头节点
+        head.next = dfs(next.next);
+        next.next = head;
+
+        return next;
+    }
+
+    /**
+     * 参照k个一组翻转链表写法
+     */
     public ListNode solution0(ListNode head) {
         return reverseKGroup(head, 2);
     }
