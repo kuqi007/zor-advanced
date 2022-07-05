@@ -38,8 +38,10 @@ public class Leetcode50 {
     }
 
 
-    public double myPow(double x, long n) {
-        return n > 0 ? quickMul(x, n) : 1.0 / quickMul(x, -n);
+    public double myPow(double x, int n) {
+        // in case int overflow 防止int溢出
+        final long N = n;
+        return N > 0 ? quickMul(x, N) : 1.0 / quickMul(x, -N);
     }
 
     public double quickMul(double x, long n) {
