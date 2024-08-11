@@ -1,0 +1,11 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+caption CHAPTER 3
+title 数据存储与检索
+
+* 数据库核心：数据结构
+** 哈希索引
+
+
+@endmindmap
