@@ -50,9 +50,51 @@ public class Leetcode496 {
         int[] n1 = {4, 1, 2};
         int[] n2 = {1, 3, 4, 2};
 
-        int[] res = leetcode496.nextGreaterElement(n1, n2);
+        int[] res = leetcode496.violet(n1, n2);
         System.out.println(Arrays.toString(res));
 
+    }
+
+    public int[] violet(int[] nums1, int[] nums2) {
+        int n = nums1.length;
+        int m = nums2.length;
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1);
+
+        for (int i = 0; i < n; i++) {
+            int num = nums1[i];
+            int j = 0;
+            // 先找到j
+            while (j < m && num != nums2[j]) j++;
+            // 再找比j大的元素，要先跳过自己
+            while (j < m && num >= nums2[j]) j++;
+            ans[i] = j < m ? nums2[j] : -1;
+        }
+        return ans;
+    }
+
+    public int[] test1(int[] nums1, int[] nums2) {
+        int[] ans = new int[nums1.length];
+        Arrays.fill(ans, -1);
+        // 找更大元素，构造递减栈
+        Deque<Integer> stack = new LinkedList<>();
+        // 因为nums1是nums2的子集，如果我提前在nums2找到每个元素的下一个更大的元素，并存储起来，那么我在遍历nums1的时候，就不用再遍历nums2
+        // 因为nums没有重复元素，用一个map存储nums2中每个元素的下一个更大元素
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int n : nums2) {
+            while (!stack.isEmpty() && n > stack.peek()) {
+                map.put(stack.pop(), n);
+            }
+            stack.push(n);
+        }
+        for (int i = 0; i < nums1.length; i++) {
+            int n = nums1[i];
+            if (map.containsKey(n)) {
+                ans[i] = map.get(n);
+            }
+        }
+
+        return ans;
     }
 
 

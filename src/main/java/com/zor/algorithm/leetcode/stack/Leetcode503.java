@@ -1,4 +1,4 @@
-package com.zor.algorithm.leetcode;
+package com.zor.algorithm.leetcode.stack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,11 +26,32 @@ public class Leetcode503 {
     public static void main(String[] args) {
 
         int[] nums = {5, 4, 3, 2, 1};
-        int[] ints = nextGreaterElements(nums);
+        int[] ints = test1(nums);
         System.out.println("单调栈解法答案：" + Arrays.toString(ints));
         int[] ints1 = solution1(nums);
         System.out.println("暴力解法答案：" + Arrays.toString(ints1));
 
+    }
+
+    /**
+     * 循环数组一般用取模来模拟
+     *
+     * @param nums
+     * @return
+     */
+    public static int[] test1(int[] nums) {
+        int n = nums.length;
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1);
+        Deque<Integer> stack = new LinkedList<>();
+        for (int i = 0; i < 2 * n - 1; i++) {
+            while (!stack.isEmpty() && nums[i % n] > nums[stack.peek()]) {
+                // 更新栈顶元素的值
+                ans[stack.pop()] = nums[i % n];
+            }
+            stack.push(i % n);
+        }
+        return ans;
     }
 
     /**

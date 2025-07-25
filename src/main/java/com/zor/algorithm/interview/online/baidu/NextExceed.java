@@ -1,8 +1,6 @@
 package com.zor.algorithm.interview.online.baidu;
 
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * 2021/2/19日 百度面试
@@ -17,11 +15,31 @@ public class NextExceed {
         //int[] nums = {6, 2, 7, 3, 3, 1, 3, 99};
         int[] nums = {5, 3, 1, 2, 4};
         //int[] nums = {6, 2, 7, 3, 2};
-        int[] ints = nextExceed(nums);
+        int[] ints = test(nums);
         System.out.println("单调栈调用结果:" + Arrays.toString(ints));
         int[] res = solution4(nums);
         System.out.println("正确结果：" + Arrays.toString(res));
     }
+
+    public static int[] test(int[] nums) {
+        int n = nums.length;
+        int[] res = new int[n];
+        Arrays.fill(res, -1);
+        // 构建单调递减的栈
+        // 因为要知道谁打破了递减性，打破递减性的当前元素，即是栈顶元素的下一个更大元素
+        Deque<Integer> stack = new LinkedList<>();
+        for (int i = 0; i < n; i++) {
+            // 当前值大于栈顶元素，那么当前元素就是栈顶元素的第一个比自身大的元素
+            // 此处找到一个比自身大的元素之后，还要继续循环，查看下一个栈顶元素，是否能找到下个更大元素
+            while (stack.peek() != null && nums[i] > nums[stack.peek()]) {
+                res[stack.peek()] = i - stack.peek();
+                stack.pop();
+            }
+            stack.push(i);
+        }
+        return res;
+    }
+
 
     /**
      * <a href="https://zhuanlan.zhihu.com/p/26465701">...</a>
