@@ -37,7 +37,63 @@ import java.util.Random;
 public class Leetcode229 {
 
     public static void main(String[] args) {
+        Leetcode229 leetcode229 = new Leetcode229();
+        int[] nums = {1, 2, 3, 1, 2, 3, 1};
+        List<Integer> res = leetcode229.test1(nums);
+        System.out.println(res);
+    }
 
+    /**
+     * 摩尔投票
+     */
+    public List<Integer> test1(int[] nums) {
+        List<Integer> res = new ArrayList<>();
+        Integer cand1 = null, cand2 = null;
+        int vote1 = 0, vote2 = 0;
+
+        //// 正确顺序:
+        // if (匹配候选人) → 增加计数
+        // else if (count为零) → 设置新候选人
+        // else → 三方抵消
+
+        // 第一次遍历，筛选候选人
+        for (int num : nums) {
+            // 如果cnt1为0，重新选举候选人
+            // 匹配候选人放在前面，如果count为0设置新候选人放在前面，像[2,2]这种会被认定为2个候选人，而不是1个
+            if (vote1 > 0 && num == cand1) {// 如果跟cand1是同一阵营，1号计数器加1
+                vote1++;
+            } else if (vote2 > 0 && num == cand2) {
+                vote2++;
+            } else if (vote1 == 0) {
+                cand1 = num;
+                vote1++;
+            } else if (vote2 == 0) { // 如果cnt2为0，重新选举候选人
+                cand2 = num;
+                vote2++;
+            } else { //如果三个元素均不相同，则相互抵消1次
+                vote1--;
+                vote2--;
+            }
+        }
+
+        // 验证是否大于1/3
+        int c1 = 0, c2 = 0;
+        for (int num : nums) {
+            if (vote1 > 0 && num == cand1) {
+                c1++;
+            } else if (vote2 > 0 && num == cand2) {
+                c2++;
+            }
+        }
+
+        if (c1 > nums.length / 3) {
+            res.add(cand1);
+        }
+        if (c2 > nums.length / 3) {
+            res.add(cand2);
+        }
+
+        return res;
     }
 
     public List<Integer> majorityElement(int[] nums) {
