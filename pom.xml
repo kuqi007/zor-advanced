@@ -60,6 +60,11 @@
             <artifactId>fastjson</artifactId>
             <version>2.0.7</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
+            <version>2.2.3</version>
+        </dependency>
 
     </dependencies>
 
