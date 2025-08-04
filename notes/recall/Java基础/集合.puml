@@ -1,0 +1,31 @@
+@startmindmap
+
+* Java基础
+** 集合
+*** HashMap
+**** JDK 1.7：数组+链表
+*****:1.hash冲突时采用头插法
+2.多线程可能会产生死链
+3.先扩容，再插入;
+**** JDK 1.8：数组+链表/红黑树
+***** 1.链表长度大于8转为红黑树，复杂度降为O(log n)\n2.尾插法解决多线程下扩容死循环\n3.先插入，再判断扩容，避免无效扩容
+**** **多线程环境**使用HashTable（内部使用synchronize，性能差）或ConcurrentHashMap
+*** ConcurrentHashMap
+**** JDK1.7
+***** 数组（Segment+HashEntry）+链表\n分段锁，ReentrantLock，每个Segment相当于一个子HashMap
+**** JDK1.8
+***** 1.数组+链表/红黑树\n2.CAS+synchronized桶级锁\n3.table容量≥64且冲突超过8个才转换为红黑树
+
+*** ArrayList与LinkedList区别
+**** 一个数组，一个链表
+
+
+
+
+
+
+
+
+
+
+@endmindmap

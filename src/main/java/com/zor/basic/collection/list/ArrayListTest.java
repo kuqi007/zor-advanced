@@ -8,14 +8,31 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- *
  * @author zqq
  * @date 2019/7/28
  */
 public class ArrayListTest {
 
+
     @Test
-    public void subListTest(){
+    public void removeElement() {
+        ArrayList<String> list = new ArrayList<>(Arrays.asList("A", "B", "C", "D"));
+        // 增强for循环会触发异常
+        for (String s : list) {          // 底层使用 Iterator
+            if (s.equals("B")) {
+                list.remove(s);           // 触发异常！
+            }
+        }
+        //for (int i = 0; i < list.size(); i++) {
+        //    if (list.get(i).equals("it"))
+        //        list.remove(i);
+        //}
+        System.out.println(list);
+    }
+
+
+    @Test
+    public void subListTest() {
         List<String> names = new ArrayList<>();
         names.add("hello");
         names.add("world");
@@ -64,9 +81,11 @@ public class ArrayListTest {
     }
 
     @Test
-    public void testSyrList(){
-        List<String> list=new ArrayList<>();
+    public void testSyrList() {
+        List<String> list = new ArrayList<>();
 
         List<String> synchronizedList = Collections.synchronizedList(list);
     }
+
+
 }
