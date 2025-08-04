@@ -36,7 +36,7 @@ public abstract class AbstractCluster implements Cluster {
         md5.reset();
         md5.update(key.getBytes());
         byte[] bKey = md5.digest();
-        //具体的哈希函数实现细节--每个字节 & 0xFF 再移位
+        // 具体的哈希函数实现细节--每个字节 & 0xFF 再移位
         // TODO 这太复杂了吧。。。
         long result = ((long) (bKey[3] & 0xFF) << 24)
                 | ((long) (bKey[2] & 0xFF) << 16

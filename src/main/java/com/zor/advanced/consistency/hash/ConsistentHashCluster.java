@@ -2,6 +2,7 @@ package com.zor.advanced.consistency.hash;
 
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 /**
  * 一致性哈希算法实现（包含虚拟节点）
@@ -17,8 +18,10 @@ public class ConsistentHashCluster extends AbstractCluster {
     private final int vNodeNum;
     /**
      * 虚拟节点
+     * 用跳表，理论上性能更好，跳表查询快，增删节点也比较快
      */
-    private final SortedMap<Long, Node> vNodes = new TreeMap<>();
+    //private final SortedMap<Long, Node> vNodes = new TreeMap<>();
+    private final SortedMap<Long, Node> vNodes = new ConcurrentSkipListMap<>();
 
     public ConsistentHashCluster() {
         this(DEFAULT_VNODE_NUM);
