@@ -36,7 +36,31 @@ import java.util.Set;
  */
 public class Leetcode219 {
 
+
+    /**
+     * 跟用map直接遍历的区别就是：这里先剔除不符合条件的元素，那么后面找到相同元素，必然是满足条件的。。。
+     */
+    public boolean test1(int[] nums, int k) {
+        int n = nums.length;
+        int l = 0, r = 0;
+        Set<Integer> set = new HashSet<>();
+        while (r < n) {
+            // 去掉不满足的元素，r-l大于k
+            if (r - l > k) {
+                set.remove(nums[l]);
+                l++;
+            }
+            // 此时set里都是满足条件的，判断有没有重复的元素
+            if (!set.add(nums[r])) {
+                return true;
+            }
+            r++;
+        }
+        return false;
+    }
+
     public boolean containsNearbyDuplicate(int[] nums, int k) {
+        // map存储已经遍历过的下标
         Map<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             int num = nums[i];
