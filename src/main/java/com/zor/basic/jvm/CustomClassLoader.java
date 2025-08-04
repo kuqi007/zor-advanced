@@ -25,6 +25,11 @@ public class CustomClassLoader extends ClassLoader {
         return super.findClass(name);
     }
 
+    @Override
+    protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
+        return super.loadClass(name, resolve);
+    }
+
     private byte[] getClassFromCustomPath(String name) {
         // TODO: 2021/6/11
         return null;
