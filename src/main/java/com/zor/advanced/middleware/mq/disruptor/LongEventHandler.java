@@ -1,4 +1,4 @@
-package com.zor.advanced.disruptor;
+package com.zor.advanced.middleware.mq.disruptor;
 
 /**
  * @author zhuqiqi03
