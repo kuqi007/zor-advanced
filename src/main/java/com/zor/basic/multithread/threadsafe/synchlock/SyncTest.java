@@ -1,4 +1,4 @@
-package com.zor.basic.multithread;
+package com.zor.basic.multithread.threadsafe.synchlock;
 
 
 /**

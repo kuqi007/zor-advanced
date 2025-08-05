@@ -1,4 +1,4 @@
-package com.zor.basic.multithread.lock;
+package com.zor.basic.multithread.threadsafe.lock;
 
 import java.util.concurrent.locks.ReentrantLock;
 

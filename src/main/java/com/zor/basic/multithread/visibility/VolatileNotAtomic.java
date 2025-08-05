@@ -1,4 +1,4 @@
-package com.zor.basic.multithread.easycoding;
+package com.zor.basic.multithread.visibility;
 
 /**
  * volatile不是原子性的测试

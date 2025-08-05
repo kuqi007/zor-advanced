@@ -1,4 +1,4 @@
-package com.zor.basic.multithread.threadprint;
+package com.zor.basic.multithread.threadsafe.threadprint;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

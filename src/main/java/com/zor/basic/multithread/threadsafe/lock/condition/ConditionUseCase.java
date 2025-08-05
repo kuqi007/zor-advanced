@@ -1,4 +1,4 @@
-package com.zor.basic.multithread.lock.condition;
+package com.zor.basic.multithread.threadsafe.lock.condition;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
