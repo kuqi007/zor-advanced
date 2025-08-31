@@ -1,0 +1,77 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+* Spring
+** IoC & AOP
+*** IoC
+
+** SpringBean的生命周期
+***:1.bean实例化; 2.注入对象属性
+3.执行Aware；4.BeanPostProcessor前置处理
+5.InitializingBean、init-method检查和执行
+6.BeanPostProcessor后置处理
+7.注册回调接口；8.Bean使用；
+9.执行销毁方法;
+
+
+** Spring拓展点
+***:基于Bean生命周期，提供的一系列接口和机制，用于不修改源码前提下定制Spring容器的行为、增强功能或修改默认流程
+*BeanPostProcessor：Bean初始化前后插入逻辑（如AOP代理、属性校验）
+*BeanFactoryPostProcessor：Bean加载完后，动态修改Bean定义（如解密配置）
+*BeanDefinitionRegistryPostProcessor：注册外部类为Spring Bean（如RPC框架整合）
+* ApplicationContextInitializer：环境预配置（如切换Profile）;
+
+
+** Bean的作用域
+***:*Singleton（默认作用域）：全局唯一
+*Prototype（原型）：每次获取都会创建新的实例
+*request：⼀次HTTP请求都会产⽣⼀个新的bean，该bean仅在当前HTTP request内有效
+*session：在一次 HTTP session 中，容器将返回同一个实
+*global-session：对象存入到web项目集群的session域中,若不存在集群,则global session相当于session;
+*** 如何保证Bean的线程安全
+**** ThreadLocal
+
+
+
+
+** 循环依赖\n（解决）
+***:Spring用三级缓存解决循环依赖（ObjectFactory延迟初始化）:
+一级缓存：singletonObjects，完全初始化的Bean
+二级缓存：earlySingletonObjects，半成品Bean（已实例化未初始化）
+三级缓存：singletonFactories，生成早期引用的ObjectFactory;
+*** 如何解决
+****:假设有A和B互相依赖（字段注入）：
+1. 开始创建A，实例化A（调用构造器），此时得到一个原始对象。
+2. 将A的ObjectFactory放入三级缓存（`singletonFactories`）。
+3. 开始对A进行属性填充，此时发现A依赖B，于是尝试获取B。
+4. 开始创建B，实例化B（调用构造器），得到B的原始对象。
+5. 将B的ObjectFactory放入三级缓存。
+6. 对B进行属性填充，发现B依赖A，于是尝试获取A。
+7. 从三级缓存中拿到A的ObjectFactory，通过它获取到A的早期引用（一个半成品A，可能被代理也可能没有被代理，取决于是否有AOP），然后将这个早期引用放入二级缓存，同时从三级缓存中移除A的ObjectFactory。
+8. 将获取到的A的早期引用注入到B中，完成B的属性填充，然后初始化B（执行初始化方法），最后B创建完成，放入一级缓存（同时从二级和三级缓存中清除B的相关缓存）。
+9. 此时A就可以从一级缓存中获取到B（因为B已经创建完成），将B注入到A中，然后完成A的初始化，最后将A放入一级缓存（同时清除二级缓存中的A）。  ;
+*** 为什么不能解决构造器注入的循环依赖
+****:*假设A，B都是构造注入，A加载时候需要去初始化B，初始化B的时候又要去初始化A，此时A没加载完
+*构造器注入显式的引用了另一个Bean B，导致必须在初始化空对象时候就要初始化B，而B又依赖了A，又要去加载A，导致死循环
+*如果A是set注入B，B是构造注入A，此时是没问题，Spring按照字幕顺序创建bean，A在B前面；反过来则不行;
+
+*** 两级缓存行不行
+****:不可以，因为有AOP对象
+**代理时机问题**：在二级缓存方案中，原始对象过早放入二级缓存，导致其他bean注入的是原始对象，而最终容器中的是代理对象，造成不一致。
+**重复代理问题**：如果我们在放入二级缓存之前就生成代理对象（即在实例化之后立即生成代理对象），那么当其他bean注入代理对象后，在A初始化之后，Spring还会对A进行AOP代理吗？如果代理了两次，就会出错。
+因此，Spring采用三级缓存，通过ObjectFactory的方式延迟代理对象的生成，确保即使是在循环依赖的情况下，每个bean也只会被代理一次，并且注入的对象和最终容器中的对象是同一个代理对象。;
+
+*** 所有Bean创建都会经过三级缓存吗？
+****:是的，所有对象都会经过三级缓存
+* 若无循环依赖，流程是：
+* 实例化对象->注册ObjectFactory到三级缓存->属性填充->初始化->移入一级缓存->清理二三级缓存
+* 如果有循环依赖的对象，流程是一样的，会在属性填充这一步检测到;
+** Spring注解
+** SpringBoot自动装配原理
+*** @EnableAutoConfiguration，自动扫描META-INF/spring.factories下的类，自动加载
+
+** Spring事务传播机制
+
+
+
+
+@endmindmap

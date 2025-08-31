@@ -1,0 +1,14 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+* 分布式系统
+** 分布式锁
+*** Redis
+*** Zookeeper
+*** Etcd
+
+** CAP理论
+***:必须要保证P，分布式系统在网络发生分区时，不能整体崩溃..
+* Partition Tolerance（分区容忍性）：分布式系统在网络发生分区（Partition）时，仍然能够继续对外提供服务的能力;
+
+@endmindmap

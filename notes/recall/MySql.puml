@@ -1,0 +1,11 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+* MySql
+
+** 锁
+*** 行锁锁/页锁/表锁
+*** 共享锁/排它锁/意向锁
+*** 乐观锁/悲观锁
+** 索引
+@endmindmap

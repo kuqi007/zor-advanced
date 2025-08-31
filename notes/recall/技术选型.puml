@@ -1,0 +1,12 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+* 其他技术
+** Node.js单线程模型\n如何做到高吞吐
+*** 非阻塞I/O模型
+****:1.遇到I/O操作时，不会停下来等待结果。它会立即将这个操作委托给操作系统，并提供一个回调函数。
+事件循环继续执行其他JavaScript任务或者处理之前安排好的回调。
+
+;
+*** 事件循环（Event Loop）
+@endmindmap

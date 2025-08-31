@@ -1,0 +1,20 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+* Redis
+
+** 常见数据结构
+*** String (SDS)
+**** 缓存功能/计数器/共享用户session
+*** List（双链表）
+*** Set
+*** Hash
+*** Sorted Set (ZSet)
+*** BitMap
+*** HyperLog
+
+** 缓存雪崩
+** 缓存穿透
+
+** I/O多路复用
+@endmindmap
