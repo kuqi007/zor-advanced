@@ -3,11 +3,11 @@
 
 * RocketMQ
 ** 事务消息
-*** executeLocalTransaction（简称ELT）
+*** executeLocalTransaction: ELT
 **** 执行业务处理/数据库操作
 **** 成功返回COMMIT/异常返回ROLLBACK
 **** 如果用**事务日志表**做回查，必须保证同一数据源（保证原子性）
-*** checkLocalTransaction（回查函数）
+*** checkLocalTransaction: 回查函数
 **** ELT返回UNKNOWN会调用回查函数
 **** 可以检查业务状态（DB/Redis等）
 **** 或查事务日志表，查询消息是否被成功处理
