@@ -13,8 +13,14 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class UserCityInfoFacade {
-    @Autowired
-    private LbsService lbsService;
+
+    private final LbsService lbsService;
+
+    public UserCityInfoFacade(LbsService lbsService) {
+        this.lbsService = lbsService;
+    }
+
+
 
     public MtCityInfo getMtCityInfo(LotteryContext context) {
         LbsReq lbsReq = new LbsReq();
