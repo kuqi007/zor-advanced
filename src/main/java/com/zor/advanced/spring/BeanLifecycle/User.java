@@ -35,7 +35,7 @@ public class User implements InitializingBean, DisposableBean,
         System.out.println("调用Bean的函数(postConstruct)");
     }
 
-    //MainConfig中@Bean 的initMethod
+    // MainConfig中@Bean 的initMethod
     public void initMethod() {
         System.out.println("调用Bean的函数(initMethod)");
     }

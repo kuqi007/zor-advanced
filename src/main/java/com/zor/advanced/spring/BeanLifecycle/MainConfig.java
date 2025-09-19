@@ -14,4 +14,10 @@ public class MainConfig {
     public User user() {
         return new User();
     }
+
+    @Bean(initMethod = "initMethod", destroyMethod = "destroyMethod")
+    public MyBean myBean() {
+        return new MyBean();
+    }
+
 }

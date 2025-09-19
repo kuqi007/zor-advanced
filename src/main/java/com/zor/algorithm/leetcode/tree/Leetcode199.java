@@ -1,7 +1,5 @@
 package com.zor.algorithm.leetcode.tree;
 
-import sun.reflect.generics.tree.Tree;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
